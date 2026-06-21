@@ -1,4 +1,3 @@
-'use client';
 import Link from 'next/link';
 import Image from 'next/image';
 import { CalendarDays, Gauge, Settings } from 'lucide-react';
@@ -16,9 +15,8 @@ export default function VehicleCard({ vehicle }) {
             alt={`${vehicle.marca} ${vehicle.modelo}`} 
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
-            onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-            onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            style={{ objectFit: 'cover' }}
+            className="vehicle-img"
           />
           {vehicle.estado === 'RESERVADO' && (
             <div style={{ position: 'absolute', top: '10px', right: '10px', background: '#f59e0b', color: '#fff', padding: '0.25rem 0.75rem', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 'bold', zIndex: 2 }}>

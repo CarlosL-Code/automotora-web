@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap');
+/* Light Theme (Default) */
 
 /* Light Theme (Default) */
 :root {
@@ -206,6 +206,13 @@ h3 { font-size: 1.875rem; }
   transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
   border-color: var(--color-border-focus);
+}
+
+.vehicle-img {
+  transition: transform 0.5s ease;
+}
+.card:hover .vehicle-img {
+  transform: scale(1.05);
 }
 
 /* Page transitions / micro animations */

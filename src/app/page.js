@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { prisma } from '@/lib/prisma';
 import VehicleCard from '@/components/VehicleCard';
 import { ArrowRight, ShieldCheck, Users, Wallet, Phone } from 'lucide-react';
 
-export const revalidate = 0; // Disable static rendering for this page so it's always fresh
+export const revalidate = 60; // Enable ISR (update every 60s) for blazing fast initial loads
 
 export default async function Home() {
   const featuredVehicles = await prisma.vehicle.findMany({
@@ -21,9 +22,22 @@ export default async function Home() {
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center',
-        background: 'linear-gradient(rgba(15, 17, 21, 0.6), rgba(15, 17, 21, 0.9)), url("https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop") center/cover no-repeat'
+        overflow: 'hidden'
       }}>
-        <div className="container text-center slide-up" style={{ zIndex: 2, color: '#ffffff' }}>
+        {/* LCP Image Optimized */}
+        <Image 
+          src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop"
+          alt="Auto de lujo fondo HMC Premium"
+          fill
+          priority
+          sizes="100vw"
+          quality={85}
+          style={{ objectFit: 'cover', zIndex: 0 }}
+        />
+        {/* Overlay Dark */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(rgba(15, 17, 21, 0.6), rgba(15, 17, 21, 0.9))', zIndex: 1 }}></div>
+
+        <div className="container text-center slide-up" style={{ zIndex: 2, color: '#ffffff', position: 'relative' }}>
           <h1 style={{ fontSize: '4rem', marginBottom: '1.5rem', textShadow: '0 4px 20px rgba(0,0,0,0.5)', color: '#ffffff' }}>
             Encuentra el auto de tus <span className="text-gradient" style={{ background: 'linear-gradient(135deg, var(--color-accent) 0%, #ffffff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>sueños</span>
           </h1>
