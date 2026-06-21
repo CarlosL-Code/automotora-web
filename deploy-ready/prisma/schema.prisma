@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Vehicle {
+  id           Int      @id @default(autoincrement())
+  marca        String
+  modelo       String
+  ano          Int
+  precio       Float
+  kilometraje  Int
+  transmision  String
+  combustible  String
+  motor        String?
+  color        String?
+  descripcion  String?
+  estado       String   @default("DISPONIBLE") // DISPONIBLE, RESERVADO, VENDIDO
+  imagenes     String   // We will store as a JSON string array of URLs
+  destacado    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Staff {
+  id           Int      @id @default(autoincrement())
+  nombre       String
+  cargo        String
+  descripcion  String?
+  imagenUrl    String?
+  telefono     String?
+  email        String?
+  esEjecutivo  Boolean  @default(false)
+  orden        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
