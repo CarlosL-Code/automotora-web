@@ -61,27 +61,21 @@ export default function StaffGallery({ staff }) {
       
       {/* Tabs / Filters */}
       <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '2rem' }}>
-        {categories.map((cat) => {
-          // Only show category tab if there are people in it, except for "Todos"
-          const hasPeople = cat === 'Todos' || staff.some(p => getCategory(p) === cat);
-          if (!hasPeople) return null;
-
-          return (
-            <button
-              key={cat}
-              onClick={() => setActiveTab(cat)}
-              className={`btn ${activeTab === cat ? 'btn-primary' : 'btn-outline'}`}
-              style={{
-                padding: '0.5rem 1.5rem',
-                borderRadius: '2rem',
-                fontSize: '0.9rem',
-                transition: 'all 0.3s ease',
-              }}
-            >
-              {cat}
-            </button>
-          );
-        })}
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setActiveTab(cat)}
+            className={`btn ${activeTab === cat ? 'btn-primary' : 'btn-outline'}`}
+            style={{
+              padding: '0.5rem 1.5rem',
+              borderRadius: '2rem',
+              fontSize: '0.9rem',
+              transition: 'all 0.3s ease',
+            }}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
 
       {/* Staff Grid */}
