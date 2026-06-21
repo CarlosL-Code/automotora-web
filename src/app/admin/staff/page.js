@@ -7,11 +7,12 @@ export default function AdminStaff() {
   const [isAdding, setIsAdding] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [formData, setFormData] = useState({
-    nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false
+    nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false, imagenUrl: ''
   });
   const [departamento, setDepartamento] = useState('Administración');
   const [puesto, setPuesto] = useState('');
   const [file, setFile] = useState(null);
+  const [existingImage, setExistingImage] = useState(null);
 
   const fetchStaff = async () => {
     const res = await fetch('/api/staff');
@@ -52,9 +53,13 @@ export default function AdminStaff() {
       ...formData,
       cargo: `${puesto} | [${departamento}]`
     };
-    // Only update imagenUrl if a new file was uploaded
+    
+    // Si hay una nueva imagen subida, actualizamos la url
     if (imagenUrl) {
       staffData.imagenUrl = imagenUrl;
+    } else if (existingImage) {
+      // Si no subió una nueva pero tenía una antigua, la conservamos
+      staffData.imagenUrl = existingImage;
     }
 
     const url = editingId ? `/api/staff/${editingId}` : '/api/staff';
@@ -70,10 +75,11 @@ export default function AdminStaff() {
       setIsAdding(false);
       setEditingId(null);
       fetchStaff();
-      setFormData({ nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false });
+      setFormData({ nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false, imagenUrl: '' });
       setDepartamento('Administración');
       setPuesto('');
       setFile(null);
+      setExistingImage(null);
     } else {
       alert('Error guardando personal');
     }
@@ -98,7 +104,9 @@ export default function AdminStaff() {
       telefono: s.telefono || '',
       email: s.email || '',
       esEjecutivo: s.esEjecutivo || false,
+      imagenUrl: s.imagenUrl || '',
     });
+    setExistingImage(s.imagenUrl || null);
     setEditingId(s.id);
     setIsAdding(true);
   };
@@ -210,6 +218,13 @@ export default function AdminStaff() {
             </div>
             <div className="form-group" style={{ gridColumn: '1 / -1' }}>
               <label className="form-label">Fotografía</label>
+              
+              {existingImage && !file && (
+                <div style={{ marginBottom: '1rem', width: '80px', height: '80px', borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--color-accent)' }}>
+                  <img src={existingImage} alt="Actual" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+              )}
+              
               <input type="file" accept="image/*" onChange={handleFileChange} className="input" style={{ padding: '0.5rem' }} />
             </div>
           </div>
@@ -218,9 +233,11 @@ export default function AdminStaff() {
             <button type="button" className="btn btn-outline" onClick={() => {
               setIsAdding(false);
               setEditingId(null);
-              setFormData({ nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false });
+              setFormData({ nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false, imagenUrl: '' });
               setDepartamento('Administración');
               setPuesto('');
+              setExistingImage(null);
+              setFile(null);
             }}>Cancelar</button>
           </div>
         </form>
@@ -243,9 +260,11 @@ export default function AdminStaff() {
         <button className="btn btn-primary" onClick={() => {
           setIsAdding(true);
           setEditingId(null);
-          setFormData({ nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false });
+          setFormData({ nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false, imagenUrl: '' });
           setDepartamento('Administración');
           setPuesto('');
+          setExistingImage(null);
+          setFile(null);
         }}>
           <Plus size={20} /> Añadir Manual
         </button>
