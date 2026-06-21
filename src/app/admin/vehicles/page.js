@@ -12,6 +12,8 @@ export default function AdminVehicles() {
     descripcion: '', motor: '', color: ''
   });
   const [files, setFiles] = useState([]);
+  const [previewUrls, setPreviewUrls] = useState([]);
+  const [existingImages, setExistingImages] = useState([]);
 
   const fetchVehicles = async () => {
     const res = await fetch('/api/vehicles');
@@ -26,7 +28,30 @@ export default function AdminVehicles() {
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
   
   const handleFileChange = (e) => {
-    setFiles(e.target.files);
+    const selectedFiles = Array.from(e.target.files);
+    setFiles(selectedFiles);
+    // Create preview URLs
+    const urls = selectedFiles.map(file => URL.createObjectURL(file));
+    setPreviewUrls(urls);
+  };
+
+  const setFileAsCover = (index) => {
+    const newFiles = [...files];
+    const [selectedFile] = newFiles.splice(index, 1);
+    newFiles.unshift(selectedFile);
+    setFiles(newFiles);
+
+    const newUrls = [...previewUrls];
+    const [selectedUrl] = newUrls.splice(index, 1);
+    newUrls.unshift(selectedUrl);
+    setPreviewUrls(newUrls);
+  };
+
+  const setExistingAsCover = (index) => {
+    const newImages = [...existingImages];
+    const [selectedImg] = newImages.splice(index, 1);
+    newImages.unshift(selectedImg);
+    setExistingImages(newImages);
   };
 
   const handleSubmit = async (e) => {
@@ -53,9 +78,12 @@ export default function AdminVehicles() {
     const vehicleData = {
       ...formData,
     };
-    // Only update imagenes if new files were uploaded
+    
+    // Update imagenes: new uploads have priority, otherwise use the reordered existing images
     if (imageUrls.length > 0) {
       vehicleData.imagenes = JSON.stringify(imageUrls);
+    } else if (existingImages.length > 0) {
+      vehicleData.imagenes = JSON.stringify(existingImages);
     }
 
     const url = editingId ? `/api/vehicles/${editingId}` : '/api/vehicles';
@@ -77,6 +105,8 @@ export default function AdminVehicles() {
         descripcion: '', motor: '', color: ''
       });
       setFiles([]);
+      setPreviewUrls([]);
+      setExistingImages([]);
     } else {
       alert('Error guardando el vehículo');
     }
@@ -96,6 +126,15 @@ export default function AdminVehicles() {
       motor: v.motor || '',
       color: v.color || '',
     });
+    
+    let imgs = [];
+    if (v.imagenes) {
+      try { imgs = JSON.parse(v.imagenes); } catch(e) { imgs = [v.imagenes]; }
+    }
+    setExistingImages(imgs);
+    setFiles([]);
+    setPreviewUrls([]);
+    
     setEditingId(v.id);
     setIsAdding(true);
   };
@@ -232,6 +271,46 @@ export default function AdminVehicles() {
             <div className="form-group" style={{ gridColumn: '1 / -1' }}>
               <label className="form-label">Imágenes (Selecciona múltiples)</label>
               <input type="file" multiple accept="image/*" onChange={handleFileChange} className="input" style={{ padding: '0.5rem' }} />
+              
+              {/* Galería de Nuevas Fotos */}
+              {previewUrls.length > 0 && (
+                <div style={{ marginTop: '1rem' }}>
+                  <p style={{ fontSize: '0.875rem', marginBottom: '0.5rem' }}>Nuevas Fotos (Haz clic en ⭐ para elegir portada):</p>
+                  <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
+                    {previewUrls.map((url, i) => (
+                      <div key={i} style={{ position: 'relative', minWidth: '100px', width: '100px', height: '100px', borderRadius: '0.5rem', overflow: 'hidden', border: i === 0 ? '3px solid var(--color-accent)' : '1px solid var(--color-border)' }}>
+                        <img src={url} alt={`Preview ${i}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        {i === 0 && <span style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'var(--color-accent)', color: 'white', fontSize: '0.7rem', textAlign: 'center', padding: '2px', fontWeight: 'bold' }}>PORTADA</span>}
+                        {i !== 0 && (
+                          <button type="button" onClick={() => setFileAsCover(i)} title="Establecer como Portada" style={{ position: 'absolute', top: '5px', right: '5px', background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', borderRadius: '50%', width: '28px', height: '28px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'transform 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                            ⭐
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Galería de Fotos Existentes */}
+              {previewUrls.length === 0 && existingImages.length > 0 && (
+                <div style={{ marginTop: '1rem' }}>
+                  <p style={{ fontSize: '0.875rem', marginBottom: '0.5rem' }}>Fotos Actuales (Haz clic en ⭐ para cambiar portada):</p>
+                  <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
+                    {existingImages.map((url, i) => (
+                      <div key={i} style={{ position: 'relative', minWidth: '100px', width: '100px', height: '100px', borderRadius: '0.5rem', overflow: 'hidden', border: i === 0 ? '3px solid var(--color-accent)' : '1px solid var(--color-border)' }}>
+                        <img src={url} alt={`Existing ${i}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        {i === 0 && <span style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'var(--color-accent)', color: 'white', fontSize: '0.7rem', textAlign: 'center', padding: '2px', fontWeight: 'bold' }}>PORTADA</span>}
+                        {i !== 0 && (
+                          <button type="button" onClick={() => setExistingAsCover(i)} title="Establecer como Portada" style={{ position: 'absolute', top: '5px', right: '5px', background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', borderRadius: '50%', width: '28px', height: '28px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'transform 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                            ⭐
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <div className="form-actions">
@@ -244,6 +323,9 @@ export default function AdminVehicles() {
                 transmision: 'Automática', combustible: 'Gasolina', estado: 'DISPONIBLE',
                 descripcion: '', motor: '', color: ''
               });
+              setFiles([]);
+              setPreviewUrls([]);
+              setExistingImages([]);
             }}>Cancelar</button>
           </div>
         </form>
@@ -271,6 +353,9 @@ export default function AdminVehicles() {
               transmision: 'Automática', combustible: 'Gasolina', estado: 'DISPONIBLE',
               descripcion: '', motor: '', color: ''
             });
+            setFiles([]);
+            setPreviewUrls([]);
+            setExistingImages([]);
           }}>
             <Plus size={20} /> Añadir Manual
           </button>
