@@ -76,7 +76,7 @@ export default function Navbar() {
           <div style={{ marginLeft: '1rem' }}><ThemeToggle /></div>
         </div>
 
-        <div className="mobile-menu-btn" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <div className="mobile-menu-btn" style={{ alignItems: 'center', gap: '1rem' }}>
           <ThemeToggle />
           <div onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} style={{ cursor: 'pointer' }}>
             {isMobileMenuOpen ? <X color="var(--nav-text)" size={28} /> : <Menu color="var(--nav-text)" size={28} />}

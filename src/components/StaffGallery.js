@@ -263,15 +263,15 @@ export default function StaffGallery({ staff }) {
           color: var(--color-accent);
         }
         .staff-btn-whatsapp {
-          background: transparent;
-          color: #25D366;
+          background: #25D366;
+          color: white;
           border: 1px solid #25D366;
         }
         .staff-btn-whatsapp:hover {
-          background: #25D366;
-          color: white;
+          background: #1EBE53;
+          border-color: #1EBE53;
           transform: translateY(-2px);
-          box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+          box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
         }
 
         .staff-tab:hover {
