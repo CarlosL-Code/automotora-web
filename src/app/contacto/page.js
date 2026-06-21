@@ -40,22 +40,23 @@ export default function ContactPage() {
         <h1 style={{ fontSize: '3rem', marginBottom: '1rem', textAlign: 'center' }}>
           Ponte en <span className="text-gradient">Contacto</span>
         </h1>
-        <p style={{ textAlign: 'center', color: 'var(--color-text-secondary)', marginBottom: '4rem', maxWidth: '600px', margin: '0 auto 4rem' }}>
+        <p style={{ textAlign: 'center', color: 'var(--color-text-secondary)', marginBottom: '4rem', maxWidth: '600px', margin: '0 auto 4rem', padding: '0 1rem' }}>
           ¿Tienes dudas o quieres agendar una visita? Escríbenos y un ejecutivo se pondrá en contacto contigo a la brevedad.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '4rem', alignItems: 'start' }}>
+        <div className="contact-grid">
           
-          {/* Info */}
-          <div>
-            <div className="card glass" style={{ padding: '2.5rem', marginBottom: '2rem' }}>
+          {/* Columna Izquierda: Info y Mapa */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            {/* Info Card */}
+            <div className="card glass" style={{ padding: '2.5rem' }}>
               <h3 style={{ marginBottom: '1.5rem', fontSize: '1.5rem' }}>Información</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
                   <div style={{ color: 'var(--color-accent)', padding: '0.5rem', background: 'var(--color-accent-light)', borderRadius: '50%' }}><MapPin size={24} /></div>
                   <div>
                     <h4 style={{ marginBottom: '0.25rem' }}>Dirección</h4>
-                    <p style={{ color: 'var(--color-text-secondary)' }}>Avenida Caupolican 579, Temuco</p>
+                    <p style={{ color: 'var(--color-text-secondary)' }}>Avenida Caupolicán 579, Temuco</p>
                   </div>
                 </div>
                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
@@ -81,9 +82,23 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
+
+            {/* Mapa Card */}
+            <div className="card glass" style={{ padding: '1rem', height: '350px', overflow: 'hidden' }}>
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3161.4116499692415!2d-72.593798!3d-38.7369344!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d3c3337a4453%3A0xc6657c91ba2d6c6e!2sAv.%20Caupolic%C3%A1n%20579%2C%20Temuco%2C%20Araucan%C3%ADa!5e0!3m2!1ses-419!2scl!4v1700000000000!5m2!1ses-419!2scl" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0, borderRadius: '0.5rem' }} 
+                allowFullScreen="" 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Mapa Automotora HMC"
+              ></iframe>
+            </div>
           </div>
 
-          {/* Form */}
+          {/* Columna Derecha: Formulario */}
           <div className="card glass" style={{ padding: '3rem' }}>
             <h3 style={{ marginBottom: '2rem', fontSize: '1.5rem' }}>Envíanos un mensaje</h3>
             {status && (
@@ -92,7 +107,7 @@ export default function ContactPage() {
               </div>
             )}
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+              <div className="form-row">
                 <div className="form-group" style={{ marginBottom: 0 }}>
                   <label className="form-label">Nombre Completo</label>
                   <input required type="text" name="nombre" value={formData.nombre} onChange={handleChange} className="input" placeholder="Tu nombre" />
@@ -110,7 +125,7 @@ export default function ContactPage() {
                 <label className="form-label">Mensaje</label>
                 <textarea required name="mensaje" value={formData.mensaje} onChange={handleChange} className="input" rows="5" placeholder="¿En qué te podemos ayudar?"></textarea>
               </div>
-              <button type="submit" disabled={loading} className="btn btn-primary" style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+              <button type="submit" disabled={loading} className="btn btn-primary" style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', width: '100%' }}>
                 {loading ? <Loader2 className="spin" size={20} /> : <Send size={20} />}
                 {loading ? 'Enviando...' : 'Enviar Mensaje'}
               </button>
@@ -119,11 +134,33 @@ export default function ContactPage() {
 
         </div>
       </div>
-      <style>{`
+      <style jsx>{`
+        .contact-grid {
+          display: grid;
+          grid-template-columns: 1fr 1.5fr;
+          gap: 4rem;
+          align-items: start;
+        }
+        .form-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+        }
+        @media (max-width: 992px) {
+          .contact-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+          }
+        }
         @media (max-width: 768px) {
-          .container > div:nth-child(3) {
-            grid-template-columns: 1fr !important;
-            gap: 2rem !important;
+          .form-row {
+            grid-template-columns: 1fr;
+          }
+          .card {
+            padding: 1.5rem !important;
+          }
+          h1 {
+            fontSize: 2.5rem !important;
           }
         }
       `}</style>

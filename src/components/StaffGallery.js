@@ -5,20 +5,51 @@ import { Phone, Mail } from 'lucide-react';
 export default function StaffGallery({ staff }) {
   const [activeTab, setActiveTab] = useState('Todos');
 
-  const categories = ['Todos', 'Administración', 'Tecnología', 'Ejecutivos', 'Mecánicos'];
+  // Nuevo nombre para los Ejecutivos y Mecánicos
+  const categories = ['Todos', 'Administración', 'Ventas & Servicio'];
 
   const getCategory = (person) => {
     const cargo = person.cargo.toLowerCase();
-    if (/(jefe|admin|gerent|director|encargado)/.test(cargo)) return 'Administración';
-    if (/(informátic|sistemas|ti|it|programador|desarrollador|software|soporte)/.test(cargo)) return 'Tecnología';
-    if (person.esEjecutivo || /(ejecutiv|venta|comercial|asesor)/.test(cargo)) return 'Ejecutivos';
-    if (/(mecánic|taller|servicio|técnico|mantenimiento)/.test(cargo)) return 'Mecánicos';
-    return 'Otros'; // Fallback for anyone else
+    
+    // Si es informática, ahora pertenece a Administración
+    if (/(jefe|admin|gerent|director|encargado|informátic|sistemas|ti|it|programador|desarrollador|software|soporte)/.test(cargo)) {
+      return 'Administración';
+    }
+    
+    // Ejecutivos y Mecánicos en una sola sección ("Ventas & Servicio")
+    if (person.esEjecutivo || /(ejecutiv|venta|comercial|asesor|mecánic|taller|servicio|técnico|mantenimiento)/.test(cargo)) {
+      return 'Ventas & Servicio';
+    }
+    
+    return 'Otros';
   };
 
   const filteredStaff = useMemo(() => {
-    if (activeTab === 'Todos') return staff;
-    return staff.filter(person => getCategory(person) === activeTab);
+    let list = staff;
+    if (activeTab !== 'Todos') {
+      list = staff.filter(person => getCategory(person) === activeTab);
+    }
+    
+    // Lógica para ordenar a los de informática hacia atrás en Administración (que queden terceros)
+    return list.sort((a, b) => {
+      // Si ambos tienen un orden asignado en BD que no sea 0, respetamos la BD
+      if (a.orden !== b.orden && a.orden !== 0 && b.orden !== 0) {
+        return a.orden - b.orden;
+      }
+      
+      const cargoA = a.cargo.toLowerCase();
+      const cargoB = b.cargo.toLowerCase();
+      
+      const isIT_A = /(informátic|sistemas|ti|it|programador|desarrollador|software|soporte)/.test(cargoA);
+      const isIT_B = /(informátic|sistemas|ti|it|programador|desarrollador|software|soporte)/.test(cargoB);
+      
+      // Si A es informática y B no lo es, A va después (al final/terceros)
+      if (isIT_A && !isIT_B) return 1;
+      // Si B es informática y A no lo es, B va después
+      if (!isIT_A && isIT_B) return -1;
+      
+      return 0; // Se mantienen igual
+    });
   }, [staff, activeTab]);
 
   return (
