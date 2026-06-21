@@ -5,6 +5,7 @@ import { Plus, Trash2, Edit, Download, Upload } from 'lucide-react';
 export default function AdminVehicles() {
   const [vehicles, setVehicles] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
+  const [editingId, setEditingId] = useState(null);
   const [formData, setFormData] = useState({
     marca: '', modelo: '', ano: '', precio: '', kilometraje: '',
     transmision: 'Automática', combustible: 'Gasolina', estado: 'DISPONIBLE',
@@ -51,17 +52,24 @@ export default function AdminVehicles() {
     // 2. Save Vehicle
     const vehicleData = {
       ...formData,
-      imagenes: JSON.stringify(imageUrls)
     };
+    // Only update imagenes if new files were uploaded
+    if (imageUrls.length > 0) {
+      vehicleData.imagenes = JSON.stringify(imageUrls);
+    }
 
-    const res = await fetch('/api/vehicles', {
-      method: 'POST',
+    const url = editingId ? `/api/vehicles/${editingId}` : '/api/vehicles';
+    const method = editingId ? 'PUT' : 'POST';
+
+    const res = await fetch(url, {
+      method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(vehicleData)
     });
 
     if (res.ok) {
       setIsAdding(false);
+      setEditingId(null);
       fetchVehicles();
       setFormData({
         marca: '', modelo: '', ano: '', precio: '', kilometraje: '',
@@ -72,6 +80,24 @@ export default function AdminVehicles() {
     } else {
       alert('Error guardando el vehículo');
     }
+  };
+
+  const handleEdit = (v) => {
+    setFormData({
+      marca: v.marca || '',
+      modelo: v.modelo || '',
+      ano: v.ano || '',
+      precio: v.precio || '',
+      kilometraje: v.kilometraje || '',
+      transmision: v.transmision || 'Automática',
+      combustible: v.combustible || 'Gasolina',
+      estado: v.estado || 'DISPONIBLE',
+      descripcion: v.descripcion || '',
+      motor: v.motor || '',
+      color: v.color || '',
+    });
+    setEditingId(v.id);
+    setIsAdding(true);
   };
 
   const handleDelete = async (id) => {
@@ -149,7 +175,7 @@ export default function AdminVehicles() {
   if (isAdding) {
     return (
       <div className="slide-up">
-        <h2>Añadir Nuevo Vehículo</h2>
+        <h2>{editingId ? 'Editar Vehículo' : 'Añadir Nuevo Vehículo'}</h2>
         <form onSubmit={handleSubmit} className="card glass" style={{ padding: '2rem', marginTop: '2rem' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
             <div className="form-group">
@@ -192,6 +218,13 @@ export default function AdminVehicles() {
               <label className="form-label">Color</label>
               <input type="text" name="color" value={formData.color} onChange={handleChange} className="input" />
             </div>
+            <div className="form-group">
+              <label className="form-label">Estado</label>
+              <select name="estado" value={formData.estado} onChange={handleChange} className="input">
+                <option value="DISPONIBLE">DISPONIBLE</option>
+                <option value="VENDIDO">VENDIDO</option>
+              </select>
+            </div>
             <div className="form-group" style={{ gridColumn: '1 / -1' }}>
               <label className="form-label">Descripción</label>
               <textarea name="descripcion" value={formData.descripcion} onChange={handleChange} className="input" rows="4"></textarea>
@@ -203,7 +236,15 @@ export default function AdminVehicles() {
           </div>
           <div className="form-actions">
             <button type="submit" className="btn btn-primary">Guardar Vehículo</button>
-            <button type="button" className="btn btn-outline" onClick={() => setIsAdding(false)}>Cancelar</button>
+            <button type="button" className="btn btn-outline" onClick={() => {
+              setIsAdding(false);
+              setEditingId(null);
+              setFormData({
+                marca: '', modelo: '', ano: '', precio: '', kilometraje: '',
+                transmision: 'Automática', combustible: 'Gasolina', estado: 'DISPONIBLE',
+                descripcion: '', motor: '', color: ''
+              });
+            }}>Cancelar</button>
           </div>
         </form>
       </div>
@@ -222,7 +263,15 @@ export default function AdminVehicles() {
             <Upload size={20} /> Subir Excel
             <input type="file" accept=".xlsx, .xls" onChange={handleExcelUpload} style={{ display: 'none' }} />
           </label>
-          <button className="btn btn-primary" onClick={() => setIsAdding(true)}>
+          <button className="btn btn-primary" onClick={() => {
+            setIsAdding(true);
+            setEditingId(null);
+            setFormData({
+              marca: '', modelo: '', ano: '', precio: '', kilometraje: '',
+              transmision: 'Automática', combustible: 'Gasolina', estado: 'DISPONIBLE',
+              descripcion: '', motor: '', color: ''
+            });
+          }}>
             <Plus size={20} /> Añadir Manual
           </button>
         </div>
@@ -257,7 +306,10 @@ export default function AdminVehicles() {
                   </span>
                 </td>
                 <td>
-                  <button onClick={() => handleDelete(v.id)} style={{ color: 'var(--color-danger)', cursor: 'pointer' }}>
+                  <button onClick={() => handleEdit(v)} style={{ color: 'var(--color-primary)', cursor: 'pointer', marginRight: '1rem', background: 'none', border: 'none' }}>
+                    <Edit size={20} />
+                  </button>
+                  <button onClick={() => handleDelete(v.id)} style={{ color: 'var(--color-danger)', cursor: 'pointer', background: 'none', border: 'none' }}>
                     <Trash2 size={20} />
                   </button>
                 </td>

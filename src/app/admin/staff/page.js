@@ -5,6 +5,7 @@ import { Plus, Trash2, Download, Upload } from 'lucide-react';
 export default function AdminStaff() {
   const [staff, setStaff] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
+  const [editingId, setEditingId] = useState(null);
   const [formData, setFormData] = useState({
     nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false
   });
@@ -47,23 +48,43 @@ export default function AdminStaff() {
     // 2. Save Staff Member
     const staffData = {
       ...formData,
-      imagenUrl
     };
+    // Only update imagenUrl if a new file was uploaded
+    if (imagenUrl) {
+      staffData.imagenUrl = imagenUrl;
+    }
 
-    const res = await fetch('/api/staff', {
-      method: 'POST',
+    const url = editingId ? `/api/staff/${editingId}` : '/api/staff';
+    const method = editingId ? 'PUT' : 'POST';
+
+    const res = await fetch(url, {
+      method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(staffData)
     });
 
     if (res.ok) {
       setIsAdding(false);
+      setEditingId(null);
       fetchStaff();
       setFormData({ nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false });
       setFile(null);
     } else {
       alert('Error guardando personal');
     }
+  };
+
+  const handleEdit = (s) => {
+    setFormData({
+      nombre: s.nombre || '',
+      cargo: s.cargo || '',
+      descripcion: s.descripcion || '',
+      telefono: s.telefono || '',
+      email: s.email || '',
+      esEjecutivo: s.esEjecutivo || false,
+    });
+    setEditingId(s.id);
+    setIsAdding(true);
   };
 
   const handleDelete = async (id) => {
@@ -135,7 +156,7 @@ export default function AdminStaff() {
   if (isAdding) {
     return (
       <div className="slide-up">
-        <h2>Añadir Miembro del Personal</h2>
+        <h2>{editingId ? 'Editar Personal' : 'Añadir Miembro del Personal'}</h2>
         <form onSubmit={handleSubmit} className="card glass" style={{ padding: '2rem', marginTop: '2rem' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
             <div className="form-group">
@@ -169,7 +190,11 @@ export default function AdminStaff() {
           </div>
           <div className="form-actions">
             <button type="submit" className="btn btn-primary">Guardar Personal</button>
-            <button type="button" className="btn btn-outline" onClick={() => setIsAdding(false)}>Cancelar</button>
+            <button type="button" className="btn btn-outline" onClick={() => {
+              setIsAdding(false);
+              setEditingId(null);
+              setFormData({ nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false });
+            }}>Cancelar</button>
           </div>
         </form>
       </div>
@@ -188,9 +213,13 @@ export default function AdminStaff() {
             <Upload size={20} /> Subir Excel
             <input type="file" accept=".xlsx, .xls" onChange={handleExcelUpload} style={{ display: 'none' }} />
           </label>
-          <button className="btn btn-primary" onClick={() => setIsAdding(true)}>
-            <Plus size={20} /> Añadir Manual
-          </button>
+        <button className="btn btn-primary" onClick={() => {
+          setIsAdding(true);
+          setEditingId(null);
+          setFormData({ nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false });
+        }}>
+          <Plus size={20} /> Añadir Manual
+        </button>
         </div>
       </div>
 
@@ -226,7 +255,10 @@ export default function AdminStaff() {
                   </div>
                 </td>
                 <td>
-                  <button onClick={() => handleDelete(s.id)} style={{ color: 'var(--color-danger)', cursor: 'pointer' }}>
+                  <button onClick={() => handleEdit(s)} style={{ color: 'var(--color-primary)', cursor: 'pointer', marginRight: '1rem', background: 'none', border: 'none' }}>
+                    <Edit size={20} />
+                  </button>
+                  <button onClick={() => handleDelete(s.id)} style={{ color: 'var(--color-danger)', cursor: 'pointer', background: 'none', border: 'none' }}>
                     <Trash2 size={20} />
                   </button>
                 </td>
