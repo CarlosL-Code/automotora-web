@@ -17,7 +17,9 @@ export default function RootLayout({ children }) {
       <body>
         <ThemeProvider attribute="data-theme" defaultTheme="light">
           <Navbar />
-          {children}
+          <main style={{ paddingTop: '140px', minHeight: '80vh' }}>
+            {children}
+          </main>
           <Footer />
         </ThemeProvider>
       </body>

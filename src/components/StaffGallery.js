@@ -151,7 +151,7 @@ export default function StaffGallery({ staff }) {
               </div>
               
               <h3 className="staff-name" style={{ fontSize: '1.4rem', marginBottom: '0.25rem', fontWeight: '800' }}>{person.nombre}</h3>
-              <p className="staff-role" style={{ color: 'var(--color-accent-light)', fontWeight: '600', marginBottom: '1rem', fontSize: '0.9rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+              <p className="staff-role" style={{ color: 'var(--color-accent)', fontWeight: '700', marginBottom: '1rem', fontSize: '0.9rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                 {person.cargo && person.cargo.includes(' | [') ? person.cargo.split(' | [')[0] : person.cargo}
               </p>
               
@@ -239,14 +239,15 @@ export default function StaffGallery({ staff }) {
           box-shadow: 0 6px 20px rgba(var(--color-accent-rgb), 0.5);
         }
         .staff-btn-secondary {
-          background: rgba(255,255,255,0.05);
-          color: var(--color-text);
+          background: transparent;
+          color: var(--color-text-primary);
           border: 1px solid var(--color-border);
         }
         .staff-btn-secondary:hover {
-          background: rgba(255,255,255,0.1);
+          background: var(--color-accent-light);
           transform: translateY(-2px);
-          border-color: var(--color-text-secondary);
+          border-color: var(--color-accent);
+          color: var(--color-accent);
         }
 
         .staff-tab:hover {
