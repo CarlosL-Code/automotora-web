@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -53,11 +54,16 @@ export default function Navbar() {
     <>
       <nav style={navStyle}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          {/* Aquí se carga el logo.png si existe, si no mostrará el texto alternativo */}
-          <img src="/logo.png" alt="HMC Premium Logo" style={{ height: isScrolled ? '50px' : '80px', width: 'auto', objectFit: 'contain', transition: 'height 0.3s ease' }} onError={(e) => {
-            e.target.style.display = 'none';
-            e.target.nextSibling.style.display = 'block';
-          }} />
+          {/* Aquí se carga el logo usando next/image para optimización */}
+          <div style={{ position: 'relative', width: isScrolled ? '120px' : '180px', height: isScrolled ? '50px' : '80px', transition: 'all 0.3s ease' }}>
+            <Image 
+              src="/logo.png" 
+              alt="HMC Premium Logo" 
+              fill
+              style={{ objectFit: 'contain' }}
+              priority
+            />
+          </div>
           <span style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--nav-text)', display: 'none' }}>HMC Premium</span>
         </Link>
         
@@ -92,6 +98,11 @@ export default function Navbar() {
           <Link href="/nosotros" style={{ ...linkStyle, fontSize: '2rem' }} onClick={() => setIsMobileMenuOpen(false)}>Nosotros</Link>
           <Link href="/contacto" style={{ ...linkStyle, fontSize: '2rem' }} onClick={() => setIsMobileMenuOpen(false)}>Contacto</Link>
         </div>
+      )}
+
+      {/* Spacer para páginas interiores, evita que el Navbar tape el contenido. El Home (/) y Admin lo manejan de forma distinta */}
+      {pathname !== '/' && !pathname.startsWith('/admin') && (
+        <div style={{ height: isScrolled ? '110px' : '150px', width: '100%', transition: 'height 0.3s ease' }} aria-hidden="true" />
       )}
 
       <style jsx>{`

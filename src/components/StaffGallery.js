@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { useState, useMemo } from 'react';
 import { Phone, Mail, Briefcase, Monitor, Wrench, Users, ShieldCheck } from 'lucide-react';
 
@@ -138,10 +139,16 @@ export default function StaffGallery({ staff }) {
                 position: 'relative'
               }}>
                 <div className="staff-img-inner" style={{
-                  width: '100%', height: '100%', borderRadius: '50%', overflow: 'hidden', backgroundColor: 'var(--color-bg)'
+                  width: '100%', height: '100%', borderRadius: '50%', overflow: 'hidden', backgroundColor: 'var(--color-bg)', position: 'relative'
                 }}>
                   {person.imagenUrl ? (
-                    <img src={person.imagenUrl} alt={person.nombre} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <Image 
+                      src={person.imagenUrl} 
+                      alt={person.nombre} 
+                      fill
+                      sizes="(max-width: 768px) 150px, 150px"
+                      style={{ objectFit: 'cover' }} 
+                    />
                   ) : (
                     <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-secondary)', fontSize: '3rem' }}>
                       👤

@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { CalendarDays, Gauge, Settings } from 'lucide-react';
 
 export default function VehicleCard({ vehicle }) {
@@ -10,10 +11,12 @@ export default function VehicleCard({ vehicle }) {
     <Link href={`/vehiculos/${vehicle.id}`}>
       <div className="card" style={{ cursor: 'pointer', height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ position: 'relative', paddingTop: '60%', overflow: 'hidden', backgroundColor: 'rgba(255,255,255,0.05)' }}>
-          <img 
+          <Image 
             src={mainImage} 
             alt={`${vehicle.marca} ${vehicle.modelo}`} 
-            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
             onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
             onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
           />
