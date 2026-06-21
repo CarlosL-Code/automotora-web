@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Plus, Trash2, Download, Upload } from 'lucide-react';
+import { Plus, Trash2, Edit, Download, Upload } from 'lucide-react';
 
 export default function AdminStaff() {
   const [staff, setStaff] = useState([]);
