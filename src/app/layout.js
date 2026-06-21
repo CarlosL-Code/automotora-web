@@ -6,6 +6,9 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 export const metadata = {
   title: "HMC Automotora Premium",
   description: "Encuentra el auto de tus sueños con la mejor atención.",
+  icons: {
+    icon: '/logo.png',
+  },
 };
 
 export default function RootLayout({ children }) {

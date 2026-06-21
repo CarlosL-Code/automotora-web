@@ -54,7 +54,7 @@ export default function Navbar() {
       <nav style={navStyle}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           {/* Aquí se carga el logo.png si existe, si no mostrará el texto alternativo */}
-          <img src="/logo.png" alt="HMC Premium Logo" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} onError={(e) => {
+          <img src="/logo.png" alt="HMC Premium Logo" style={{ height: isScrolled ? '50px' : '80px', width: 'auto', objectFit: 'contain', transition: 'height 0.3s ease' }} onError={(e) => {
             e.target.style.display = 'none';
             e.target.nextSibling.style.display = 'block';
           }} />
