@@ -9,6 +9,8 @@ export default function AdminStaff() {
   const [formData, setFormData] = useState({
     nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false
   });
+  const [departamento, setDepartamento] = useState('Administración');
+  const [puesto, setPuesto] = useState('');
   const [file, setFile] = useState(null);
 
   const fetchStaff = async () => {
@@ -48,6 +50,7 @@ export default function AdminStaff() {
     // 2. Save Staff Member
     const staffData = {
       ...formData,
+      cargo: `${puesto} | [${departamento}]`
     };
     // Only update imagenUrl if a new file was uploaded
     if (imagenUrl) {
@@ -68,6 +71,8 @@ export default function AdminStaff() {
       setEditingId(null);
       fetchStaff();
       setFormData({ nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false });
+      setDepartamento('Administración');
+      setPuesto('');
       setFile(null);
     } else {
       alert('Error guardando personal');
@@ -75,6 +80,17 @@ export default function AdminStaff() {
   };
 
   const handleEdit = (s) => {
+    let dep = 'Administración';
+    let p = s.cargo || '';
+    if (p.includes(' | [')) {
+      const parts = p.split(' | [');
+      p = parts[0];
+      dep = parts[1].replace(']', '');
+    }
+    
+    setDepartamento(dep);
+    setPuesto(p);
+
     setFormData({
       nombre: s.nombre || '',
       cargo: s.cargo || '',
@@ -164,8 +180,17 @@ export default function AdminStaff() {
               <input required type="text" name="nombre" value={formData.nombre} onChange={handleChange} className="input" />
             </div>
             <div className="form-group">
-              <label className="form-label">Cargo</label>
-              <input required type="text" name="cargo" value={formData.cargo} onChange={handleChange} className="input" />
+              <label className="form-label">Departamento / Área</label>
+              <select value={departamento} onChange={(e) => setDepartamento(e.target.value)} className="input">
+                <option value="Administración">Administración</option>
+                <option value="Ventas">Ventas (Ejecutivos y Mecánicos)</option>
+                <option value="TI">TI (Informática)</option>
+                <option value="Otros">Otros</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label className="form-label">Puesto (Ej. Jefe de Taller)</label>
+              <input required type="text" value={puesto} onChange={(e) => setPuesto(e.target.value)} className="input" />
             </div>
             <div className="form-group">
               <label className="form-label">Teléfono (Opcional)</label>
@@ -194,6 +219,8 @@ export default function AdminStaff() {
               setIsAdding(false);
               setEditingId(null);
               setFormData({ nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false });
+              setDepartamento('Administración');
+              setPuesto('');
             }}>Cancelar</button>
           </div>
         </form>
@@ -217,6 +244,8 @@ export default function AdminStaff() {
           setIsAdding(true);
           setEditingId(null);
           setFormData({ nombre: '', cargo: '', descripcion: '', telefono: '', email: '', esEjecutivo: false });
+          setDepartamento('Administración');
+          setPuesto('');
         }}>
           <Plus size={20} /> Añadir Manual
         </button>
@@ -246,7 +275,7 @@ export default function AdminStaff() {
                   )}
                 </td>
                 <td><strong>{s.nombre}</strong></td>
-                <td>{s.cargo}</td>
+                <td>{s.cargo && s.cargo.includes(' | [') ? s.cargo.split(' | [')[0] : s.cargo}</td>
                 <td>{s.esEjecutivo ? <span style={{ color: 'var(--color-accent)', fontWeight: 'bold' }}>Ejecutivo</span> : 'Personal'}</td>
                 <td>
                   <div style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>

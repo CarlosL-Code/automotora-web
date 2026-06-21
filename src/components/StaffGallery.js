@@ -8,22 +8,21 @@ export default function StaffGallery({ staff }) {
   const categories = ['Todos', 'Administración', 'Ventas', 'TI'];
 
   const getCategory = (person) => {
-    const cargo = person.cargo.toLowerCase();
+    const cargoFull = person.cargo || '';
     
-    // TI / Informática
-    if (/(informátic|sistemas|ti|it|programador|desarrollador|software|soporte)/.test(cargo)) {
-      return 'TI';
+    // Si tiene la etiqueta explícita (creado con el nuevo Admin)
+    if (cargoFull.includes(' | [')) {
+      const tag = cargoFull.split(' | [')[1].replace(']', '').trim();
+      if (tag === 'Administración') return 'Administración';
+      if (tag === 'Ventas') return 'Ventas';
+      if (tag === 'TI') return 'TI';
     }
     
-    // Administración
-    if (/(jefe|admin|gerent|director|encargado)/.test(cargo)) {
-      return 'Administración';
-    }
-    
-    // Ventas (Ejecutivos y Mecánicos)
-    if (person.esEjecutivo || /(ejecutiv|venta|comercial|asesor|mecánic|taller|servicio|técnico|mantenimiento)/.test(cargo)) {
-      return 'Ventas';
-    }
+    // Fallback (creado con el Admin antiguo)
+    const cargo = cargoFull.toLowerCase();
+    if (/(informátic|sistemas|ti|it|programador|desarrollador|software|soporte)/.test(cargo)) return 'TI';
+    if (/(jefe|admin|gerent|director|encargado)/.test(cargo)) return 'Administración';
+    if (person.esEjecutivo || /(ejecutiv|venta|comercial|asesor|mecánic|taller|servicio|técnico|mantenimiento)/.test(cargo)) return 'Ventas';
     
     return 'Otros';
   };
@@ -99,7 +98,9 @@ export default function StaffGallery({ staff }) {
                 )}
               </div>
               <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{person.nombre}</h3>
-              <p style={{ color: 'var(--color-accent)', fontWeight: '600', marginBottom: '1rem', fontSize: '0.9rem' }}>{person.cargo}</p>
+              <p style={{ color: 'var(--color-accent)', fontWeight: '600', marginBottom: '1rem', fontSize: '0.9rem' }}>
+                {person.cargo && person.cargo.includes(' | [') ? person.cargo.split(' | [')[0] : person.cargo}
+              </p>
               {person.descripcion && (
                 <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem', marginBottom: '1.5rem', flexGrow: 1 }}>{person.descripcion}</p>
               )}
