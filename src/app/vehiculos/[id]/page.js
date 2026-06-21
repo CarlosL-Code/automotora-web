@@ -19,6 +19,11 @@ export default async function VehicleDetails({ params }) {
   const images = vehicle.imagenes ? JSON.parse(vehicle.imagenes) : [];
   const mainImage = images.length > 0 ? images[0] : '/placeholder-car.jpg';
 
+  const ejecutivos = await prisma.staff.findMany({
+    where: { esEjecutivo: true },
+    orderBy: { orden: 'asc' }
+  });
+
   // Componente de cliente para el carrusel
-  return <VehicleDetailsClient vehicle={vehicle} images={images} mainImage={mainImage} />;
+  return <VehicleDetailsClient vehicle={vehicle} images={images} mainImage={mainImage} ejecutivos={ejecutivos} />;
 }

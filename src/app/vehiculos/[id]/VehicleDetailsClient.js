@@ -4,7 +4,9 @@ import Link from 'next/link';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
-export default function VehicleDetailsClient({ vehicle, images, mainImage }) {
+import { Phone, MessageCircle } from 'lucide-react';
+
+export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecutivos = [] }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -117,6 +119,61 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage }) {
             </Link>
           </div>
         </div>
+
+        {/* Carousel de Ejecutivos */}
+        {ejecutivos && ejecutivos.length > 0 && (
+          <div style={{ marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid var(--color-border)' }}>
+            <h3 style={{ fontSize: '2rem', marginBottom: '2rem', textAlign: 'center' }}>¿Te interesa este vehículo? <br/><span className="text-gradient">Contacta a un ejecutivo</span></h3>
+            
+            {/* Contenedor scrolleable (carrusel simple) */}
+            <div className="ejecutivos-carousel" style={{ 
+              display: 'flex', 
+              gap: '1.5rem', 
+              overflowX: 'auto', 
+              paddingBottom: '1.5rem',
+              scrollSnapType: 'x mandatory',
+              WebkitOverflowScrolling: 'touch',
+              scrollbarWidth: 'thin',
+              scrollbarColor: 'var(--color-accent) rgba(0,0,0,0.1)'
+            }}>
+              {ejecutivos.map(person => (
+                <div key={person.id} className="card glass" style={{ minWidth: '280px', maxWidth: '300px', flex: '0 0 auto', scrollSnapAlign: 'start', textAlign: 'center', padding: '2rem 1.5rem' }}>
+                  <div style={{ width: '100px', height: '100px', margin: '0 auto 1rem', borderRadius: '50%', overflow: 'hidden', border: '3px solid var(--color-accent)', padding: '2px' }}>
+                    {person.imagenUrl ? (
+                      <img src={person.imagenUrl} alt={person.nombre} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                    ) : (
+                      <div style={{ width: '100%', height: '100%', borderRadius: '50%', backgroundColor: 'rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-secondary)', fontSize: '1.5rem' }}>
+                        👤
+                      </div>
+                    )}
+                  </div>
+                  <h4 style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{person.nombre}</h4>
+                  <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem', marginBottom: '1.5rem' }}>{person.cargo}</p>
+                  
+                  <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
+                    {person.telefono && (
+                      <>
+                        <a href={`tel:${person.telefono.replace(/\s+/g, '')}`} className="btn btn-primary" style={{ padding: '0.5rem', fontSize: '0.85rem', flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.3rem' }}>
+                          <Phone size={14} /> Llamar
+                        </a>
+                        <a 
+                          href={`https://wa.me/${person.telefono.replace(/[\s+]/g, '')}`} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="btn btn-whatsapp" 
+                          style={{ padding: '0.5rem', fontSize: '0.85rem', flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.3rem' }}
+                        >
+                          <MessageCircle size={14} /> WhatsApp
+                        </a>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
       </div>
       <style>{`
         @media (max-width: 768px) {
@@ -124,6 +181,17 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage }) {
             grid-template-columns: 1fr !important;
             gap: 2rem !important;
           }
+        }
+        .ejecutivos-carousel::-webkit-scrollbar {
+          height: 6px;
+        }
+        .ejecutivos-carousel::-webkit-scrollbar-track {
+          background: rgba(0,0,0,0.05);
+          border-radius: 10px;
+        }
+        .ejecutivos-carousel::-webkit-scrollbar-thumb {
+          background-color: var(--color-accent);
+          border-radius: 10px;
         }
       `}</style>
     </main>
