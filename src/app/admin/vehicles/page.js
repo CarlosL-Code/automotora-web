@@ -54,6 +54,22 @@ export default function AdminVehicles() {
     setExistingImages(newImages);
   };
 
+  const removeFile = (index) => {
+    const newFiles = [...files];
+    newFiles.splice(index, 1);
+    setFiles(newFiles);
+
+    const newUrls = [...previewUrls];
+    newUrls.splice(index, 1);
+    setPreviewUrls(newUrls);
+  };
+
+  const removeExisting = (index) => {
+    const newImages = [...existingImages];
+    newImages.splice(index, 1);
+    setExistingImages(newImages);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -79,12 +95,9 @@ export default function AdminVehicles() {
       ...formData,
     };
     
-    // Update imagenes: new uploads have priority, otherwise use the reordered existing images
-    if (imageUrls.length > 0) {
-      vehicleData.imagenes = JSON.stringify(imageUrls);
-    } else if (existingImages.length > 0) {
-      vehicleData.imagenes = JSON.stringify(existingImages);
-    }
+    // Unir las imágenes existentes con las nuevas recién subidas
+    const finalImages = [...existingImages, ...imageUrls];
+    vehicleData.imagenes = JSON.stringify(finalImages);
 
     const url = editingId ? `/api/vehicles/${editingId}` : '/api/vehicles';
     const method = editingId ? 'PUT' : 'POST';
@@ -275,17 +288,20 @@ export default function AdminVehicles() {
               {/* Galería de Nuevas Fotos */}
               {previewUrls.length > 0 && (
                 <div style={{ marginTop: '1rem' }}>
-                  <p style={{ fontSize: '0.875rem', marginBottom: '0.5rem' }}>Nuevas Fotos (Haz clic en ⭐ para elegir portada):</p>
+                  <p style={{ fontSize: '0.875rem', marginBottom: '0.5rem' }}>Nuevas Fotos (Haz clic en ⭐ para elegir portada o ✕ para borrar):</p>
                   <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
                     {previewUrls.map((url, i) => (
-                      <div key={i} style={{ position: 'relative', minWidth: '100px', width: '100px', height: '100px', borderRadius: '0.5rem', overflow: 'hidden', border: i === 0 ? '3px solid var(--color-accent)' : '1px solid var(--color-border)' }}>
+                      <div key={i} style={{ position: 'relative', minWidth: '100px', width: '100px', height: '100px', borderRadius: '0.5rem', overflow: 'hidden', border: i === 0 && existingImages.length === 0 ? '3px solid var(--color-accent)' : '1px solid var(--color-border)' }}>
                         <img src={url} alt={`Preview ${i}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        {i === 0 && <span style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'var(--color-accent)', color: 'white', fontSize: '0.7rem', textAlign: 'center', padding: '2px', fontWeight: 'bold' }}>PORTADA</span>}
-                        {i !== 0 && (
-                          <button type="button" onClick={() => setFileAsCover(i)} title="Establecer como Portada" style={{ position: 'absolute', top: '5px', right: '5px', background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', borderRadius: '50%', width: '28px', height: '28px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'transform 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-                            ⭐
-                          </button>
-                        )}
+                        {i === 0 && existingImages.length === 0 && <span style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'var(--color-accent)', color: 'white', fontSize: '0.7rem', textAlign: 'center', padding: '2px', fontWeight: 'bold' }}>PORTADA</span>}
+                        
+                        <button type="button" onClick={() => removeFile(i)} title="Eliminar Foto" style={{ position: 'absolute', top: '5px', left: '5px', background: 'var(--color-danger)', border: 'none', color: 'white', borderRadius: '50%', width: '24px', height: '24px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          ✕
+                        </button>
+
+                        <button type="button" onClick={() => setFileAsCover(i)} title="Establecer como Portada" style={{ position: 'absolute', top: '5px', right: '5px', background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', borderRadius: '50%', width: '28px', height: '28px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'transform 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                          ⭐
+                        </button>
                       </div>
                     ))}
                   </div>
@@ -293,19 +309,22 @@ export default function AdminVehicles() {
               )}
 
               {/* Galería de Fotos Existentes */}
-              {previewUrls.length === 0 && existingImages.length > 0 && (
+              {existingImages.length > 0 && (
                 <div style={{ marginTop: '1rem' }}>
-                  <p style={{ fontSize: '0.875rem', marginBottom: '0.5rem' }}>Fotos Actuales (Haz clic en ⭐ para cambiar portada):</p>
+                  <p style={{ fontSize: '0.875rem', marginBottom: '0.5rem' }}>Fotos Actuales (Haz clic en ⭐ para cambiar portada o ✕ para borrar):</p>
                   <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
                     {existingImages.map((url, i) => (
                       <div key={i} style={{ position: 'relative', minWidth: '100px', width: '100px', height: '100px', borderRadius: '0.5rem', overflow: 'hidden', border: i === 0 ? '3px solid var(--color-accent)' : '1px solid var(--color-border)' }}>
                         <img src={url} alt={`Existing ${i}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         {i === 0 && <span style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'var(--color-accent)', color: 'white', fontSize: '0.7rem', textAlign: 'center', padding: '2px', fontWeight: 'bold' }}>PORTADA</span>}
-                        {i !== 0 && (
-                          <button type="button" onClick={() => setExistingAsCover(i)} title="Establecer como Portada" style={{ position: 'absolute', top: '5px', right: '5px', background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', borderRadius: '50%', width: '28px', height: '28px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'transform 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-                            ⭐
-                          </button>
-                        )}
+                        
+                        <button type="button" onClick={() => removeExisting(i)} title="Eliminar Foto" style={{ position: 'absolute', top: '5px', left: '5px', background: 'var(--color-danger)', border: 'none', color: 'white', borderRadius: '50%', width: '24px', height: '24px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          ✕
+                        </button>
+
+                        <button type="button" onClick={() => setExistingAsCover(i)} title="Establecer como Portada" style={{ position: 'absolute', top: '5px', right: '5px', background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', borderRadius: '50%', width: '28px', height: '28px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'transform 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                          ⭐
+                        </button>
                       </div>
                     ))}
                   </div>
