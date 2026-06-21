@@ -19,7 +19,7 @@ export default async function VehiclesCatalog({ searchParams }) {
   });
 
   return (
-    <main style={{ paddingTop: '100px', minHeight: '100vh' }}>
+    <main style={{ paddingTop: '1rem', minHeight: '100vh' }}>
       <div className="container slide-up" style={{ paddingBottom: '4rem' }}>
         <h1 style={{ fontSize: '3rem', marginBottom: '1rem', textAlign: 'center' }}>
           Catálogo de <span className="text-gradient">Vehículos</span>

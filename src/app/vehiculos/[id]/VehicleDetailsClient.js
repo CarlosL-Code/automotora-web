@@ -23,7 +23,7 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecu
   }, [emblaApi, onSelect]);
 
   return (
-    <main style={{ paddingTop: '100px', minHeight: '100vh', paddingBottom: '4rem' }}>
+    <main style={{ paddingTop: '1rem', minHeight: '100vh', paddingBottom: '4rem' }}>
       <div className="container slide-up">
         <div style={{ marginBottom: '2rem' }}>
           <Link href="/vehiculos" style={{ color: 'var(--color-accent)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -38,7 +38,7 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecu
               <div className="embla" ref={emblaRef} style={{ overflow: 'hidden', borderRadius: '1rem', backgroundColor: 'rgba(255,255,255,0.05)', position: 'relative' }}>
                 <div className="embla__container" style={{ display: 'flex' }}>
                   {images.map((img, index) => (
-                    <div className="embla__slide" key={index} style={{ flex: '0 0 100%', minWidth: 0, position: 'relative', paddingTop: '60%' }}>
+                    <div className="embla__slide" key={index} style={{ flex: '0 0 100%', minWidth: 0, position: 'relative', paddingTop: '75%' }}>
                       <img src={img} alt={`${vehicle.marca} ${vehicle.modelo} - Imagen ${index + 1}`} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                     </div>
                   ))}
@@ -58,7 +58,7 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecu
                 )}
               </div>
             ) : (
-              <div style={{ width: '100%', borderRadius: '1rem', overflow: 'hidden', backgroundColor: 'rgba(255,255,255,0.05)', paddingTop: '60%', position: 'relative' }}>
+              <div style={{ width: '100%', borderRadius: '1rem', overflow: 'hidden', backgroundColor: 'rgba(255,255,255,0.05)', paddingTop: '75%', position: 'relative' }}>
                 <img src={mainImage} alt={`${vehicle.marca} ${vehicle.modelo}`} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
             )}

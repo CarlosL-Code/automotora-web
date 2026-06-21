@@ -35,7 +35,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main style={{ paddingTop: '100px', minHeight: '100vh', paddingBottom: '4rem' }}>
+    <main style={{ paddingTop: '1rem', minHeight: '100vh', paddingBottom: '4rem' }}>
       <div className="container slide-up">
         <h1 style={{ fontSize: '3rem', marginBottom: '1rem', textAlign: 'center' }}>
           Ponte en <span className="text-gradient">Contacto</span>

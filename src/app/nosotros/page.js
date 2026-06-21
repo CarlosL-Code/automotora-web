@@ -12,7 +12,7 @@ export default async function NosotrosPage() {
   });
 
   return (
-    <main style={{ paddingTop: '100px', minHeight: '100vh', paddingBottom: '4rem' }}>
+    <main style={{ paddingTop: '1rem', minHeight: '100vh', paddingBottom: '4rem' }}>
       <div className="container slide-up">
         
         {/* Header Section */}

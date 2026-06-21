@@ -40,7 +40,6 @@ export default function Navbar() {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    position: 'relative',
   };
 
   const linkStyle = {
@@ -103,7 +102,7 @@ export default function Navbar() {
 
       {/* Spacer para páginas interiores, evita que el Navbar tape el contenido. El Home (/) y Admin lo manejan de forma distinta */}
       {pathname !== '/' && !pathname.startsWith('/admin') && (
-        <div style={{ height: isScrolled ? '110px' : '150px', width: '100%', transition: 'height 0.3s ease' }} aria-hidden="true" />
+        <div style={{ height: isScrolled ? '90px' : '120px', width: '100%', transition: 'height 0.3s ease' }} aria-hidden="true" />
       )}
 
       <style jsx>{`
