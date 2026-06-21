@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Plus, Trash2, Edit } from 'lucide-react';
+import { Plus, Trash2, Edit, Download, Upload } from 'lucide-react';
 
 export default function AdminVehicles() {
   const [vehicles, setVehicles] = useState([]);
@@ -81,6 +81,71 @@ export default function AdminVehicles() {
     }
   };
 
+  const handleDownloadTemplate = async () => {
+    const XLSX = await import('xlsx');
+    const ws = XLSX.utils.json_to_sheet([{
+      Marca: 'Toyota', Modelo: 'Yaris', Ano: 2020, Precio: 8500000, Kilometraje: 45000, 
+      Transmision: 'Manual', Combustible: 'Gasolina', Color: 'Blanco', Descripcion: 'Excelente estado', 
+      Estado: 'DISPONIBLE', Destacado: 'NO'
+    }]);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Vehiculos");
+    XLSX.writeFile(wb, "Plantilla_Vehiculos.xlsx");
+  };
+
+  const handleExcelUpload = (e) => {
+    const uploadedFile = e.target.files[0];
+    if (!uploadedFile) return;
+    
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      try {
+        const XLSX = await import('xlsx');
+        const data = new Uint8Array(event.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        const json = XLSX.utils.sheet_to_json(worksheet);
+        
+        const formattedData = json.map(row => ({
+          marca: row.Marca,
+          modelo: row.Modelo,
+          ano: row.Ano || row.Año,
+          precio: row.Precio,
+          kilometraje: row.Kilometraje,
+          transmision: row.Transmision,
+          combustible: row.Combustible,
+          color: row.Color || '',
+          descripcion: row.Descripcion || '',
+          estado: row.Estado || 'DISPONIBLE',
+          destacado: String(row.Destacado).toUpperCase() === 'SI' || String(row.Destacado).toUpperCase() === 'SÍ'
+        })).filter(row => row.marca && row.modelo); // Filter empty rows
+
+        if (formattedData.length === 0) {
+          alert('No se encontraron datos válidos en el archivo Excel.');
+          return;
+        }
+
+        const res = await fetch('/api/vehicles/bulk', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formattedData)
+        });
+        
+        if (res.ok) {
+          alert(`${formattedData.length} vehículos importados exitosamente.`);
+          fetchVehicles();
+        } else {
+          alert('Error importando vehículos desde Excel.');
+        }
+      } catch (error) {
+        alert('Error leyendo el archivo Excel: ' + error.message);
+      }
+    };
+    reader.readAsArrayBuffer(uploadedFile);
+    e.target.value = ''; // Reset input
+  };
+
   if (isAdding) {
     return (
       <div className="slide-up">
@@ -149,9 +214,18 @@ export default function AdminVehicles() {
     <div className="fade-in">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <h2>Inventario de Vehículos</h2>
-        <button className="btn btn-primary" onClick={() => setIsAdding(true)}>
-          <Plus size={20} /> Añadir Vehículo
-        </button>
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <button className="btn btn-outline" onClick={handleDownloadTemplate}>
+            <Download size={20} /> Plantilla Excel
+          </button>
+          <label className="btn btn-outline" style={{ cursor: 'pointer', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Upload size={20} /> Subir Excel
+            <input type="file" accept=".xlsx, .xls" onChange={handleExcelUpload} style={{ display: 'none' }} />
+          </label>
+          <button className="btn btn-primary" onClick={() => setIsAdding(true)}>
+            <Plus size={20} /> Añadir Manual
+          </button>
+        </div>
       </div>
 
       <div className="card glass">
