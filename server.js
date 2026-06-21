@@ -2,27 +2,34 @@ const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
 
-const dev = process.env.NODE_ENV !== 'production';
-const hostname = 'localhost';
-const port = process.env.PORT || 3000;
-// Cuando Next.js se arranca así, usa su propio compilador.
+const dev = false; // Siempre producción en Hostinger
+const hostname = '0.0.0.0';
+const port = parseInt(process.env.PORT, 10) || 3000;
+
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
-app.prepare().then(() => {
-  createServer(async (req, res) => {
-    try {
-      // Be sure to pass `true` as the second argument to `url.parse`.
-      // This tells it to parse the query portion of the URL.
-      const parsedUrl = parse(req.url, true);
-      await handle(req, res, parsedUrl);
-    } catch (err) {
-      console.error('Error occurred handling', req.url, err);
-      res.statusCode = 500;
-      res.end('internal server error');
-    }
-  }).listen(port, (err) => {
-    if (err) throw err;
-    console.log(`> Ready on http://${hostname}:${port}`);
+console.log(`[HMC Motors] Iniciando servidor en puerto ${port}...`);
+console.log(`[HMC Motors] NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`[HMC Motors] DATABASE_URL: ${process.env.DATABASE_URL}`);
+
+app.prepare()
+  .then(() => {
+    createServer(async (req, res) => {
+      try {
+        const parsedUrl = parse(req.url, true);
+        await handle(req, res, parsedUrl);
+      } catch (err) {
+        console.error('[HMC Motors] Error handling request:', req.url, err);
+        res.statusCode = 500;
+        res.end('Internal Server Error');
+      }
+    }).listen(port, hostname, (err) => {
+      if (err) throw err;
+      console.log(`[HMC Motors] ✓ Servidor listo en http://${hostname}:${port}`);
+    });
+  })
+  .catch((err) => {
+    console.error('[HMC Motors] ✗ Error fatal al iniciar:', err);
+    process.exit(1);
   });
-});
