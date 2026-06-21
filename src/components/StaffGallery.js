@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useState, useMemo } from 'react';
-import { Phone, Mail, Briefcase, Monitor, Wrench, Users, ShieldCheck } from 'lucide-react';
+import { Phone, MessageCircle, Briefcase, Monitor, Wrench, Users, ShieldCheck } from 'lucide-react';
 
 export default function StaffGallery({ staff }) {
   const [activeTab, setActiveTab] = useState('Todos');
@@ -170,14 +170,20 @@ export default function StaffGallery({ staff }) {
               
               <div className="staff-actions" style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', marginTop: 'auto' }}>
                 {person.telefono && (
-                  <a href={`tel:${person.telefono.replace(/\s+/g, '')}`} className="staff-btn staff-btn-primary" title="Llamar">
-                    <Phone size={18} /> <span>Llamar</span>
-                  </a>
-                )}
-                {person.email && (
-                  <a href={`mailto:${person.email}`} className="staff-btn staff-btn-secondary" title="Enviar Email">
-                    <Mail size={18} /> <span>Email</span>
-                  </a>
+                  <>
+                    <a href={`tel:${person.telefono.replace(/\s+/g, '')}`} className="staff-btn staff-btn-primary" title="Llamar">
+                      <Phone size={18} /> <span>Llamar</span>
+                    </a>
+                    <a 
+                      href={`https://wa.me/${person.telefono.replace(/[\s+]/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="staff-btn staff-btn-whatsapp" 
+                      title="WhatsApp"
+                    >
+                      <MessageCircle size={18} /> <span>WhatsApp</span>
+                    </a>
+                  </>
                 )}
               </div>
             </div>
@@ -255,6 +261,17 @@ export default function StaffGallery({ staff }) {
           transform: translateY(-2px);
           border-color: var(--color-accent);
           color: var(--color-accent);
+        }
+        .staff-btn-whatsapp {
+          background: transparent;
+          color: #25D366;
+          border: 1px solid #25D366;
+        }
+        .staff-btn-whatsapp:hover {
+          background: #25D366;
+          color: white;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
 
         .staff-tab:hover {
