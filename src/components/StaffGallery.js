@@ -5,20 +5,24 @@ import { Phone, Mail } from 'lucide-react';
 export default function StaffGallery({ staff }) {
   const [activeTab, setActiveTab] = useState('Todos');
 
-  // Nuevo nombre para los Ejecutivos y Mecánicos
-  const categories = ['Todos', 'Administración', 'Ventas & Servicio'];
+  const categories = ['Todos', 'Administración', 'Ventas', 'TI'];
 
   const getCategory = (person) => {
     const cargo = person.cargo.toLowerCase();
     
-    // Si es informática, ahora pertenece a Administración
-    if (/(jefe|admin|gerent|director|encargado|informátic|sistemas|ti|it|programador|desarrollador|software|soporte)/.test(cargo)) {
+    // TI / Informática
+    if (/(informátic|sistemas|ti|it|programador|desarrollador|software|soporte)/.test(cargo)) {
+      return 'TI';
+    }
+    
+    // Administración
+    if (/(jefe|admin|gerent|director|encargado)/.test(cargo)) {
       return 'Administración';
     }
     
-    // Ejecutivos y Mecánicos en una sola sección ("Ventas & Servicio")
+    // Ventas (Ejecutivos y Mecánicos)
     if (person.esEjecutivo || /(ejecutiv|venta|comercial|asesor|mecánic|taller|servicio|técnico|mantenimiento)/.test(cargo)) {
-      return 'Ventas & Servicio';
+      return 'Ventas';
     }
     
     return 'Otros';
