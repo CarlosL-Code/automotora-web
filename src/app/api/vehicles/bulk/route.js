@@ -11,17 +11,17 @@ export async function POST(request) {
 
     const createdVehicles = await prisma.vehicle.createMany({
       data: vehiclesArray.map(vehicle => ({
-        marca: vehicle.marca,
-        modelo: vehicle.modelo,
+        marca: vehicle.marca != null ? String(vehicle.marca) : '',
+        modelo: vehicle.modelo != null ? String(vehicle.modelo) : '',
         ano: parseInt(vehicle.ano) || new Date().getFullYear(),
         precio: parseFloat(vehicle.precio) || 0,
         kilometraje: parseInt(vehicle.kilometraje) || 0,
-        transmision: vehicle.transmision || 'Automática',
-        combustible: vehicle.combustible || 'Gasolina',
-        motor: vehicle.motor || '',
-        color: vehicle.color || '',
-        descripcion: vehicle.descripcion || '',
-        estado: vehicle.estado || 'DISPONIBLE',
+        transmision: vehicle.transmision != null ? String(vehicle.transmision) : 'Automática',
+        combustible: vehicle.combustible != null ? String(vehicle.combustible) : 'Gasolina',
+        motor: vehicle.motor != null ? String(vehicle.motor) : '',
+        color: vehicle.color != null ? String(vehicle.color) : '',
+        descripcion: vehicle.descripcion != null ? String(vehicle.descripcion) : '',
+        estado: vehicle.estado != null ? String(vehicle.estado) : 'DISPONIBLE',
         imagenes: '[]', // Images loaded later
         destacado: vehicle.destacado === true || vehicle.destacado === 'true',
       })),

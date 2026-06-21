@@ -11,12 +11,12 @@ export async function POST(request) {
 
     const createdStaff = await prisma.staff.createMany({
       data: staffArray.map(staff => ({
-        nombre: staff.nombre,
-        cargo: staff.cargo,
-        descripcion: staff.descripcion || '',
+        nombre: staff.nombre != null ? String(staff.nombre) : '',
+        cargo: staff.cargo != null ? String(staff.cargo) : '',
+        descripcion: staff.descripcion != null ? String(staff.descripcion) : '',
         imagenUrl: null, // Images loaded later
-        telefono: staff.telefono || '',
-        email: staff.email || '',
+        telefono: staff.telefono != null ? String(staff.telefono) : '',
+        email: staff.email != null ? String(staff.email) : '',
         esEjecutivo: staff.esEjecutivo === true,
         orden: staff.orden ? parseInt(staff.orden) : 0,
       })),
