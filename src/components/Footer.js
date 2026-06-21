@@ -36,8 +36,8 @@ export default function Footer() {
           <div>
             <h4 style={{ marginBottom: '1rem' }}>Contacto</h4>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem', color: 'var(--color-text-secondary)' }}>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><MapPin size={18} /> Av. Principal 123, Ciudad</li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Phone size={18} /> +56 9 1234 5678</li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><MapPin size={18} /> Avenida Caupolican 579, Temuco</li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Phone size={18} /> (+56) 9 58251226</li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Mail size={18} /> contacto@hmcautomotora.cl</li>
             </ul>
           </div>

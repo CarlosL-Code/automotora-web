@@ -21,7 +21,7 @@ export default async function Home() {
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center',
-        background: 'linear-gradient(rgba(15, 17, 21, 0.7), rgba(15, 17, 21, 0.9)), url("https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=2000") center/cover no-repeat'
+        background: 'linear-gradient(rgba(15, 17, 21, 0.6), rgba(15, 17, 21, 0.9)), url("https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop") center/cover no-repeat'
       }}>
         <div className="container text-center slide-up" style={{ zIndex: 2, color: '#ffffff' }}>
           <h1 style={{ fontSize: '4rem', marginBottom: '1.5rem', textShadow: '0 4px 20px rgba(0,0,0,0.5)', color: '#ffffff' }}>

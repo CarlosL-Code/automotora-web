@@ -1,6 +1,11 @@
 import { NextResponse } from 'next/server';
-import { writeFile } from 'fs/promises';
-import path from 'path';
+import { v2 as cloudinary } from 'cloudinary';
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request) {
   try {
@@ -17,18 +22,17 @@ export async function POST(request) {
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
 
-      // Generate a unique filename
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      const filename = uniqueSuffix + '-' + file.name.replace(/[^a-zA-Z0-9.]/g, '_');
-      
-      const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-      const filepath = path.join(uploadDir, filename);
+      const url = await new Promise((resolve, reject) => {
+        cloudinary.uploader.upload_stream(
+          { folder: 'automotora' },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result.secure_url);
+          }
+        ).end(buffer);
+      });
 
-      // Save the file
-      await writeFile(filepath, buffer);
-      
-      // Store the public URL
-      uploadedUrls.push(`/uploads/${filename}`);
+      uploadedUrls.push(url);
     }
 
     return NextResponse.json({ urls: uploadedUrls });
