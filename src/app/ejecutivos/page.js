@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma';
-import { Phone, Mail } from 'lucide-react';
+import { Phone, MessageCircle } from 'lucide-react';
 
 export const revalidate = 0;
 
@@ -40,14 +40,20 @@ export default async function EjecutivosPage() {
                 
                 <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '1rem' }}>
                   {person.telefono && (
-                    <a href={`tel:${person.telefono.replace(/\s+/g, '')}`} className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem', width: '100%', gap: '0.5rem' }}>
-                      <Phone size={16} /> Llamar
-                    </a>
-                  )}
-                  {person.email && (
-                    <a href={`mailto:${person.email}`} className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem', width: '100%', gap: '0.5rem' }}>
-                      <Mail size={16} /> Email
-                    </a>
+                    <>
+                      <a href={`tel:${person.telefono.replace(/\s+/g, '')}`} className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem', width: '100%', gap: '0.5rem' }}>
+                        <Phone size={16} /> Llamar
+                      </a>
+                      <a 
+                        href={`https://wa.me/${person.telefono.replace(/[\s+]/g, '')}`} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="btn btn-whatsapp" 
+                        style={{ padding: '0.5rem 1rem', fontSize: '0.875rem', width: '100%', gap: '0.5rem' }}
+                      >
+                        <MessageCircle size={16} /> WhatsApp
+                      </a>
+                    </>
                   )}
                 </div>
               </div>

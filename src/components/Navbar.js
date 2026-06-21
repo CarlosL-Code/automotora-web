@@ -40,6 +40,7 @@ export default function Navbar() {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    position: 'relative',
   };
 
   const linkStyle = {
@@ -67,7 +68,7 @@ export default function Navbar() {
           <span style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--nav-text)', display: 'none' }}>HMC Premium</span>
         </Link>
         
-        <div className="desktop-menu" style={{ display: 'flex', alignItems: 'center' }}>
+        <div className="desktop-menu" style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center' }}>
           <Link href="/" style={linkStyle}>Inicio</Link>
           <Link href="/vehiculos" style={linkStyle}>Vehículos</Link>
           <Link href="/ejecutivos" style={linkStyle}>Ejecutivos</Link>
