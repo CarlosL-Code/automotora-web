@@ -41,3 +41,13 @@ yarn-error.log*
 next-env.d.ts
 
 /src/generated/prisma
+
+# deploy artifacts
+/deploy-ready
+/deploy.zip
+/codigo-fuente*.zip
+prepare_deploy.js
+build_deploy.js
+build_source_zip.js
+pack_clean.js
+zip.js
