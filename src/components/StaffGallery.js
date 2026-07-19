@@ -17,7 +17,7 @@ export default function StaffGallery({ staff }) {
       if (tag === 'TI') return 'TI';
     }
     const cargo = cargoFull.toLowerCase();
-    if (/(informátic|sistemas|ti|it|programador|desarrollador|software|soporte)/.test(cargo)) return 'TI';
+    if (/(informátic|sistemas|\bti\b|\bit\b|programador|desarrollador|software|soporte)/.test(cargo)) return 'TI';
     if (/(jefe|admin|gerent|director|encargado)/.test(cargo)) return 'Administración';
     if (person.esEjecutivo || /(ejecutiv|venta|comercial|asesor|mecánic|taller|servicio|técnico|mantenimiento)/.test(cargo)) return 'Ventas';
     return 'Otros';
@@ -48,8 +48,8 @@ export default function StaffGallery({ staff }) {
       const cargoA = a.cargo.toLowerCase();
       const cargoB = b.cargo.toLowerCase();
       
-      const isIT_A = /(informátic|sistemas|ti|it|programador|desarrollador|software|soporte)/.test(cargoA);
-      const isIT_B = /(informátic|sistemas|ti|it|programador|desarrollador|software|soporte)/.test(cargoB);
+      const isIT_A = /(informátic|sistemas|\bti\b|\bit\b|programador|desarrollador|software|soporte)/.test(cargoA);
+      const isIT_B = /(informátic|sistemas|\bti\b|\bit\b|programador|desarrollador|software|soporte)/.test(cargoB);
       
       // Si A es informática y B no lo es, A va después (al final/terceros)
       if (isIT_A && !isIT_B) return 1;

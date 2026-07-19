@@ -16,9 +16,8 @@ export default async function Home() {
   return (
     <main>
       {/* Hero Section */}
-      <section style={{ 
+      <section className="hero-section" style={{ 
         position: 'relative', 
-        height: '100vh', 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center',
@@ -26,7 +25,7 @@ export default async function Home() {
       }}>
         {/* LCP Image Optimized */}
         <Image 
-          src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop"
           alt="Auto de lujo fondo HMC Premium"
           fill
           priority
@@ -34,8 +33,8 @@ export default async function Home() {
           quality={85}
           style={{ objectFit: 'cover', zIndex: 0 }}
         />
-        {/* Overlay Dark */}
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(rgba(15, 17, 21, 0.6), rgba(15, 17, 21, 0.9))', zIndex: 1 }}></div>
+        {/* Overlay Dark (Más claro para que resalte la imagen) */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(rgba(15, 17, 21, 0.3), rgba(15, 17, 21, 0.6))', zIndex: 1 }}></div>
 
         <div className="container text-center slide-up" style={{ zIndex: 2, color: '#ffffff', position: 'relative' }}>
           <h1 style={{ fontSize: '4rem', marginBottom: '1.5rem', textShadow: '0 4px 20px rgba(0,0,0,0.5)', color: '#ffffff' }}>
