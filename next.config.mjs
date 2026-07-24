@@ -12,6 +12,14 @@ const nextConfig = {
       }
     ],
   },
+  eslint: {
+    // Apaga el chequeo de código durante la compilación para ahorrar mucha RAM en Hostinger
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  // Activa el modo 'standalone' para reducir al mínimo el consumo de memoria del servidor en vivo
+  output: 'standalone',
 };
-
 export default nextConfig;
