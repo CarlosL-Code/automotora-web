@@ -407,13 +407,14 @@ h3 { font-size: 1.875rem; }
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    flex: 1; /* Distribuye el espacio equitativamente y previene que se solapen */
     height: 100%;
     color: var(--color-text-secondary);
     text-decoration: none;
     transition: color 0.3s ease;
     -webkit-tap-highlight-color: transparent;
     padding-top: 5px;
+    cursor: pointer;
   }
 
   .mobile-nav-item.active {
@@ -440,6 +441,7 @@ h3 { font-size: 1.875rem; }
   /* WhatsApp FAB (Guatita central) */
   .mobile-nav-center-btn {
     position: relative;
+    flex: 0 0 60px; /* Tamaño fijo, no se encoge ni se expande */
     width: 60px;
     height: 100%;
     display: flex;
