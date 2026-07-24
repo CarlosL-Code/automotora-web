@@ -103,11 +103,11 @@ export default function Navbar() {
 
       {/* --- MOBILE BOTTOM NAV (APP-LIKE CON BOTON CENTRAL) --- */}
       <nav className="mobile-bottom-nav">
-        <Link href="/" className={`mobile-nav-item ${pathname === '/' ? 'active' : ''}`}>
+        <Link href="/" prefetch={true} className={`mobile-nav-item ${pathname === '/' ? 'active' : ''}`}>
           <div className="icon-wrapper"><Home size={22} /></div>
           <span className="nav-label">Inicio</span>
         </Link>
-        <Link href="/vehiculos" className={`mobile-nav-item ${pathname.startsWith('/vehiculos') ? 'active' : ''}`}>
+        <Link href="/vehiculos" prefetch={true} className={`mobile-nav-item ${pathname.startsWith('/vehiculos') ? 'active' : ''}`}>
           <div className="icon-wrapper"><Car size={22} /></div>
           <span className="nav-label">Catálogo</span>
         </Link>
@@ -120,11 +120,11 @@ export default function Navbar() {
           </a>
         </div>
 
-        <Link href="/ejecutivos" className={`mobile-nav-item ${pathname.startsWith('/ejecutivos') ? 'active' : ''}`}>
+        <Link href="/ejecutivos" prefetch={true} className={`mobile-nav-item ${pathname.startsWith('/ejecutivos') ? 'active' : ''}`}>
           <div className="icon-wrapper"><Users size={22} /></div>
           <span className="nav-label">Staff</span>
         </Link>
-        <Link href="/nosotros" className={`mobile-nav-item ${pathname.startsWith('/nosotros') ? 'active' : ''}`}>
+        <Link href="/nosotros" prefetch={true} className={`mobile-nav-item ${pathname.startsWith('/nosotros') ? 'active' : ''}`}>
           <div className="icon-wrapper"><Briefcase size={22} /></div>
           <span className="nav-label">Nosotros</span>
         </Link>
