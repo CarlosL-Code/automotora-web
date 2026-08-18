@@ -253,40 +253,64 @@ h3 { font-size: 1.875rem; }
 
 .main-top-nav {
   position: fixed;
-  top: 20px;
+  top: 15px; /* Efecto flotante */
   left: 0;
   right: 0;
   margin: 0 auto;
-  width: 90%;
+  width: 92%;
   max-width: 1200px;
   z-index: 9999;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   padding: 0.5rem 2rem;
-  border-radius: 20px;
-  /* Fondo oscuro transparente SIEMPRE al inicio para resaltar el logo dorado y texto blanco */
-  background: rgba(15, 17, 21, 0.65);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 999px; /* Forma de píldora muy redondeada */
+  /* Fondo claro profesional con glassmorphism */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #ffffff; /* Texto inicial siempre blanco */
+  color: #0f172a; /* Texto oscuro para contrastar con el fondo claro */
+  overflow: hidden; /* Mantiene la barra de progreso contenida en los bordes curvos */
 }
 
-/* Ya no necesitamos la variante [data-theme='dark'] para el inicio, porque ahora siempre inicia oscuro */
+[data-theme='dark'] .main-top-nav {
+  background: rgba(20, 22, 27, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
 
 .main-top-nav.scrolled {
+  top: 10px; /* Sigue flotando al hacer scroll */
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme='dark'] .main-top-nav.scrolled {
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+}
+
+/* --- SCROLL PROGRESS BAR --- */
+.scroll-progress-container {
+  position: absolute;
   top: 0;
+  left: 0;
   width: 100%;
-  max-width: 100%;
-  padding: 0.5rem 2rem;
-  border-radius: 0;
-  background: var(--nav-bg-scrolled);
-  border: none;
-  box-shadow: var(--shadow-md);
-  color: var(--nav-text); /* Vuelve al color adaptativo (negro en claro, blanco en oscuro) al hacer scroll */
+  height: 4px; /* Grosor de la línea azul */
+  background: transparent;
+  z-index: 1001;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: #0066ff; /* Línea azul sugerida por el usuario */
+  width: 0%;
+  transition: width 0.15s ease-out;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
 }
 
 .logo-wrapper {

@@ -9,6 +9,7 @@ import ThemeToggle from './ThemeToggle';
 export default function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [mounted, setMounted] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -16,6 +17,14 @@ export default function Navbar() {
     setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      
+      const totalScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      if (windowHeight > 0) {
+        setScrollProgress((totalScroll / windowHeight) * 100);
+      } else {
+        setScrollProgress(0);
+      }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -42,6 +51,11 @@ export default function Navbar() {
     <>
       {/* --- DESKTOP & MOBILE TOP NAV --- */}
       <nav className={`main-top-nav ${isScrolled ? 'scrolled' : ''}`}>
+        {/* Línea de progreso de lectura azul */}
+        <div className="scroll-progress-container">
+          <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }}></div>
+        </div>
+
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <div className="logo-wrapper">
             <Image 
