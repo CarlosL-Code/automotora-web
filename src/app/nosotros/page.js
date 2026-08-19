@@ -42,27 +42,42 @@ export default async function NosotrosPage() {
           </div>
         </section>
 
-        {/* Clean Values Grid - Clearcover Style */}
+        {/* Luxury List - Pilares */}
         <section className={`${styles.valuesSection} slide-up`} style={{ animationDelay: '0.4s' }}>
           <h2 className={styles.valuesTitle}>Nuestros Pilares</h2>
           
-          <div className={styles.valuesGrid}>
-            <div className={styles.valueCard}>
-              <div className={styles.valueIcon}><Handshake size={32} /></div>
-              <h3>Transparencia Total</h3>
-              <p>Vamos siempre con la verdad por delante. Informamos con claridad el estado real, condiciones y valores de cada vehículo. Sin sorpresas.</p>
+          <div className={styles.luxuryList}>
+            <div className={styles.luxuryRow}>
+              <div className={styles.luxuryNumber}>01</div>
+              <div className={styles.luxuryTitleWrapper}>
+                <div className={styles.luxuryIcon}><Handshake size={28} /></div>
+                <div className={styles.luxuryTitle}>Transparencia Total</div>
+              </div>
+              <div className={styles.luxuryText}>
+                Vamos siempre con la verdad por delante. Informamos con claridad el estado real, condiciones y valores de cada vehículo. <strong>Sin letra chica, sin sorpresas.</strong>
+              </div>
             </div>
 
-            <div className={styles.valueCard}>
-              <div className={styles.valueIcon}><Search size={32} /></div>
-              <h3>Inspección Rigurosa</h3>
-              <p>Previo a la venta, cada auto pasa por revisión mecánica, escáner y chequeo de historial Autofact. Te entregamos la verdadera hoja de vida.</p>
+            <div className={styles.luxuryRow}>
+              <div className={styles.luxuryNumber}>02</div>
+              <div className={styles.luxuryTitleWrapper}>
+                <div className={styles.luxuryIcon}><Search size={28} /></div>
+                <div className={styles.luxuryTitle}>Inspección Rigurosa</div>
+              </div>
+              <div className={styles.luxuryText}>
+                Previo a la venta, cada auto pasa por revisión mecánica, escáner profesional y chequeo de historial Autofact. Te entregamos la <strong>verdadera hoja de vida</strong> del vehículo.
+              </div>
             </div>
 
-            <div className={styles.valueCard}>
-              <div className={styles.valueIcon}><Star size={32} /></div>
-              <h3>Servicio Integral</h3>
-              <p>Te ofrecemos consignaciones, financiamiento, recepción en parte de pago y apoyo en transferencias. Todo en un solo lugar.</p>
+            <div className={styles.luxuryRow}>
+              <div className={styles.luxuryNumber}>03</div>
+              <div className={styles.luxuryTitleWrapper}>
+                <div className={styles.luxuryIcon}><Star size={28} /></div>
+                <div className={styles.luxuryTitle}>Servicio Integral</div>
+              </div>
+              <div className={styles.luxuryText}>
+                Te ofrecemos consignaciones, financiamiento, recepción en parte de pago y apoyo en transferencias. Todo gestionado <strong>en un solo lugar</strong> para tu comodidad.
+              </div>
             </div>
           </div>
         </section>
