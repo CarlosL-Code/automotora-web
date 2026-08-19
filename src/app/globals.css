@@ -259,18 +259,18 @@ h3 { font-size: 1.875rem; }
   max-width: 1200px;
   z-index: 9999;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  padding: 0.5rem 1.5rem;
-  border-radius: 16px; /* Bordes redondeados al estar flotando */
-  background: rgba(28, 30, 34, 0.85); /* Titanio oscuro premium corporativo */
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1); 
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); 
+  padding: 0.4rem 1.5rem; /* Más delgado */
+  border-radius: 16px; 
+  background: rgba(15, 15, 17, 0.75); /* Negro/Gris muy oscuro cristalino premium */
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08); 
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); 
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   color: #ffffff; 
-  overflow: hidden; /* Evita que la línea de progreso se salga de los bordes redondeados */
+  overflow: hidden; 
 }
 
 /* Eliminado el override de [data-theme='dark'] para que mantenga su color plomo */
@@ -283,9 +283,9 @@ h3 { font-size: 1.875rem; }
   border-left: none;
   border-right: none;
   border-top: none;
-  padding: 0.5rem 2rem; /* Un poco más de padding lateral al expandirse */
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
-  background: rgba(20, 22, 25, 0.95); /* Más oscuro y sólido al hacer scroll */
+  padding: 0.4rem 2rem; 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  background: rgba(10, 10, 12, 0.95); /* Negro sólido glass al hacer scroll */
 }
 
 /* Eliminado override oscuro de scrolled */
@@ -296,7 +296,7 @@ h3 { font-size: 1.875rem; }
   top: 0;
   left: 0;
   width: 100%;
-  height: 2px; /* Un poco más visible */
+  height: 2px; 
   background: transparent;
   z-index: 1001;
   pointer-events: none;
@@ -304,9 +304,9 @@ h3 { font-size: 1.875rem; }
 
 .scroll-progress-bar {
   height: 100%;
-  background: var(--color-accent); /* Color de acento de la marca en lugar de azul */
+  background: var(--color-accent); 
   width: 0%;
-  transition: width 0.2s ease-out; /* Transición más rápida para que se sienta responsiva */
+  transition: width 0.2s ease-out; 
   border-top-right-radius: 999px;
   border-bottom-right-radius: 999px;
 }
@@ -314,12 +314,12 @@ h3 { font-size: 1.875rem; }
 .logo-wrapper {
   position: relative;
   transition: all 0.3s ease;
-  width: 150px;
-  height: 60px;
+  width: 110px; /* Reducido para que el encabezado no sea tan alto/tosco */
+  height: 45px;
 }
 .main-top-nav.scrolled .logo-wrapper {
-  width: 120px;
-  height: 50px;
+  width: 90px;
+  height: 38px;
 }
 
 /* --- GRID LAYOUT NAV --- */
@@ -474,12 +474,12 @@ h3 { font-size: 1.875rem; }
 }
 
 .top-spacer {
-  height: 90px; /* Reducido de 120px para quitar el espacio vacío */
+  height: 100px; /* Suficiente espacio para que no quede pegado al menú */
   width: 100%;
   transition: height 0.3s ease;
 }
 .top-spacer.scrolled {
-  height: 70px;
+  height: 80px;
 }
 
 /* --- MOBILE SPECIFIC STYLES --- */
@@ -497,21 +497,21 @@ h3 { font-size: 1.875rem; }
     width: 100% !important;
     max-width: 100% !important;
     border-radius: 0 !important;
-    padding: 0.5rem 1rem !important;
-    background: rgba(28, 30, 34, 0.95) !important; /* Titanio en celular */
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
+    padding: 0.4rem 1rem !important;
+    background: rgba(15, 15, 17, 0.85) !important; /* Negro dark glass celular */
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
     border: none !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
   }
 
   .main-top-nav.scrolled {
-    background: rgba(20, 22, 25, 0.98) !important; /* Más oscuro scrolled */
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
+    background: rgba(10, 10, 12, 0.98) !important; /* Más oscuro scrolled */
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
     border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3) !important;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5) !important;
   }
   
   .logo-wrapper, .main-top-nav.scrolled .logo-wrapper {
@@ -520,7 +520,7 @@ h3 { font-size: 1.875rem; }
   }
   
   .top-spacer, .top-spacer.scrolled {
-    height: 70px !important;
+    height: 80px !important;
   }
 
   /* Bottom Navigation Bar App-like */
