@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { Phone, MessageCircle } from 'lucide-react';
+import Image from 'next/image';
 
 export const revalidate = 0;
 

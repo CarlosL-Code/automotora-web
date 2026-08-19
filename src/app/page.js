@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma';
 import VehicleCard from '@/components/VehicleCard';
 import { ArrowRight, ShieldCheck, Users, Wallet, Phone } from 'lucide-react';
 
-export const revalidate = 60; // Enable ISR (update every 60s) for blazing fast initial loads
+export const revalidate = 0; // Disable static rendering to avoid Vercel build failures with Hostinger DB
 
 export default async function Home() {
   const featuredVehicles = await prisma.vehicle.findMany({
