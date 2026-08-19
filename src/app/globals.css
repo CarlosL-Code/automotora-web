@@ -485,6 +485,9 @@ h3 { font-size: 1.875rem; }
   }
   
   .main-top-nav {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
     top: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
