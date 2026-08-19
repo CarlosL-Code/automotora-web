@@ -257,22 +257,21 @@ h3 { font-size: 1.875rem; }
   left: 0;
   right: 0;
   margin: 0 auto;
-  width: 90%;
-  max-width: 1000px; /* Un poco más compacto y elegante */
+  width: 95%;
+  max-width: 1200px; /* Un poco más ancho para albergar el botón */
   z-index: 9999;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 1.5rem;
   border-radius: 99px; /* Píldora perfecta */
-  /* Fondo oscuro premium permanente (Dark Glass) */
   background: rgba(24, 24, 27, 0.85); 
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil blanco */
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* Sombra profunda */
-  display: flex;
-  justify-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); 
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  color: #ffffff; /* Texto siempre blanco para destacar */
+  color: #ffffff; 
   overflow: hidden;
 }
 
@@ -324,24 +323,98 @@ h3 { font-size: 1.875rem; }
   height: 50px;
 }
 
-.desktop-menu {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+/* --- GRID LAYOUT NAV --- */
+.nav-left {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
 }
 
-.nav-link {
-  color: inherit; /* Hereda de .main-top-nav (blanco al inicio, oscuro/blanco al bajar) */
+.nav-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.desktop-menu {
+  /* Se mantiene como clase para ocultarlo en móvil, pero la estructura la da nav-center/right */
+}
+
+/* Animación y estilo botón WhatsApp Nav */
+.nav-wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(45deg, #25D366, #1EBE53);
+  color: #ffffff !important;
+  padding: 0.5rem 1.25rem;
+  border-radius: 99px;
   font-weight: 600;
-  margin: 0 1rem;
-  font-size: 1rem;
-  transition: color 0.2s ease;
+  font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nav-wa-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: wa-shine 3s infinite;
+}
+
+@keyframes wa-shine {
+  0% { left: -100%; }
+  20% { left: 100%; }
+  100% { left: 100%; }
+}
+
+.nav-wa-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+}
+
+.nav-link {
+  color: #ffffff; /* Texto siempre blanco */
+  font-weight: 600;
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: #ffffff;
+  transition: width 0.3s ease;
+  border-radius: 2px;
 }
 
 .nav-link:hover {
-  color: var(--color-accent);
+  color: #ffffff;
+}
+
+.nav-link:hover::after {
+  width: 80%;
 }
 
 .mobile-top-actions {
