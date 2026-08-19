@@ -75,20 +75,11 @@ export default async function Home() {
             Selección curada de vehículos con garantía, financiamiento a tu medida y la confianza de un equipo que te acompaña.
           </p>
 
-          <div className="hero-animate hero-delay-4" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <Link href="/vehiculos" className="btn btn-primary" style={{ 
-              padding: '1rem 2.5rem', fontSize: '1.05rem', gap: '0.75rem', 
-              borderRadius: '14px', fontWeight: '700'
-            }}>
+          <div className="hero-animate hero-delay-4" style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Link href="/vehiculos" className="hero-btn-primary">
               Explorar Catálogo <ArrowRight size={18} />
             </Link>
-            <Link href="/contacto" className="btn" style={{ 
-              padding: '1rem 2.5rem', fontSize: '1.05rem', gap: '0.75rem',
-              borderRadius: '14px', fontWeight: '600',
-              background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(10px)',
-              color: '#ffffff', border: '1px solid rgba(255,255,255,0.2)',
-              transition: 'all 0.3s ease'
-            }}>
+            <Link href="/contacto" className="hero-btn-secondary">
               <Phone size={18} /> Contáctanos
             </Link>
           </div>
