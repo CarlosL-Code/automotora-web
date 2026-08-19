@@ -67,9 +67,54 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const localBusinessJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AutoDealer",
+    "name": "HMC Automotora Premium",
+    "image": "https://hmcautomotora.cl/logo.png",
+    "@id": "https://hmcautomotora.cl",
+    "url": "https://hmcautomotora.cl",
+    "telephone": "+56958251226",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Avenida Caupolicán 579",
+      "addressLocality": "Temuco",
+      "addressRegion": "La Araucanía",
+      "addressCountry": "CL"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -38.7369,
+      "longitude": -72.5938
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "10:00",
+        "closes": "14:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.facebook.com",
+      "https://www.instagram.com",
+      "https://www.tiktok.com"
+    ]
+  };
+
   return (
     <html lang="es" suppressHydrationWarning className={`${inter.variable} ${roboto.variable}`}>
       <body className={roboto.className}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
         <ThemeProvider attribute="data-theme" defaultTheme="light">
           <div className={inter.className}>
             <Navbar />
