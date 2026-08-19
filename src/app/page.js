@@ -23,7 +23,7 @@ export default async function Home() {
         justifyContent: 'flex-start',
         overflow: 'hidden'
       }}>
-        {/* Local Hero Image - Espejado para que el auto quede a la derecha */}
+        {/* Local Hero Image - Hyundai Tucson */}
         <Image 
           src="/hero-bg.jpg"
           alt="Automotora HMC Premium - Concesionario"
@@ -31,7 +31,7 @@ export default async function Home() {
           priority
           sizes="100vw"
           unoptimized
-          style={{ objectFit: 'cover', objectPosition: 'center 40%', zIndex: 0, transform: 'scaleX(-1)' }}
+          style={{ objectFit: 'cover', objectPosition: 'center 60%', zIndex: 0 }}
         />
         {/* Gradient Overlay - elegante degradado de abajo hacia arriba */}
         <div style={{ 
