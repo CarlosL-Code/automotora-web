@@ -23,15 +23,15 @@ export default async function Home() {
         justifyContent: 'flex-start',
         overflow: 'hidden'
       }}>
-        {/* Local Hero Image */}
+        {/* Local Hero Image - Espejado para que el auto quede a la derecha */}
         <Image 
           src="/hero-bg.jpg"
           alt="Automotora HMC Premium - Concesionario"
           fill
           priority
           sizes="100vw"
-          quality={90}
-          style={{ objectFit: 'cover', objectPosition: 'center 40%', zIndex: 0 }}
+          unoptimized
+          style={{ objectFit: 'cover', objectPosition: 'center 40%', zIndex: 0, transform: 'scaleX(-1)' }}
         />
         {/* Gradient Overlay - elegante degradado de abajo hacia arriba */}
         <div style={{ 
