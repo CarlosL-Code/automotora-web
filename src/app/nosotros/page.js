@@ -42,43 +42,75 @@ export default async function NosotrosPage() {
           </div>
         </section>
 
-        {/* Luxury List - Pilares */}
+        {/* Visual Pillars Section */}
         <section className={`${styles.valuesSection} slide-up`} style={{ animationDelay: '0.4s' }}>
           <h2 className={styles.valuesTitle}>Nuestros Pilares</h2>
           
-          <div className={styles.luxuryList}>
-            <div className={styles.luxuryRow}>
-              <div className={styles.luxuryNumber}>01</div>
-              <div className={styles.luxuryTitleWrapper}>
-                <div className={styles.luxuryIcon}><Handshake size={28} /></div>
-                <div className={styles.luxuryTitle}>Transparencia Total</div>
+          <div className={styles.pillarsGrid}>
+            
+            {/* Pilar 1 */}
+            <div className={styles.pillarCard}>
+              <div className={styles.pillarImageWrapper}>
+                <Image 
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600" 
+                  alt="Trato transparente y familiar" 
+                  fill 
+                />
               </div>
-              <div className={styles.luxuryText}>
-                Vamos siempre con la verdad por delante. Informamos con claridad el estado real, condiciones y valores de cada vehículo. <strong>Sin letra chica, sin sorpresas.</strong>
+              <div className={styles.pillarContent}>
+                <div className={styles.pillarHeader}>
+                  <span className={styles.pillarNumber}>01</span>
+                  <Handshake size={24} />
+                </div>
+                <h3 className={styles.pillarTitle}>Transparencia Total</h3>
+                <p className={styles.pillarText}>
+                  Vamos siempre con la verdad por delante. Informamos con claridad el estado real de cada vehículo. <strong>Sin letra chica, sin sorpresas.</strong>
+                </p>
               </div>
             </div>
 
-            <div className={styles.luxuryRow}>
-              <div className={styles.luxuryNumber}>02</div>
-              <div className={styles.luxuryTitleWrapper}>
-                <div className={styles.luxuryIcon}><Search size={28} /></div>
-                <div className={styles.luxuryTitle}>Inspección Rigurosa</div>
+            {/* Pilar 2 */}
+            <div className={styles.pillarCard}>
+              <div className={styles.pillarImageWrapper}>
+                <Image 
+                  src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80&w=600" 
+                  alt="Revisión mecánica rigurosa" 
+                  fill 
+                />
               </div>
-              <div className={styles.luxuryText}>
-                Previo a la venta, cada auto pasa por revisión mecánica, escáner profesional y chequeo de historial Autofact. Te entregamos la <strong>verdadera hoja de vida</strong> del vehículo.
+              <div className={styles.pillarContent}>
+                <div className={styles.pillarHeader}>
+                  <span className={styles.pillarNumber}>02</span>
+                  <Search size={24} />
+                </div>
+                <h3 className={styles.pillarTitle}>Inspección Rigurosa</h3>
+                <p className={styles.pillarText}>
+                  Cada auto pasa por revisión mecánica y escáner profesional. Te entregamos la verdadera <strong>hoja de vida</strong> del vehículo.
+                </p>
               </div>
             </div>
 
-            <div className={styles.luxuryRow}>
-              <div className={styles.luxuryNumber}>03</div>
-              <div className={styles.luxuryTitleWrapper}>
-                <div className={styles.luxuryIcon}><Star size={28} /></div>
-                <div className={styles.luxuryTitle}>Servicio Integral</div>
+            {/* Pilar 3 */}
+            <div className={styles.pillarCard}>
+              <div className={styles.pillarImageWrapper}>
+                <Image 
+                  src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&q=80&w=600" 
+                  alt="Atención integral en concesionario" 
+                  fill 
+                />
               </div>
-              <div className={styles.luxuryText}>
-                Te ofrecemos consignaciones, financiamiento, recepción en parte de pago y apoyo en transferencias. Todo gestionado <strong>en un solo lugar</strong> para tu comodidad.
+              <div className={styles.pillarContent}>
+                <div className={styles.pillarHeader}>
+                  <span className={styles.pillarNumber}>03</span>
+                  <Star size={24} />
+                </div>
+                <h3 className={styles.pillarTitle}>Servicio Integral</h3>
+                <p className={styles.pillarText}>
+                  Te ofrecemos consignaciones, financiamiento y apoyo en transferencias. Todo gestionado en <strong>un solo lugar</strong>.
+                </p>
               </div>
             </div>
+
           </div>
         </section>
 
