@@ -44,9 +44,9 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecu
   }, [emblaApi, onSelect]);
 
   return (
-    <main style={{ paddingTop: '2rem', minHeight: '100vh', paddingBottom: '4rem' }}>
+    <main style={{ minHeight: '100vh', paddingBottom: '4rem' }}>
       <div className="container slide-up">
-        <div style={{ marginBottom: '2rem', marginTop: '80px' }}>
+        <div style={{ marginBottom: '1.5rem' }}>
           <Link href="/vehiculos" style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', fontWeight: '500', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1rem', borderRadius: '99px', backgroundColor: 'var(--color-bg-card)', border: '1px solid var(--color-border)', transition: 'all 0.2s' }} className="hover-accent">
             ← Volver al catálogo
           </Link>
