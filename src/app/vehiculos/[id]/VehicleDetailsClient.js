@@ -125,9 +125,19 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecu
               </p>
             </div>
 
-            <Link href="/contacto" className="btn btn-primary" style={{ width: '100%', padding: '1.25rem', fontSize: '1.1rem', fontWeight: '700', borderRadius: '16px', textAlign: 'center', display: 'block', boxShadow: '0 10px 25px rgba(15, 113, 67, 0.3)' }}>
-              Solicitar Información
-            </Link>
+            {vehicle.estado === 'VENDIDO' ? (
+              <div style={{ width: '100%', padding: '1.25rem', fontSize: '1.1rem', fontWeight: '700', borderRadius: '16px', textAlign: 'center', backgroundColor: 'var(--color-border)', color: 'var(--color-text-secondary)', display: 'block', cursor: 'not-allowed' }}>
+                Vehículo Vendido
+              </div>
+            ) : vehicle.estado === 'RESERVADO' ? (
+              <Link href="/contacto" className="btn btn-primary" style={{ width: '100%', padding: '1.25rem', fontSize: '1.1rem', fontWeight: '700', borderRadius: '16px', textAlign: 'center', display: 'block', backgroundColor: '#f59e0b', borderColor: '#f59e0b', boxShadow: '0 10px 25px rgba(245, 158, 11, 0.3)' }}>
+                Consultar Disponibilidad (Reservado)
+              </Link>
+            ) : (
+              <Link href="/contacto" className="btn btn-primary" style={{ width: '100%', padding: '1.25rem', fontSize: '1.1rem', fontWeight: '700', borderRadius: '16px', textAlign: 'center', display: 'block', boxShadow: '0 10px 25px rgba(15, 113, 67, 0.3)' }}>
+                Solicitar Información
+              </Link>
+            )}
 
           </div>
         </div>
