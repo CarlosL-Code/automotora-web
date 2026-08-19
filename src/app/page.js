@@ -19,36 +19,76 @@ export default async function Home() {
       <section className="hero-section" style={{ 
         position: 'relative', 
         display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
+        alignItems: 'flex-end', 
+        justifyContent: 'flex-start',
         overflow: 'hidden'
       }}>
-        {/* LCP Image Optimized */}
+        {/* Local Hero Image */}
         <Image 
-          src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop"
-          alt="Auto de lujo fondo HMC Premium"
+          src="/hero-bg.jpg"
+          alt="Automotora HMC Premium - Concesionario"
           fill
           priority
           sizes="100vw"
-          quality={85}
-          style={{ objectFit: 'cover', zIndex: 0 }}
+          quality={90}
+          style={{ objectFit: 'cover', objectPosition: 'center 40%', zIndex: 0 }}
         />
-        {/* Overlay Dark (Más claro para que resalte la imagen) */}
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(rgba(15, 17, 21, 0.3), rgba(15, 17, 21, 0.6))', zIndex: 1 }}></div>
+        {/* Gradient Overlay - elegante degradado de abajo hacia arriba */}
+        <div style={{ 
+          position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, 
+          background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.1) 70%, transparent 100%)', 
+          zIndex: 1 
+        }}></div>
+        {/* Subtle noise texture overlay for premium feel */}
+        <div style={{
+          position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+          background: 'radial-gradient(ellipse at 30% 80%, rgba(15, 113, 67, 0.08) 0%, transparent 70%)',
+          zIndex: 1
+        }}></div>
 
-        <div className="container text-center slide-up" style={{ zIndex: 2, color: '#ffffff', position: 'relative' }}>
-          <h1 style={{ fontSize: '4rem', marginBottom: '1.5rem', textShadow: '0 4px 20px rgba(0,0,0,0.5)', color: '#ffffff' }}>
-            Encuentra el auto de tus <span className="text-gradient" style={{ background: 'linear-gradient(135deg, var(--color-accent) 0%, #ffffff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>sueños</span>
+        <div className="container hero-content" style={{ zIndex: 2, color: '#ffffff', position: 'relative', paddingBottom: '6rem' }}>
+          {/* Tagline */}
+          <div className="hero-animate hero-delay-1" style={{ 
+            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+            padding: '0.5rem 1.25rem', borderRadius: '99px', 
+            backgroundColor: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255,255,255,0.15)',
+            marginBottom: '2rem', fontSize: '0.85rem', fontWeight: '600', letterSpacing: '0.05em', textTransform: 'uppercase'
+          }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-accent)', display: 'inline-block', animation: 'pulse-dot 2s infinite' }}></span>
+            Automotora Premium
+          </div>
+
+          <h1 className="hero-animate hero-delay-2" style={{ 
+            fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: '800', lineHeight: '1.05', 
+            marginBottom: '1.5rem', letterSpacing: '-0.03em', color: '#ffffff', maxWidth: '700px'
+          }}>
+            Encuentra el auto<br/>
+            <span style={{ color: 'var(--color-accent)' }}>que mereces.</span>
           </h1>
-          <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.8)', marginBottom: '2.5rem', maxWidth: '600px', margin: '0 auto 2.5rem', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
-            Descubre nuestra selección premium de vehículos garantizados. Experiencia, calidad y confianza en cada kilómetro.
+
+          <p className="hero-animate hero-delay-3" style={{ 
+            fontSize: '1.15rem', color: 'rgba(255,255,255,0.7)', marginBottom: '3rem', 
+            maxWidth: '500px', lineHeight: '1.7', fontWeight: '400'
+          }}>
+            Selección curada de vehículos con garantía, financiamiento a tu medida y la confianza de un equipo que te acompaña.
           </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/vehiculos" className="btn btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', gap: '0.5rem' }}>
-              Ver Catálogo <ArrowRight size={20} />
+
+          <div className="hero-animate hero-delay-4" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <Link href="/vehiculos" className="btn btn-primary" style={{ 
+              padding: '1rem 2.5rem', fontSize: '1.05rem', gap: '0.75rem', 
+              borderRadius: '14px', fontWeight: '700'
+            }}>
+              Explorar Catálogo <ArrowRight size={18} />
             </Link>
-            <Link href="/contacto" className="btn btn-outline" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', color: '#ffffff', borderColor: '#ffffff', gap: '0.5rem' }}>
-              <Phone size={20} /> Contáctanos
+            <Link href="/contacto" className="btn" style={{ 
+              padding: '1rem 2.5rem', fontSize: '1.05rem', gap: '0.75rem',
+              borderRadius: '14px', fontWeight: '600',
+              background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(10px)',
+              color: '#ffffff', border: '1px solid rgba(255,255,255,0.2)',
+              transition: 'all 0.3s ease'
+            }}>
+              <Phone size={18} /> Contáctanos
             </Link>
           </div>
         </div>
