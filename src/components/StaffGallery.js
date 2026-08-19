@@ -84,110 +84,69 @@ export default function StaffGallery({ staff }) {
             {getIconForCategory(cat)}
             {cat}
           </button>
-        ))}
-      </div>
-
-      {/* Staff Grid */}
+        ))}      {/* Staff Grid */}
       {filteredStaff.length > 0 ? (
         <div style={{ 
           display: 'grid', 
           gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
-          gap: '3rem',
+          gap: '2.5rem',
         }}>
           {filteredStaff.map((person, index) => {
             const cat = getCategory(person);
             return (
-            <div key={person.id} className="staff-card card glass slide-up" style={{ 
-              animationDelay: `${index * 0.1}s`,
-              textAlign: 'center', 
-              padding: '3rem 2rem 2.5rem', 
-              display: 'flex', 
-              flexDirection: 'column',
-              position: 'relative',
-              overflow: 'visible'
-            }}>
+            <div key={person.id} className="staff-card slide-up" style={{ animationDelay: `${index * 0.1}s` }}>
               
-              {/* Badge del Departamento */}
-              <div className="dept-badge" style={{
-                position: 'absolute',
-                top: '-15px',
-                right: '20px',
-                background: 'var(--color-accent)',
-                color: 'white',
-                padding: '0.5rem 1rem',
-                borderRadius: '1rem',
-                fontSize: '0.75rem',
-                fontWeight: 'bold',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.25rem',
-                boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
-                zIndex: 10
-              }}>
-                {getIconForCategory(cat)}
-                {cat.toUpperCase()}
-              </div>
+              <div className="staff-image-bg">
+                {person.imagenUrl ? (
+                  <Image 
+                    src={person.imagenUrl} 
+                    alt={person.nombre} 
+                    fill
+                    sizes="(max-width: 768px) 100vw, 300px"
+                    style={{ objectFit: 'cover' }} 
+                    className="staff-img-element"
+                  />
+                ) : (
+                  <div className="staff-placeholder">
+                    <Users size={64} opacity={0.3} />
+                  </div>
+                )}
+                <div className="staff-overlay"></div>
+                
+                <div className="dept-badge">
+                  {getIconForCategory(cat)}
+                  {cat}
+                </div>
 
-              {/* Contenedor de Imagen con Efectos */}
-              <div className="staff-img-wrapper" style={{ 
-                width: '130px', 
-                height: '130px', 
-                margin: '0 auto 1.5rem', 
-                borderRadius: '50%', 
-                padding: '4px',
-                background: 'linear-gradient(135deg, var(--color-accent) 0%, transparent 100%)',
-                position: 'relative'
-              }}>
-                <div className="staff-img-inner" style={{
-                  width: '100%', height: '100%', borderRadius: '50%', overflow: 'hidden', backgroundColor: 'var(--color-bg)', position: 'relative'
-                }}>
-                  {person.imagenUrl ? (
-                    <Image 
-                      src={person.imagenUrl} 
-                      alt={person.nombre} 
-                      fill
-                      sizes="(max-width: 768px) 150px, 150px"
-                      style={{ objectFit: 'cover' }} 
-                    />
-                  ) : (
-                    <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-secondary)', fontSize: '3rem' }}>
-                      👤
-                    </div>
-                  )}
+                <div className="staff-info">
+                  <h3 className="staff-name">{person.nombre}</h3>
+                  <p className="staff-role">
+                    {person.cargo && person.cargo.includes(' | [') ? person.cargo.split(' | [')[0] : person.cargo}
+                  </p>
+                  
+                  <div className="staff-actions-reveal">
+                    {person.telefono && (
+                      <>
+                        <a href={`tel:${person.telefono.replace(/\s+/g, '')}`} className="staff-btn btn-call" title="Llamar">
+                          <Phone size={18} /> Llamar
+                        </a>
+                        <a 
+                          href={`https://wa.me/${person.telefono.replace(/[\s+]/g, '')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="staff-btn btn-wa" 
+                          title="WhatsApp"
+                        >
+                          <MessageCircle size={18} /> WhatsApp
+                        </a>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
-              
-              <h3 className="staff-name" style={{ fontSize: '1.4rem', marginBottom: '0.25rem', fontWeight: '800' }}>{person.nombre}</h3>
-              <p className="staff-role" style={{ color: 'var(--color-accent)', fontWeight: '700', marginBottom: '1rem', fontSize: '0.9rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-                {person.cargo && person.cargo.includes(' | [') ? person.cargo.split(' | [')[0] : person.cargo}
-              </p>
-              
-              <div style={{ width: '40px', height: '3px', background: 'var(--color-border)', margin: '0 auto 1.5rem', borderRadius: '2px' }}></div>
-
-              {person.descripcion && (
-                <p className="staff-desc" style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', marginBottom: '2rem', flexGrow: 1, lineHeight: '1.6' }}>{person.descripcion}</p>
-              )}
-              
-              <div className="staff-actions" style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', marginTop: 'auto' }}>
-                {person.telefono && (
-                  <>
-                    <a href={`tel:${person.telefono.replace(/\s+/g, '')}`} className="staff-btn staff-btn-primary" title="Llamar">
-                      <Phone size={18} /> <span>Llamar</span>
-                    </a>
-                    <a 
-                      href={`https://wa.me/${person.telefono.replace(/[\s+]/g, '')}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="staff-btn staff-btn-whatsapp" 
-                      title="WhatsApp"
-                    >
-                      <MessageCircle size={18} /> <span>WhatsApp</span>
-                    </a>
-                  </>
-                )}
-              </div>
             </div>
-          )})}
+            );
+          })}
         </div>
       ) : (
         <div style={{ textAlign: 'center', padding: '5rem', background: 'var(--color-bg-glass)', borderRadius: '1.5rem', border: '1px solid var(--color-border)' }}>
@@ -198,85 +157,161 @@ export default function StaffGallery({ staff }) {
 
       <style jsx>{`
         .staff-card {
-          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          position: relative;
+          border-radius: 20px;
+          overflow: hidden;
+          aspect-ratio: 3/4;
+          cursor: pointer;
           transform: translateY(0);
-          border: 1px solid rgba(255,255,255,0.05);
-        }
-        .staff-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(var(--color-accent-rgb), 0.2);
-          border-color: rgba(255,255,255,0.1);
-        }
-        .staff-img-wrapper {
-          transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .staff-card:hover .staff-img-wrapper {
-          transform: scale(1.08) rotate(3deg);
-          box-shadow: 0 10px 25px rgba(var(--color-accent-rgb), 0.4);
-        }
-        .staff-img-inner img {
-          transition: transform 0.5s ease;
-        }
-        .staff-card:hover .staff-img-inner img {
-          transform: scale(1.1);
-        }
-        .dept-badge {
-          transition: all 0.3s ease;
-        }
-        .staff-card:hover .dept-badge {
-          transform: translateY(-3px);
-          box-shadow: 0 6px 15px rgba(var(--color-accent-rgb), 0.5);
+          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
         
-        .staff-btn {
-          padding: 0.6rem 1.2rem;
-          border-radius: 2rem;
-          font-size: 0.9rem;
-          font-weight: 600;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 0.5rem;
-          transition: all 0.3s ease;
-          text-decoration: none;
-          flex: 1;
-        }
-        .staff-btn-primary {
-          background: var(--color-accent);
-          color: white;
-          box-shadow: 0 4px 15px rgba(var(--color-accent-rgb), 0.3);
-        }
-        .staff-btn-primary:hover {
-          background: var(--color-accent-light);
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(var(--color-accent-rgb), 0.5);
-        }
-        .staff-btn-secondary {
-          background: transparent;
-          color: var(--color-text-primary);
-          border: 1px solid var(--color-border);
-        }
-        .staff-btn-secondary:hover {
-          background: var(--color-accent-light);
-          transform: translateY(-2px);
-          border-color: var(--color-accent);
-          color: var(--color-accent);
-        }
-        .staff-btn-whatsapp {
-          background: #25D366;
-          color: white;
-          border: 1px solid #25D366;
-        }
-        .staff-btn-whatsapp:hover {
-          background: #1EBE53;
-          border-color: #1EBE53;
-          transform: translateY(-2px);
-          box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        .staff-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 20px rgba(var(--color-accent-rgb), 0.2);
         }
 
-        .staff-tab:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        .staff-image-bg {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+        .staff-img-element {
+          transition: transform 0.7s ease !important;
+        }
+
+        .staff-card:hover .staff-img-element {
+          transform: scale(1.1) !important;
+        }
+
+        .staff-placeholder {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--color-bg-card);
+        }
+
+        .staff-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0) 100%);
+          transition: opacity 0.4s ease;
+        }
+
+        .dept-badge {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          background: rgba(15, 113, 67, 0.9);
+          backdrop-filter: blur(8px);
+          color: white;
+          padding: 0.5rem 1rem;
+          border-radius: 30px;
+          font-size: 0.75rem;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          z-index: 10;
+          transform: translateY(0);
+          transition: transform 0.4s ease;
+        }
+
+        .staff-card:hover .dept-badge {
+          transform: translateY(-5px);
+        }
+
+        .staff-info {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          padding: 2rem 1.5rem;
+          z-index: 10;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+        }
+
+        .staff-name {
+          color: white;
+          font-size: 1.6rem;
+          font-weight: 800;
+          margin-bottom: 0.2rem;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+          transform: translateY(20px);
+          transition: transform 0.4s ease;
+        }
+
+        .staff-role {
+          color: var(--color-accent);
+          font-size: 0.95rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          margin-bottom: 1rem;
+          transform: translateY(20px);
+          transition: transform 0.4s ease;
+        }
+
+        .staff-actions-reveal {
+          display: flex;
+          gap: 0.75rem;
+          opacity: 0;
+          transform: translateY(20px);
+          transition: all 0.4s ease;
+          pointer-events: none;
+        }
+
+        .staff-card:hover .staff-name,
+        .staff-card:hover .staff-role {
+          transform: translateY(0);
+        }
+
+        .staff-card:hover .staff-actions-reveal {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+          transition-delay: 0.1s;
+        }
+
+        .staff-btn {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          padding: 0.75rem;
+          border-radius: 12px;
+          font-weight: 700;
+          font-size: 0.9rem;
+          text-decoration: none;
+          transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .staff-btn:hover {
+          transform: scale(1.05);
+          filter: brightness(1.1);
+        }
+
+        .btn-call {
+          background: rgba(255,255,255,0.15);
+          backdrop-filter: blur(10px);
+          color: white;
+          border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-wa {
+          background: #25D366;
+          color: white;
+          box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
         }
       `}</style>
     </div>
