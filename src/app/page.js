@@ -50,13 +50,19 @@ export default async function Home() {
         <div className="container hero-content" style={{ zIndex: 2, color: '#ffffff', position: 'relative', paddingBottom: '6rem' }}>
           {/* Tagline */}
           <div className="hero-animate hero-delay-1" style={{ 
-            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+            display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
             padding: '0.5rem 1.25rem', borderRadius: '99px', 
-            backgroundColor: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255,255,255,0.15)',
-            marginBottom: '2rem', fontSize: '0.85rem', fontWeight: '600', letterSpacing: '0.05em', textTransform: 'uppercase'
+            backgroundColor: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255,255,255,0.2)',
+            marginBottom: '2rem', fontSize: '0.85rem', fontWeight: '700', letterSpacing: '0.05em', textTransform: 'uppercase',
+            color: '#ffffff', textShadow: 'none'
           }}>
-            <span style={{ fontSize: '1.1rem' }}>🇨🇱</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="20" height="14" style={{ borderRadius: '2px', display: 'block' }}>
+              <rect width="3" height="2" fill="#d52b1e"/>
+              <rect width="3" height="1" fill="#ffffff"/>
+              <rect width="1" height="1" fill="#0039a6"/>
+              <polygon points="0.5,0.25 0.58,0.45 0.8,0.45 0.63,0.6 0.7,0.8 0.5,0.7 0.3,0.8 0.37,0.6 0.2,0.45 0.42,0.45" fill="#ffffff"/>
+            </svg>
             Concesionario en Temuco
           </div>
 
