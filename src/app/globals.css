@@ -822,6 +822,9 @@ h3 { font-size: 1.875rem; }
     font-size: 0.95rem;
     width: 100%;
     justify-content: center;
+  }
+}
+
 /* Nosotros Page Styles */
 .feature-row {
   display: flex;
