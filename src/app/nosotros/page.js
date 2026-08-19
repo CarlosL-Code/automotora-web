@@ -52,7 +52,7 @@ export default async function NosotrosPage() {
             <div className={styles.pillarCard}>
               <div className={styles.pillarImageWrapper}>
                 <Image 
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600" 
+                  src="/transparencia.jpg" 
                   alt="Trato transparente y familiar" 
                   fill 
                 />
@@ -94,7 +94,7 @@ export default async function NosotrosPage() {
             <div className={styles.pillarCard}>
               <div className={styles.pillarImageWrapper}>
                 <Image 
-                  src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&q=80&w=600" 
+                  src="/servicio-integral.jpg" 
                   alt="Atención integral en concesionario" 
                   fill 
                 />
