@@ -56,21 +56,23 @@ export default async function Home() {
             border: '1px solid rgba(255,255,255,0.15)',
             marginBottom: '2rem', fontSize: '0.85rem', fontWeight: '600', letterSpacing: '0.05em', textTransform: 'uppercase'
           }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-accent)', display: 'inline-block', animation: 'pulse-dot 2s infinite' }}></span>
-            Automotora Premium
+            <span style={{ fontSize: '1.1rem' }}>🇨🇱</span>
+            Concesionario en Temuco
           </div>
 
           <h1 className="hero-animate hero-delay-2" style={{ 
             fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: '800', lineHeight: '1.05', 
-            marginBottom: '1.5rem', letterSpacing: '-0.03em', color: '#ffffff', maxWidth: '700px'
+            marginBottom: '1.5rem', letterSpacing: '-0.03em', color: '#ffffff', maxWidth: '700px',
+            textShadow: '0 2px 20px rgba(0,0,0,0.5)'
           }}>
             Encuentra el auto<br/>
-            <span style={{ color: 'var(--color-accent)' }}>que mereces.</span>
+            <span style={{ color: '#2ecc71', textShadow: '0 2px 30px rgba(46, 204, 113, 0.4)' }}>que mereces.</span>
           </h1>
 
           <p className="hero-animate hero-delay-3" style={{ 
-            fontSize: '1.15rem', color: 'rgba(255,255,255,0.7)', marginBottom: '3rem', 
-            maxWidth: '500px', lineHeight: '1.7', fontWeight: '400'
+            fontSize: '1.15rem', color: 'rgba(255,255,255,0.85)', marginBottom: '3rem', 
+            maxWidth: '500px', lineHeight: '1.7', fontWeight: '400',
+            textShadow: '0 1px 10px rgba(0,0,0,0.5)'
           }}>
             Selección curada de vehículos con garantía, financiamiento a tu medida y la confianza de un equipo que te acompaña.
           </p>
