@@ -3,30 +3,40 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Home, Car, Users, Briefcase, PhoneCall, Menu, X } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [mounted, setMounted] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const progressBarRef = useRef(null);
 
   useEffect(() => {
     setMounted(true);
+    let ticking = false;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      
-      const totalScroll = document.documentElement.scrollTop || document.body.scrollTop;
-      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      if (windowHeight > 0) {
-        setScrollProgress((totalScroll / windowHeight) * 100);
-      } else {
-        setScrollProgress(0);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Update scrolled state only if changed
+          const shouldBeScrolled = window.scrollY > 50;
+          setIsScrolled(prev => prev !== shouldBeScrolled ? shouldBeScrolled : prev);
+          
+          // Update progress bar via DOM ref to avoid React re-renders on every pixel
+          if (progressBarRef.current) {
+            const totalScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = windowHeight > 0 ? (totalScroll / windowHeight) * 100 : 0;
+            progressBarRef.current.style.width = `${progress}%`;
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -53,7 +63,7 @@ export default function Navbar() {
       <nav className={`main-top-nav ${isScrolled ? 'scrolled' : ''}`}>
         {/* Línea de progreso de lectura azul */}
         <div className="scroll-progress-container">
-          <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }}></div>
+          <div ref={progressBarRef} className="scroll-progress-bar" style={{ width: '0%' }}></div>
         </div>
 
         <div className="nav-left">
