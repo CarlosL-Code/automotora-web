@@ -4,7 +4,28 @@ import Link from 'next/link';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
-import { Phone, MessageCircle } from 'lucide-react';
+import { Phone, MessageCircle, Calendar, Gauge, Settings, Fuel, Palette, Wrench } from 'lucide-react';
+
+const SpecCard = ({ icon, label, value }) => (
+  <div className="spec-card" style={{ 
+    display: 'flex', alignItems: 'center', gap: '1rem', padding: '1.25rem', 
+    backgroundColor: 'var(--color-bg-card)', border: '1px solid var(--color-border)', 
+    borderRadius: '16px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+    transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+  }}>
+    <div style={{ 
+      color: 'var(--color-accent)', padding: '0.75rem', 
+      backgroundColor: 'var(--color-accent-light)', borderRadius: '12px', 
+      display: 'flex', alignItems: 'center', justifyContent: 'center' 
+    }}>
+      {icon}
+    </div>
+    <div>
+      <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem', fontWeight: '600' }}>{label}</p>
+      <p style={{ fontSize: '1.1rem', fontWeight: '700', color: 'var(--color-text-primary)', lineHeight: 1.2 }}>{value}</p>
+    </div>
+  </div>
+);
 
 export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecutivos = [] }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
@@ -23,19 +44,20 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecu
   }, [emblaApi, onSelect]);
 
   return (
-    <main style={{ paddingTop: '1rem', minHeight: '100vh', paddingBottom: '4rem' }}>
+    <main style={{ paddingTop: '2rem', minHeight: '100vh', paddingBottom: '4rem' }}>
       <div className="container slide-up">
-        <div style={{ marginBottom: '2rem' }}>
-          <Link href="/vehiculos" style={{ color: 'var(--color-accent)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <div style={{ marginBottom: '2rem', marginTop: '80px' }}>
+          <Link href="/vehiculos" style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', fontWeight: '500', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1rem', borderRadius: '99px', backgroundColor: 'var(--color-bg-card)', border: '1px solid var(--color-border)', transition: 'all 0.2s' }} className="hover-accent">
             ← Volver al catálogo
           </Link>
         </div>
 
-        <div className="details-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
-          {/* Gallery - Embla Carousel */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', maxWidth: '100%' }}>
+        <div className="details-grid" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '4rem', alignItems: 'start' }}>
+          
+          {/* Gallery - Sticky Left Column */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', position: 'sticky', top: '100px' }}>
             {images.length > 0 ? (
-              <div className="embla" ref={emblaRef} style={{ overflow: 'hidden', borderRadius: '1rem', backgroundColor: 'rgba(255,255,255,0.05)', position: 'relative' }}>
+              <div className="embla" ref={emblaRef} style={{ overflow: 'hidden', borderRadius: '24px', backgroundColor: 'var(--color-bg-card)', position: 'relative', boxShadow: '0 10px 40px rgba(0,0,0,0.08)' }}>
                 <div className="embla__container" style={{ display: 'flex' }}>
                   {images.map((img, index) => (
                     <div className="embla__slide" key={index} style={{ flex: '0 0 100%', minWidth: 0, position: 'relative', paddingTop: '75%' }}>
@@ -45,12 +67,12 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecu
                 </div>
                 {/* Dots indicator */}
                 {images.length > 1 && (
-                  <div style={{ position: 'absolute', bottom: '1rem', left: '0', right: '0', display: 'flex', justifyContent: 'center', gap: '0.5rem', zIndex: 10 }}>
+                  <div style={{ position: 'absolute', bottom: '1.5rem', left: '0', right: '0', display: 'flex', justifyContent: 'center', gap: '0.5rem', zIndex: 10 }}>
                     {images.map((_, index) => (
                       <button 
                         key={index} 
                         onClick={() => emblaApi?.scrollTo(index)}
-                        style={{ width: '10px', height: '10px', borderRadius: '50%', background: index === selectedIndex ? 'var(--color-accent)' : 'rgba(255,255,255,0.5)', border: 'none', cursor: 'pointer', padding: 0 }}
+                        style={{ width: '8px', height: '8px', borderRadius: '50%', background: index === selectedIndex ? '#ffffff' : 'rgba(255,255,255,0.4)', border: index === selectedIndex ? '2px solid rgba(0,0,0,0.2)' : 'none', cursor: 'pointer', padding: 0, transition: 'all 0.3s' }}
                         aria-label={`Ir a la imagen ${index + 1}`}
                       />
                     ))}
@@ -58,65 +80,55 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecu
                 )}
               </div>
             ) : (
-              <div style={{ width: '100%', borderRadius: '1rem', overflow: 'hidden', backgroundColor: 'rgba(255,255,255,0.05)', paddingTop: '75%', position: 'relative' }}>
+              <div style={{ width: '100%', borderRadius: '24px', overflow: 'hidden', backgroundColor: 'var(--color-bg-card)', paddingTop: '75%', position: 'relative', boxShadow: '0 10px 40px rgba(0,0,0,0.08)' }}>
                 <img src={mainImage} alt={`${vehicle.marca} ${vehicle.modelo}`} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
             )}
           </div>
 
-          {/* Details */}
-          <div className="card glass" style={{ padding: '3rem' }}>
-            {vehicle.estado !== 'DISPONIBLE' && (
-              <div style={{ display: 'inline-block', padding: '0.5rem 1rem', background: vehicle.estado === 'VENDIDO' ? 'var(--color-danger)' : '#f59e0b', color: '#fff', borderRadius: '20px', fontWeight: 'bold', marginBottom: '1rem' }}>
-                {vehicle.estado}
-              </div>
-            )}
-            <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>{vehicle.marca} <span className="text-gradient">{vehicle.modelo}</span></h1>
-            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--color-accent)', marginBottom: '2rem' }}>
-              ${vehicle.precio.toLocaleString('es-CL')}
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
-              <div>
-                <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>Año</p>
-                <p style={{ fontSize: '1.1rem', fontWeight: '600' }}>{vehicle.ano}</p>
-              </div>
-              <div>
-                <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>Kilometraje</p>
-                <p style={{ fontSize: '1.1rem', fontWeight: '600' }}>{vehicle.kilometraje.toLocaleString('es-CL')} km</p>
-              </div>
-              <div>
-                <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>Transmisión</p>
-                <p style={{ fontSize: '1.1rem', fontWeight: '600' }}>{vehicle.transmision}</p>
-              </div>
-              <div>
-                <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>Combustible</p>
-                <p style={{ fontSize: '1.1rem', fontWeight: '600' }}>{vehicle.combustible}</p>
-              </div>
-              {vehicle.motor && (
-                <div>
-                  <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>Motor</p>
-                  <p style={{ fontSize: '1.1rem', fontWeight: '600' }}>{vehicle.motor}</p>
+          {/* Details - Right Column */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+            
+            {/* Header / Title */}
+            <div>
+              {vehicle.estado !== 'DISPONIBLE' && (
+                <div style={{ display: 'inline-block', padding: '0.4rem 1rem', background: vehicle.estado === 'VENDIDO' ? 'var(--color-danger)' : '#f59e0b', color: '#fff', borderRadius: '99px', fontWeight: '700', fontSize: '0.8rem', letterSpacing: '0.05em', marginBottom: '1.5rem' }}>
+                  {vehicle.estado}
                 </div>
               )}
-              {vehicle.color && (
-                <div>
-                  <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.875rem' }}>Color</p>
-                  <p style={{ fontSize: '1.1rem', fontWeight: '600' }}>{vehicle.color}</p>
-                </div>
-              )}
+              <h1 style={{ fontSize: '3rem', fontWeight: '800', lineHeight: '1.1', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
+                {vehicle.marca} <span style={{ fontWeight: '300', color: 'var(--color-text-secondary)' }}>{vehicle.modelo}</span>
+              </h1>
+              <div style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--color-accent)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                ${vehicle.precio.toLocaleString('es-CL')}
+              </div>
             </div>
 
-            <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '2rem', marginBottom: '2rem' }}>
-              <h3 style={{ marginBottom: '1rem' }}>Descripción</h3>
-              <p style={{ color: 'var(--color-text-secondary)', whiteSpace: 'pre-wrap' }}>
+            {/* Bento Grid Specs */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+              <SpecCard icon={<Calendar size={20} />} label="Año" value={vehicle.ano} />
+              <SpecCard icon={<Gauge size={20} />} label="Kilometraje" value={`${vehicle.kilometraje.toLocaleString('es-CL')} km`} />
+              <SpecCard icon={<Settings size={20} />} label="Transmisión" value={vehicle.transmision} />
+              <SpecCard icon={<Fuel size={20} />} label="Combustible" value={vehicle.combustible} />
+              {vehicle.motor && <SpecCard icon={<Wrench size={20} />} label="Motor" value={vehicle.motor} />}
+              {vehicle.color && <SpecCard icon={<Palette size={20} />} label="Color" value={vehicle.color} />}
+            </div>
+
+            {/* Description Area */}
+            <div className="card glass" style={{ padding: '2.5rem', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+              <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ width: '4px', height: '24px', backgroundColor: 'var(--color-accent)', borderRadius: '4px' }}></span>
+                Descripción
+              </h3>
+              <p style={{ color: 'var(--color-text-secondary)', whiteSpace: 'pre-wrap', lineHeight: '1.8', fontSize: '1.05rem' }}>
                 {vehicle.descripcion || 'Sin descripción adicional.'}
               </p>
             </div>
 
-            <Link href="/contacto" className="btn btn-primary" style={{ width: '100%', padding: '1rem', fontSize: '1.1rem', textAlign: 'center', display: 'block' }}>
+            <Link href="/contacto" className="btn btn-primary" style={{ width: '100%', padding: '1.25rem', fontSize: '1.1rem', fontWeight: '700', borderRadius: '16px', textAlign: 'center', display: 'block', boxShadow: '0 10px 25px rgba(15, 113, 67, 0.3)' }}>
               Solicitar Información
             </Link>
+
           </div>
         </div>
 
