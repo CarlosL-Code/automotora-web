@@ -253,43 +253,43 @@ h3 { font-size: 1.875rem; }
 
 .main-top-nav {
   position: fixed;
-  top: 15px; /* Efecto flotante */
+  top: 15px;
   left: 0;
   right: 0;
   margin: 0 auto;
-  width: 92%;
-  max-width: 1200px;
+  width: 90%;
+  max-width: 1000px; /* Un poco más compacto y elegante */
   z-index: 9999;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   padding: 0.5rem 2rem;
-  border-radius: 999px; /* Forma de píldora muy redondeada */
-  /* Fondo claro profesional con glassmorphism */
-  background: rgba(255, 255, 255, 0.95);
+  border-radius: 99px; /* Píldora perfecta */
+  /* Fondo oscuro premium permanente (Dark Glass) */
+  background: rgba(24, 24, 27, 0.85); 
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil blanco */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* Sombra profunda */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #0f172a; /* Texto oscuro para contrastar con el fondo claro */
-  overflow: hidden; /* Mantiene la barra de progreso contenida en los bordes curvos */
+  color: #ffffff; /* Texto siempre blanco para destacar */
+  overflow: hidden;
 }
 
 [data-theme='dark'] .main-top-nav {
-  background: rgba(20, 22, 27, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  background: rgba(15, 17, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
 }
 
 .main-top-nav.scrolled {
-  top: 10px; /* Sigue flotando al hacer scroll */
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
+  top: 10px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+  background: rgba(24, 24, 27, 0.95);
 }
 
 [data-theme='dark'] .main-top-nav.scrolled {
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+  background: rgba(15, 17, 20, 0.95);
 }
 
 /* --- SCROLL PROGRESS BAR --- */
