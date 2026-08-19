@@ -28,16 +28,16 @@ export default async function VehiclesCatalog({ searchParams }) {
           Explora nuestra selección y encuentra el modelo perfecto para ti.
         </p>
 
-        {/* Basic Filters placeholder (could be made interactive with Client Components) */}
-        <div className="card glass" style={{ padding: '1.5rem', marginBottom: '3rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <span style={{ fontWeight: '600' }}>Filtros Rápidos:</span>
-          <a href="/vehiculos" className="btn btn-outline" style={{ padding: '0.5rem 1rem' }}>Todos</a>
-          <a href="/vehiculos?transmision=Automática" className="btn btn-outline" style={{ padding: '0.5rem 1rem' }}>Automáticos</a>
-          <a href="/vehiculos?transmision=Manual" className="btn btn-outline" style={{ padding: '0.5rem 1rem' }}>Manuales</a>
+        {/* Interactive Filters */}
+        <div className="card glass" style={{ padding: '1.25rem 2rem', marginBottom: '3rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', borderRadius: '100px', justifyContent: 'center' }}>
+          <span style={{ fontWeight: '700', color: 'var(--color-text-secondary)', marginRight: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '0.85rem' }}>Filtros Rápidos:</span>
+          <a href="/vehiculos" className="btn btn-outline" style={{ padding: '0.5rem 1.5rem', borderRadius: '99px', fontSize: '0.9rem' }}>Todos</a>
+          <a href="/vehiculos?transmision=Automática" className="btn btn-outline" style={{ padding: '0.5rem 1.5rem', borderRadius: '99px', fontSize: '0.9rem' }}>Automáticos</a>
+          <a href="/vehiculos?transmision=Manual" className="btn btn-outline" style={{ padding: '0.5rem 1.5rem', borderRadius: '99px', fontSize: '0.9rem' }}>Manuales</a>
         </div>
 
         {vehicles.length > 0 ? (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2.5rem' }}>
             {vehicles.map(vehicle => (
               <VehicleCard key={vehicle.id} vehicle={vehicle} />
             ))}

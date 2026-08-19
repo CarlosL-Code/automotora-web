@@ -2,26 +2,26 @@
 
 /* Light Theme (Default) */
 :root {
-  --color-bg: #f8fafc; /* Very light slate, elegant */
+  --color-bg: #f3f4f6; /* Gris perla muy suave, no fatiga la vista */
   --color-bg-glass: rgba(255, 255, 255, 0.85);
   --color-bg-card: #ffffff;
-  --color-text-primary: #0f172a; /* Slate 900 */
-  --color-text-secondary: #475569; /* Slate 600 */
+  --color-text-primary: #111827; 
+  --color-text-secondary: #4b5563; 
   
   --color-accent: #0F7143; /* Green from the original brand */
   --color-accent-hover: #138d54;
   --color-accent-light: rgba(15, 113, 67, 0.1);
   
   --color-danger: #ef4444;
-  --color-border: rgba(0, 0, 0, 0.1);
+  --color-border: rgba(0, 0, 0, 0.08);
   --color-border-focus: rgba(15, 113, 67, 0.4);
 
   --font-family-sans: 'Outfit', sans-serif;
   
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-accent: 0 0 15px rgba(15, 113, 67, 0.2);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-accent: 0 0 20px rgba(15, 113, 67, 0.15);
 
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
@@ -40,9 +40,9 @@
 
 /* Dark Theme */
 [data-theme='dark'] {
-  --color-bg: #0f1115; 
+  --color-bg: #0b0c10; 
   --color-bg-glass: rgba(25, 28, 35, 0.7);
-  --color-bg-card: #181b21;
+  --color-bg-card: #15171e;
   --color-text-primary: #ffffff;
   --color-text-secondary: #a1a1aa;
   
@@ -50,13 +50,13 @@
   --color-accent-hover: #1ed180;
   --color-accent-light: rgba(19, 141, 84, 0.15);
   
-  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border: rgba(255, 255, 255, 0.08);
   --color-border-focus: rgba(19, 141, 84, 0.5);
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-  --shadow-accent: 0 0 15px rgba(19, 141, 84, 0.3);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  --shadow-accent: 0 0 20px rgba(19, 141, 84, 0.2);
 
   --nav-bg-scrolled: rgba(15, 17, 21, 0.95);
   --nav-text: #ffffff;
@@ -74,9 +74,12 @@ body {
   overflow-x: hidden;
   font-family: var(--font-family-sans);
   background-color: var(--color-bg);
+  /* Patrón de puntos muy sutil para dar textura premium */
+  background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
+  background-size: 24px 24px;
   color: var(--color-text-primary);
   line-height: 1.6;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, background-image 0.3s ease;
 }
 
 a {
@@ -107,7 +110,7 @@ button {
 
 .container {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -140,11 +143,10 @@ h3 { font-size: 1.875rem; }
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-text-primary) 100%);
+  background: linear-gradient(135deg, var(--color-accent), #2ecc71);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: transparent;
 }
 
 /* Buttons */
@@ -155,32 +157,34 @@ h3 { font-size: 1.875rem; }
   padding: 0.75rem 1.5rem;
   border-radius: var(--radius-md);
   font-weight: 600;
-  transition: all var(--transition-normal);
+  transition: all var(--transition-fast);
   text-align: center;
+  gap: 0.5rem;
 }
 
 .btn-primary {
   background-color: var(--color-accent);
-  color: #ffffff;
-  box-shadow: var(--shadow-accent);
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(15, 113, 67, 0.39);
 }
 
 .btn-primary:hover {
   background-color: var(--color-accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 0 20px var(--color-accent-light);
-  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(15, 113, 67, 0.23);
+  color: white;
 }
 
 .btn-outline {
-  background-color: transparent;
-  border: 1px solid var(--color-accent);
-  color: var(--color-accent);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-primary);
 }
 
 .btn-outline:hover {
-  background-color: var(--color-accent-light);
-  transform: translateY(-2px);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-light);
 }
 
 .btn-whatsapp {
@@ -221,20 +225,20 @@ h3 { font-size: 1.875rem; }
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   overflow: hidden;
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--color-border-focus);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg), var(--shadow-accent);
+  border-color: var(--color-accent-light);
 }
 
-.vehicle-img {
-  transition: transform 0.5s ease;
+.card .vehicle-img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .card:hover .vehicle-img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 /* Page transitions / micro animations */
@@ -249,7 +253,7 @@ h3 { font-size: 1.875rem; }
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
-}.main-top-nav {
+}.main-top-nav {
   position: fixed;
   top: 15px;
   left: 0;
@@ -259,7 +263,7 @@ h3 { font-size: 1.875rem; }
   max-width: 1200px;
   z-index: 9999;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  padding: 0.4rem 1.5rem; /* Más delgado */
+  padding: 0.2rem 1.5rem; /* Más delgado */
   border-radius: 16px; 
   background: rgba(15, 15, 17, 0.75); /* Negro/Gris muy oscuro cristalino premium */
   backdrop-filter: blur(24px);
@@ -283,7 +287,7 @@ h3 { font-size: 1.875rem; }
   border-left: none;
   border-right: none;
   border-top: none;
-  padding: 0.4rem 2rem; 
+  padding: 0.2rem 2rem; 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   background: rgba(10, 10, 12, 0.95); /* Negro sólido glass al hacer scroll */
 }
@@ -314,12 +318,12 @@ h3 { font-size: 1.875rem; }
 .logo-wrapper {
   position: relative;
   transition: all 0.3s ease;
-  width: 110px; /* Reducido para que el encabezado no sea tan alto/tosco */
-  height: 45px;
+  width: 140px; /* Aumentado para que el logo se vea más grande */
+  height: 55px; /* Aumentado */
 }
 .main-top-nav.scrolled .logo-wrapper {
-  width: 90px;
-  height: 38px;
+  width: 110px; /* Más grande también al scrollear */
+  height: 45px;
 }
 
 /* --- GRID LAYOUT NAV --- */

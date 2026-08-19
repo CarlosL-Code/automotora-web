@@ -30,16 +30,27 @@ export default function VehicleCard({ vehicle }) {
           )}
         </div>
         <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-          <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span>{vehicle.marca} {vehicle.modelo}</span>
+          <h3 style={{ display: 'flex', flexDirection: 'column', marginBottom: '0.5rem' }}>
+            <span style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '600' }}>{vehicle.marca}</span>
+            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--color-text-primary)' }}>{vehicle.modelo}</span>
           </h3>
-          <p style={{ color: 'var(--color-accent)', fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+          <p style={{ color: 'var(--color-text-primary)', fontSize: '1.4rem', fontWeight: '800', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             ${vehicle.precio.toLocaleString('es-CL')}
+            <span style={{ fontSize: '0.75rem', fontWeight: '500', color: 'var(--color-text-secondary)', background: 'var(--color-bg)', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>CLP</span>
           </p>
-          <div style={{ display: 'flex', gap: '1rem', color: 'var(--color-text-secondary)', fontSize: '0.875rem', marginTop: 'auto', borderTop: '1px solid var(--color-border)', paddingTop: '1rem' }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}><CalendarDays size={16} /> {vehicle.ano}</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Gauge size={16} /> {vehicle.kilometraje.toLocaleString('es-CL')} km</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Settings size={16} /> {vehicle.transmision}</span>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', color: 'var(--color-text-secondary)', fontSize: '0.8rem', marginTop: 'auto', borderTop: '1px solid var(--color-border)', paddingTop: '1.25rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem', background: 'var(--color-bg)', padding: '0.5rem', borderRadius: '8px' }}>
+              <CalendarDays size={16} color="var(--color-accent)" />
+              <span style={{ fontWeight: '600' }}>{vehicle.ano}</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem', background: 'var(--color-bg)', padding: '0.5rem', borderRadius: '8px' }}>
+              <Gauge size={16} color="var(--color-accent)" />
+              <span style={{ fontWeight: '600' }}>{vehicle.kilometraje >= 1000 ? (vehicle.kilometraje/1000).toFixed(0) + 'k' : vehicle.kilometraje} km</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem', background: 'var(--color-bg)', padding: '0.5rem', borderRadius: '8px', textAlign: 'center' }}>
+              <Settings size={16} color="var(--color-accent)" />
+              <span style={{ fontWeight: '600', fontSize: '0.75rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%' }}>{vehicle.transmision}</span>
+            </div>
           </div>
         </div>
       </div>
