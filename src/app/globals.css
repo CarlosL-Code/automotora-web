@@ -263,33 +263,26 @@ h3 { font-size: 1.875rem; }
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   padding: 0.5rem 1.5rem;
   border-radius: 16px; /* Más rectangular con pequeños bordes redondeados */
-  background: rgba(24, 24, 27, 0.85); 
+  background: rgba(71, 85, 105, 0.9); /* Plomo metálico corporativo (Slate 600) constante */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1); 
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); 
+  border: 1px solid rgba(255, 255, 255, 0.15); 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   color: #ffffff; 
-  overflow: hidden;
 }
 
-[data-theme='dark'] .main-top-nav {
-  background: rgba(15, 17, 20, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-}
+/* Eliminado el override de [data-theme='dark'] para que mantenga su color plomo */
 
 .main-top-nav.scrolled {
   top: 10px;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
-  background: rgba(24, 24, 27, 0.95);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+  background: rgba(51, 65, 85, 0.95); /* Slate 700 al hacer scroll (un poco más oscuro) */
 }
 
-[data-theme='dark'] .main-top-nav.scrolled {
-  background: rgba(15, 17, 20, 0.95);
-}
+/* Eliminado override oscuro de scrolled */
 
 /* --- SCROLL PROGRESS BAR --- */
 .scroll-progress-container {
@@ -499,20 +492,20 @@ h3 { font-size: 1.875rem; }
     max-width: 100% !important;
     border-radius: 0 !important;
     padding: 0.5rem 1rem !important;
-    background: rgba(15, 17, 21, 0.65) !important; /* Fondo oscuro glass recomendado para celular */
+    background: rgba(71, 85, 105, 0.9) !important; /* Plomo metálico en celular */
     backdrop-filter: blur(15px) !important;
     -webkit-backdrop-filter: blur(15px) !important;
     border: none !important;
     border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15) !important;
   }
 
   .main-top-nav.scrolled {
-    background: var(--nav-bg-scrolled) !important;
+    background: rgba(51, 65, 85, 0.95) !important; /* Slate 700 scrolled */
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
-    border-bottom: 1px solid var(--color-border) !important;
-    box-shadow: var(--shadow-md) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3) !important;
   }
   
   .logo-wrapper, .main-top-nav.scrolled .logo-wrapper {
