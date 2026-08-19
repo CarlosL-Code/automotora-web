@@ -1,10 +1,11 @@
-import { Outfit } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
-const outfit = Outfit({ 
+const inter = Inter({ 
   subsets: ["latin"],
   weight: ['300', '400', '600', '700', '800'],
   display: 'swap',
@@ -21,11 +22,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" suppressHydrationWarning className={outfit.variable}>
-      <body className={outfit.className}>
+    <html lang="es" suppressHydrationWarning className={inter.variable}>
+      <body className={inter.className}>
         <ThemeProvider attribute="data-theme" defaultTheme="light">
           <Navbar />
           {children}
+          <FloatingWhatsApp />
           <Footer />
         </ThemeProvider>
       </body>

@@ -262,7 +262,7 @@ h3 { font-size: 1.875rem; }
   z-index: 9999;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   padding: 0.5rem 1.5rem;
-  border-radius: 99px; /* Píldora perfecta */
+  border-radius: 16px; /* Más rectangular con pequeños bordes redondeados */
   background: rgba(24, 24, 27, 0.85); 
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -348,42 +348,91 @@ h3 { font-size: 1.875rem; }
   /* Se mantiene como clase para ocultarlo en móvil, pero la estructura la da nav-center/right */
 }
 
-/* Animación y estilo botón WhatsApp Nav */
-.nav-wa-btn {
-  display: inline-flex;
+/* --- FLOATING WHATSAPP BUTTON --- */
+.floating-wa-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  background-color: #25D366;
+  color: white;
+  border-radius: 50%;
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: linear-gradient(45deg, #25D366, #1EBE53);
-  color: #ffffff !important;
-  padding: 0.5rem 1.25rem;
-  border-radius: 99px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  z-index: 9999;
+  text-decoration: none;
+  transition: transform 0.3s ease;
 }
 
-.nav-wa-btn::before {
+.floating-wa-btn:hover {
+  transform: scale(1.1);
+}
+
+.floating-wa-btn::before {
   content: '';
   position: absolute;
-  top: 0; left: -100%;
-  width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  animation: wa-shine 3s infinite;
+  width: 100%;
+  height: 100%;
+  background-color: #25D366;
+  border-radius: 50%;
+  z-index: -1;
+  animation: wa-ripple 2s infinite ease-out;
 }
 
-@keyframes wa-shine {
-  0% { left: -100%; }
-  20% { left: 100%; }
-  100% { left: 100%; }
+@keyframes wa-ripple {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
 }
 
-.nav-wa-btn:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+.floating-wa-tooltip {
+  position: absolute;
+  bottom: 75px;
+  right: 0;
+  background-color: #ffffff;
+  color: #333333;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  white-space: nowrap;
+  animation: tooltip-float 3s infinite ease-in-out;
+  pointer-events: none;
+}
+
+.floating-wa-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  right: 20px;
+  width: 12px;
+  height: 12px;
+  background-color: #ffffff;
+  transform: rotate(45deg);
+}
+
+@keyframes tooltip-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+[data-theme='dark'] .floating-wa-tooltip {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+[data-theme='dark'] .floating-wa-tooltip::after {
+  background-color: #333333;
+}
+
+@media (max-width: 768px) {
+  .floating-wa-btn {
+    bottom: 90px;
+    right: 1rem;
+  }
 }
 
 .nav-link {
