@@ -226,6 +226,10 @@
   .blobWrapper {
     max-width: 350px;
     height: 350px;
+    animation: none !important;
+    border-radius: 20px !important;
+    -webkit-mask-image: none !important;
+    transform: none !important;
   }
   .visionBanner {
     padding: 4rem 2rem;
