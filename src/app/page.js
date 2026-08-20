@@ -94,6 +94,26 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Brands Marquee Section */}
+      <section className="brands-marquee-container">
+        <div className="brands-marquee-content">
+          {[
+            'Toyota', 'Peugeot', 'Hyundai', 'Chevrolet', 'Citroen', 'Ford', 
+            'Volkswagen', 'Kia', 'Mazda', 'Fiat', 'Ram', 'Changan', 
+            'Suzuki', 'Maxus', 'JAC', 'Sinotruk', 'Renault', 'Samsung', 
+            'Nissan', 'Jeep', 'Foton', 'Chery',
+            'Toyota', 'Peugeot', 'Hyundai', 'Chevrolet', 'Citroen', 'Ford', 
+            'Volkswagen', 'Kia', 'Mazda', 'Fiat', 'Ram', 'Changan', 
+            'Suzuki', 'Maxus', 'JAC', 'Sinotruk', 'Renault', 'Samsung', 
+            'Nissan', 'Jeep', 'Foton', 'Chery'
+          ].map((brand, index) => (
+            <div key={index} className="brand-pill">
+              {brand}
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Featured Vehicles */}
       <section style={{ padding: '6rem 0' }}>
         <div className="container">
