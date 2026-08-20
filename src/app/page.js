@@ -94,18 +94,25 @@ export default async function Home() {
         </div>
       </section>
 
-        {/* Brands Marquee Section with Inline Styles for Cache Busting */}
+        {/* Brands Marquee Section */}
         <style dangerouslySetInnerHTML={{__html: `
-          .marquee-box { overflow: hidden; width: 100%; background: rgba(10, 10, 12, 0.5); border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 2rem 0; display: flex; align-items: center; position: relative; }
+          .marquee-box { overflow: hidden; width: 100%; background: var(--color-bg-card); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); padding: 2.5rem 0; display: flex; align-items: center; position: relative; }
           .marquee-box::before, .marquee-box::after { content: ""; position: absolute; top: 0; bottom: 0; width: 150px; z-index: 2; pointer-events: none; }
-          .marquee-box::before { left: 0; background: linear-gradient(to right, var(--color-bg), transparent); }
-          .marquee-box::after { right: 0; background: linear-gradient(to left, var(--color-bg), transparent); }
-          .marquee-track { display: flex; gap: 3rem; width: max-content; animation: scroll-track 50s linear infinite; padding-left: 3rem; }
+          .marquee-box::before { left: 0; background: linear-gradient(to right, var(--color-bg-card), transparent); }
+          .marquee-box::after { right: 0; background: linear-gradient(to left, var(--color-bg-card), transparent); }
+          .marquee-track { display: flex; gap: 4rem; width: max-content; animation: scroll-track 40s linear infinite; padding-left: 4rem; align-items: center; }
           .marquee-box:hover .marquee-track { animation-play-state: paused; }
-          .marquee-pill { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-secondary); background: rgba(255, 255, 255, 0.02); padding: 0.8rem 2.5rem; border-radius: 100px; border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; white-space: nowrap; }
-          .marquee-pill:hover { color: var(--color-accent); border-color: var(--color-accent); background: rgba(15, 113, 67, 0.05); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(15, 113, 67, 0.2); }
+          
+          .marquee-item { display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; font-size: 1.25rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-secondary); opacity: 0.6; }
+          .marquee-item:hover { opacity: 1; transform: scale(1.05); color: var(--color-text-primary); }
+          
+          .marquee-logo { width: 50px; height: 50px; object-fit: contain; }
+          
+          /* Invert logos to white in dark mode, keep black in light mode */
+          [data-theme='dark'] .marquee-logo { filter: invert(1); }
+          
           @keyframes scroll-track { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-          @media (max-width: 768px) { .marquee-box { padding: 1.5rem 0; } .marquee-pill { font-size: 1rem; padding: 0.6rem 1.8rem; } .marquee-box::before, .marquee-box::after { width: 60px; } }
+          @media (max-width: 768px) { .marquee-box { padding: 2rem 0; } .marquee-item { font-size: 1.1rem; } .marquee-logo { width: 40px; height: 40px; } .marquee-box::before, .marquee-box::after { width: 60px; } }
         `}} />
         <section className="marquee-box">
           <div className="marquee-track">
@@ -156,12 +163,12 @@ export default async function Home() {
               { name: 'Foton', icon: null },
               { name: 'Chery', icon: null }
             ].map((brand, index) => (
-              <div key={index} className="marquee-pill">
+              <div key={index} className="marquee-item">
                 {brand.icon ? (
                   <img 
-                    src={`https://cdn.simpleicons.org/${brand.icon}/8ea372`} 
+                    src={`https://cdn.simpleicons.org/${brand.icon}/000000`} 
                     alt={`${brand.name} logo`}
-                    style={{ width: '35px', height: '35px', objectFit: 'contain' }}
+                    className="marquee-logo"
                   />
                 ) : (
                   brand.name
