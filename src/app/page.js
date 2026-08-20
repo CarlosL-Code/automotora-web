@@ -110,17 +110,61 @@ export default async function Home() {
         <section className="marquee-box">
           <div className="marquee-track">
             {[
-              'Toyota', 'Peugeot', 'Hyundai', 'Chevrolet', 'Citroen', 'Ford', 
-              'Volkswagen', 'Kia', 'Mazda', 'Fiat', 'Ram', 'Changan', 
-              'Suzuki', 'Maxus', 'JAC', 'Sinotruk', 'Renault', 'Samsung', 
-              'Nissan', 'Jeep', 'Foton', 'Chery',
-              'Toyota', 'Peugeot', 'Hyundai', 'Chevrolet', 'Citroen', 'Ford', 
-              'Volkswagen', 'Kia', 'Mazda', 'Fiat', 'Ram', 'Changan', 
-              'Suzuki', 'Maxus', 'JAC', 'Sinotruk', 'Renault', 'Samsung', 
-              'Nissan', 'Jeep', 'Foton', 'Chery'
+              { name: 'Toyota', icon: 'toyota' },
+              { name: 'Peugeot', icon: 'peugeot' },
+              { name: 'Hyundai', icon: 'hyundai' },
+              { name: 'Chevrolet', icon: 'chevrolet' },
+              { name: 'Citroen', icon: 'citroen' },
+              { name: 'Ford', icon: 'ford' },
+              { name: 'Volkswagen', icon: 'volkswagen' },
+              { name: 'Kia', icon: 'kia' },
+              { name: 'Mazda', icon: 'mazda' },
+              { name: 'Fiat', icon: 'fiat' },
+              { name: 'Ram', icon: 'ram' },
+              { name: 'Changan', icon: null },
+              { name: 'Suzuki', icon: 'suzuki' },
+              { name: 'Maxus', icon: null },
+              { name: 'JAC', icon: null },
+              { name: 'Sinotruk', icon: null },
+              { name: 'Renault', icon: 'renault' },
+              { name: 'Samsung', icon: 'samsung' },
+              { name: 'Nissan', icon: 'nissan' },
+              { name: 'Jeep', icon: 'jeep' },
+              { name: 'Foton', icon: null },
+              { name: 'Chery', icon: null },
+              // Repetido para efecto infinito
+              { name: 'Toyota', icon: 'toyota' },
+              { name: 'Peugeot', icon: 'peugeot' },
+              { name: 'Hyundai', icon: 'hyundai' },
+              { name: 'Chevrolet', icon: 'chevrolet' },
+              { name: 'Citroen', icon: 'citroen' },
+              { name: 'Ford', icon: 'ford' },
+              { name: 'Volkswagen', icon: 'volkswagen' },
+              { name: 'Kia', icon: 'kia' },
+              { name: 'Mazda', icon: 'mazda' },
+              { name: 'Fiat', icon: 'fiat' },
+              { name: 'Ram', icon: 'ram' },
+              { name: 'Changan', icon: null },
+              { name: 'Suzuki', icon: 'suzuki' },
+              { name: 'Maxus', icon: null },
+              { name: 'JAC', icon: null },
+              { name: 'Sinotruk', icon: null },
+              { name: 'Renault', icon: 'renault' },
+              { name: 'Samsung', icon: 'samsung' },
+              { name: 'Nissan', icon: 'nissan' },
+              { name: 'Jeep', icon: 'jeep' },
+              { name: 'Foton', icon: null },
+              { name: 'Chery', icon: null }
             ].map((brand, index) => (
               <div key={index} className="marquee-pill">
-                {brand}
+                {brand.icon && (
+                  <img 
+                    src={`https://cdn.simpleicons.org/${brand.icon}/8ea372`} 
+                    alt={`${brand.name} icon`}
+                    style={{ width: '22px', height: '22px', objectFit: 'contain', marginRight: '10px' }}
+                  />
+                )}
+                {brand.name}
               </div>
             ))}
           </div>
