@@ -94,25 +94,56 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Brands Marquee Section */}
-      <section className="brands-marquee-container">
-        <div className="brands-marquee-content">
-          {[
-            'Toyota', 'Peugeot', 'Hyundai', 'Chevrolet', 'Citroen', 'Ford', 
-            'Volkswagen', 'Kia', 'Mazda', 'Fiat', 'Ram', 'Changan', 
-            'Suzuki', 'Maxus', 'JAC', 'Sinotruk', 'Renault', 'Samsung', 
-            'Nissan', 'Jeep', 'Foton', 'Chery',
-            'Toyota', 'Peugeot', 'Hyundai', 'Chevrolet', 'Citroen', 'Ford', 
-            'Volkswagen', 'Kia', 'Mazda', 'Fiat', 'Ram', 'Changan', 
-            'Suzuki', 'Maxus', 'JAC', 'Sinotruk', 'Renault', 'Samsung', 
-            'Nissan', 'Jeep', 'Foton', 'Chery'
-          ].map((brand, index) => (
-            <div key={index} className="brand-pill">
-              {brand}
-            </div>
-          ))}
-        </div>
-      </section>
+        {/* Brands Marquee Section */}
+        <section className="brands-marquee-container">
+          <div className="brands-marquee-content">
+            {[
+              { name: 'Toyota', domain: 'toyota.com' },
+              { name: 'Peugeot', domain: 'peugeot.com' },
+              { name: 'Hyundai', domain: 'hyundai.com' },
+              { name: 'Chevrolet', domain: 'chevrolet.com' },
+              { name: 'Citroen', domain: 'citroen.com' },
+              { name: 'Ford', domain: 'ford.com' },
+              { name: 'Volkswagen', domain: 'volkswagen.com' },
+              { name: 'Kia', domain: 'kia.com' },
+              { name: 'Mazda', domain: 'mazda.com' },
+              { name: 'Fiat', domain: 'fiat.com' },
+              { name: 'Ram', domain: 'ramtrucks.com' },
+              { name: 'Suzuki', domain: 'suzuki.com' },
+              { name: 'Renault', domain: 'renault.com' },
+              { name: 'Nissan', domain: 'nissan.com' },
+              { name: 'Jeep', domain: 'jeep.com' },
+              { name: 'Chery', domain: 'cheryinternational.com' },
+              // Duplicado para efecto infinito suave
+              { name: 'Toyota', domain: 'toyota.com' },
+              { name: 'Peugeot', domain: 'peugeot.com' },
+              { name: 'Hyundai', domain: 'hyundai.com' },
+              { name: 'Chevrolet', domain: 'chevrolet.com' },
+              { name: 'Citroen', domain: 'citroen.com' },
+              { name: 'Ford', domain: 'ford.com' },
+              { name: 'Volkswagen', domain: 'volkswagen.com' },
+              { name: 'Kia', domain: 'kia.com' },
+              { name: 'Mazda', domain: 'mazda.com' },
+              { name: 'Fiat', domain: 'fiat.com' },
+              { name: 'Ram', domain: 'ramtrucks.com' },
+              { name: 'Suzuki', domain: 'suzuki.com' },
+              { name: 'Renault', domain: 'renault.com' },
+              { name: 'Nissan', domain: 'nissan.com' },
+              { name: 'Jeep', domain: 'jeep.com' },
+              { name: 'Chery', domain: 'cheryinternational.com' }
+            ].map((brand, index) => (
+              <div key={index} className="brand-pill">
+                <img 
+                  src={`https://logo.clearbit.com/${brand.domain}`} 
+                  alt={`${brand.name} logo`}
+                  style={{ width: '28px', height: '28px', objectFit: 'contain', marginRight: '12px', borderRadius: '4px', backgroundColor: '#fff', padding: '2px' }}
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                />
+                {brand.name}
+              </div>
+            ))}
+          </div>
+        </section>
 
       {/* Featured Vehicles */}
       <section style={{ padding: '6rem 0' }}>
