@@ -157,14 +157,15 @@ export default async function Home() {
               { name: 'Chery', icon: null }
             ].map((brand, index) => (
               <div key={index} className="marquee-pill">
-                {brand.icon && (
+                {brand.icon ? (
                   <img 
                     src={`https://cdn.simpleicons.org/${brand.icon}/8ea372`} 
-                    alt={`${brand.name} icon`}
-                    style={{ width: '22px', height: '22px', objectFit: 'contain', marginRight: '10px' }}
+                    alt={`${brand.name} logo`}
+                    style={{ width: '35px', height: '35px', objectFit: 'contain' }}
                   />
+                ) : (
+                  brand.name
                 )}
-                {brand.name}
               </div>
             ))}
           </div>
