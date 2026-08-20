@@ -487,25 +487,27 @@ h3 { font-size: 1.875rem; }
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    top: 0 !important;
-    width: 100% !important;
+    top: 15px !important;
+    width: 92% !important;
     max-width: 100% !important;
-    border-radius: 0 !important;
-    padding: 0.4rem 1rem !important;
-    background: rgba(15, 15, 17, 0.85) !important; /* Negro dark glass celular */
+    border-radius: 100px !important;
+    padding: 0.3rem 1.2rem !important;
+    background: rgba(15, 15, 17, 0.85) !important; 
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
-    border: none !important;
-    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3) !important;
   }
 
   .main-top-nav.scrolled {
-    background: rgba(10, 10, 12, 0.98) !important; /* Más oscuro scrolled */
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5) !important;
+    top: 15px !important;
+    width: 92% !important;
+    border-radius: 100px !important;
+    background: rgba(10, 10, 12, 0.95) !important; 
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
   }
   
   .logo-wrapper, .main-top-nav.scrolled .logo-wrapper {
@@ -514,7 +516,7 @@ h3 { font-size: 1.875rem; }
   }
   
   .top-spacer, .top-spacer.scrolled {
-    height: 80px !important;
+    height: 95px !important;
   }
 
   /* Bottom Navigation Bar App-like */
