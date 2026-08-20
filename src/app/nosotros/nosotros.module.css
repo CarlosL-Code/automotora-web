@@ -218,15 +218,15 @@
   .heroSection {
     flex-direction: column;
     text-align: center;
-    gap: 1.5rem; /* Reduced from 4rem */
-    margin-bottom: 4rem; /* Reduced from 8rem */
+    gap: 0; /* Removed gap */
+    margin-bottom: 4rem; 
   }
   .heroText p {
-    margin: 0 auto 1rem;
+    margin: 0 auto 0; /* Removed bottom margin */
   }
   .heroVisual {
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 0.5rem; /* Minimal spacing */
   }
   .dots1 {
     bottom: -30px;
