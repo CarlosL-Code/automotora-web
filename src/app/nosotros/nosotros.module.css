@@ -222,11 +222,12 @@
     margin-bottom: 4rem; 
   }
   .heroText p {
-    margin: 0 auto 0; /* Removed bottom margin */
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
   .heroVisual {
     width: 100%;
-    margin-top: 0.5rem; /* Minimal spacing */
+    margin-top: -2.5rem !important; /* Brute-force pull it up */
   }
   .dots1 {
     bottom: -30px;
