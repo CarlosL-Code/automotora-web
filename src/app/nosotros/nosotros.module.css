@@ -218,13 +218,27 @@
   .heroSection {
     flex-direction: column;
     text-align: center;
-    gap: 4rem;
+    gap: 1.5rem; /* Reduced from 4rem */
+    margin-bottom: 4rem; /* Reduced from 8rem */
   }
   .heroText p {
-    margin: 0 auto 2rem;
+    margin: 0 auto 1rem;
   }
   .heroVisual {
     width: 100%;
+    margin-top: 1rem;
+  }
+  .dots1 {
+    bottom: -30px;
+    left: -10px;
+    width: 180px;
+    height: 180px;
+  }
+  .dots2 {
+    top: -30px;
+    right: -10px;
+    width: 180px;
+    height: 180px;
   }
   .blobWrapper {
     width: 350px; /* Force width so it doesn't collapse to 0 in flex column */
