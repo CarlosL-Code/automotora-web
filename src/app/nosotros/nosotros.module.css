@@ -216,7 +216,7 @@
 
 @media (max-width: 900px) {
   .pageWrapper {
-    padding-top: 80px; /* Reduced from 140px */
+    padding-top: 40px; /* Aggressively reduced for mobile */
   }
   .heroSection {
     flex-direction: column;
@@ -229,7 +229,7 @@
   }
   .heroVisual {
     width: 100%;
-    margin-top: 1rem; /* Removed the negative margin */
+    margin-top: 0rem; 
   }
   .dots1 {
     bottom: -30px;
