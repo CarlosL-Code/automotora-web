@@ -43,8 +43,8 @@
 /* Organic Blob Shape for Image */
 .blobWrapper {
   width: 100%;
-  max-width: 480px;
-  height: 480px; /* Explicit height instead of aspect-ratio to fix Safari/Mobile collapsing */
+  max-width: 400px;
+  height: 400px; /* Explicit height instead of aspect-ratio to fix Safari/Mobile collapsing */
   position: relative;
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   overflow: hidden;
