@@ -421,8 +421,7 @@ h3 { font-size: 1.875rem; }
 
 @media (max-width: 768px) {
   .floating-wa-btn {
-    bottom: 90px;
-    right: 1rem;
+    display: none !important;
   }
 }
 
