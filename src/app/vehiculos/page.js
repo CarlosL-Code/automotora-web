@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import VehicleCard from '@/components/VehicleCard';
+import Link from 'next/link';
 
 export const revalidate = 0; // Disable static rendering
 
@@ -31,9 +32,9 @@ export default async function VehiclesCatalog({ searchParams }) {
         {/* Interactive Filters */}
         <div className="card glass" style={{ padding: '1.25rem 2rem', marginBottom: '3rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', borderRadius: '100px', justifyContent: 'center' }}>
           <span style={{ fontWeight: '700', color: 'var(--color-text-secondary)', marginRight: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '0.85rem' }}>Filtros Rápidos:</span>
-          <a href="/vehiculos" className="btn btn-outline" style={{ padding: '0.5rem 1.5rem', borderRadius: '99px', fontSize: '0.9rem' }}>Todos</a>
-          <a href="/vehiculos?transmision=Automática" className="btn btn-outline" style={{ padding: '0.5rem 1.5rem', borderRadius: '99px', fontSize: '0.9rem' }}>Automáticos</a>
-          <a href="/vehiculos?transmision=Manual" className="btn btn-outline" style={{ padding: '0.5rem 1.5rem', borderRadius: '99px', fontSize: '0.9rem' }}>Manuales</a>
+          <Link href="/vehiculos" className="btn btn-outline" style={{ padding: '0.5rem 1.5rem', borderRadius: '99px', fontSize: '0.9rem' }}>Todos</Link>
+          <Link href="/vehiculos?transmision=Automática" className="btn btn-outline" style={{ padding: '0.5rem 1.5rem', borderRadius: '99px', fontSize: '0.9rem' }}>Automáticos</Link>
+          <Link href="/vehiculos?transmision=Manual" className="btn btn-outline" style={{ padding: '0.5rem 1.5rem', borderRadius: '99px', fontSize: '0.9rem' }}>Manuales</Link>
         </div>
 
         {vehicles.length > 0 ? (

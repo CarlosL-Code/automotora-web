@@ -84,7 +84,10 @@ export default function StaffGallery({ staff }) {
             {getIconForCategory(cat)}
             {cat}
           </button>
-        ))}      {/* Staff Grid */}
+        ))}
+      </div>
+      
+      {/* Staff Grid */}
       {filteredStaff.length > 0 ? (
         <div style={{ 
           display: 'grid', 

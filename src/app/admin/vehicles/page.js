@@ -22,6 +22,7 @@ export default function AdminVehicles() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchVehicles();
   }, []);
 

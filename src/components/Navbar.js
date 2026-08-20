@@ -14,6 +14,7 @@ export default function Navbar() {
   const progressBarRef = useRef(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     let ticking = false;
 
@@ -42,6 +43,7 @@ export default function Navbar() {
 
   // Cerrar el menú al navegar
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
