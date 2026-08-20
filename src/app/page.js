@@ -137,7 +137,6 @@ export default async function Home() {
                   src={`https://logo.clearbit.com/${brand.domain}`} 
                   alt={`${brand.name} logo`}
                   style={{ width: '28px', height: '28px', objectFit: 'contain', marginRight: '12px', borderRadius: '4px', backgroundColor: '#fff', padding: '2px' }}
-                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
                 />
                 {brand.name}
               </div>
