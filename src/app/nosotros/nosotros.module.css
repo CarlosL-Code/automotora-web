@@ -215,19 +215,21 @@
 }
 
 @media (max-width: 900px) {
+  .pageWrapper {
+    padding-top: 80px; /* Reduced from 140px */
+  }
   .heroSection {
     flex-direction: column;
     text-align: center;
-    gap: 0; /* Removed gap */
-    margin-bottom: 4rem; 
+    gap: 1.5rem;
+    margin-bottom: 3rem; 
   }
   .heroText p {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
+    margin: 0 auto 0;
   }
   .heroVisual {
     width: 100%;
-    margin-top: -2.5rem !important; /* Brute-force pull it up */
+    margin-top: 1rem; /* Removed the negative margin */
   }
   .dots1 {
     bottom: -30px;
