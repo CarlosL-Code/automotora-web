@@ -44,7 +44,7 @@
 .blobWrapper {
   width: 100%;
   max-width: 480px;
-  aspect-ratio: 1 / 1;
+  height: 480px; /* Explicit height instead of aspect-ratio to fix Safari/Mobile collapsing */
   position: relative;
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   overflow: hidden;
@@ -222,6 +222,7 @@
   }
   .blobWrapper {
     max-width: 350px;
+    height: 350px;
   }
   .visionBanner {
     padding: 4rem 2rem;

@@ -91,7 +91,8 @@ export default function StaffGallery({ staff }) {
       {filteredStaff.length > 0 ? (
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 280px))', 
+          justifyContent: 'center',
           gap: '2.5rem',
         }}>
           {filteredStaff.map((person, index) => {

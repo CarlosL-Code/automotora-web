@@ -32,7 +32,7 @@ export default async function NosotrosPage() {
             
             <div className={styles.blobWrapper}>
               <Image 
-                src="https://images.unsplash.com/photo-1573273787173-0eb81a833b34?auto=format&fit=crop&q=80&w=800" 
+                src="/transparencia.jpg" 
                 alt="Familia recibiendo llaves de su nuevo auto" 
                 fill 
                 style={{ objectFit: 'cover' }}
