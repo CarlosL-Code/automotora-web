@@ -52,12 +52,12 @@ export default async function Home() {
             <div className="hero-animate hero-delay-1" style={{ 
               display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
               padding: '0.4rem 1.2rem', borderRadius: '100px', 
-              backgroundColor: 'rgba(255, 255, 255, 0.03)', backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-              marginBottom: '2rem', fontSize: '0.75rem', fontWeight: '600', letterSpacing: '0.1em', textTransform: 'uppercase',
-              color: 'rgba(255, 255, 255, 0.9)', textShadow: 'none',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+              backgroundColor: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255, 255, 255, 0.15)',
+              marginBottom: '2rem', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase',
+              color: '#ffffff', textShadow: 'none',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
             }}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="16" height="11" style={{ borderRadius: '2px', display: 'block' }}>
                 <rect width="3" height="2" fill="#d52b1e"/>
