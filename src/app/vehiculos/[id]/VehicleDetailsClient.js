@@ -4,25 +4,25 @@ import Link from 'next/link';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
-import { Phone, MessageCircle, Calendar, Gauge, Settings, Fuel, Palette, Wrench } from 'lucide-react';
+import { Icon } from '@iconify/react';
 
 const SpecCard = ({ icon, label, value }) => (
-  <div className="spec-card" style={{ 
-    display: 'flex', alignItems: 'center', gap: '1rem', padding: '1.25rem', 
+  <div className="spec-card premium-card" style={{ 
+    display: 'flex', alignItems: 'center', gap: '1rem', padding: '1.5rem', 
     backgroundColor: 'var(--color-bg-card)', border: '1px solid var(--color-border)', 
-    borderRadius: '16px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+    borderRadius: '24px', boxShadow: '0 10px 40px rgba(0,0,0,0.03)',
     transition: 'transform 0.3s ease, box-shadow 0.3s ease'
   }}>
     <div style={{ 
-      color: 'var(--color-accent)', padding: '0.75rem', 
-      backgroundColor: 'var(--color-accent-light)', borderRadius: '12px', 
+      color: 'var(--color-accent)', padding: '1rem', 
+      backgroundColor: 'rgba(15, 113, 67, 0.08)', borderRadius: '16px', 
       display: 'flex', alignItems: 'center', justifyContent: 'center' 
     }}>
-      {icon}
+      <Icon icon={icon} width="24" />
     </div>
     <div>
-      <p style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem', fontWeight: '600' }}>{label}</p>
-      <p style={{ fontSize: '1.1rem', fontWeight: '700', color: 'var(--color-text-primary)', lineHeight: 1.2 }}>{value}</p>
+      <p style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.3rem', fontWeight: '700' }}>{label}</p>
+      <p style={{ fontSize: '1.15rem', fontWeight: '800', color: 'var(--color-text-primary)', lineHeight: 1.2 }}>{value}</p>
     </div>
   </div>
 );
@@ -47,9 +47,9 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecu
   return (
     <main style={{ minHeight: '100vh', paddingBottom: '4rem' }}>
       <div className="container slide-up">
-        <div style={{ marginBottom: '1.5rem' }}>
-          <Link href="/vehiculos" style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', fontWeight: '500', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1rem', borderRadius: '99px', backgroundColor: 'var(--color-bg-card)', border: '1px solid var(--color-border)', transition: 'all 0.2s' }} className="hover-accent">
-            ← Volver al catálogo
+        <div style={{ marginBottom: '1.5rem', display: 'flex' }}>
+          <Link href="/vehiculos" style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.2rem', borderRadius: '100px', backgroundColor: 'var(--color-bg-card)', border: '1px solid var(--color-border)', transition: 'all 0.3s', boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }} className="hover-accent">
+            <Icon icon="solar:arrow-left-linear" width="18" /> Volver al catálogo
           </Link>
         </div>
 
@@ -97,22 +97,29 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecu
                   {vehicle.estado}
                 </div>
               )}
-              <h1 style={{ fontSize: '3rem', fontWeight: '800', lineHeight: '1.1', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.4rem 1.2rem', background: 'rgba(15, 113, 67, 0.05)', border: '1px solid rgba(15, 113, 67, 0.1)', borderRadius: '100px', color: 'var(--color-accent)', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1rem' }}>
+                <span style={{ width: '6px', height: '6px', background: 'var(--color-accent)', borderRadius: '50%', animation: 'pulse-dot 2s infinite' }}></span>
+                {vehicle.ano} · {vehicle.combustible}
+              </div>
+              <h1 style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', fontWeight: '800', lineHeight: '1.1', marginBottom: '1rem', letterSpacing: '-0.03em' }}>
                 {vehicle.marca} <span style={{ fontWeight: '300', color: 'var(--color-text-secondary)' }}>{vehicle.modelo}</span>
               </h1>
-              <div style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--color-accent)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                ${vehicle.precio.toLocaleString('es-CL')}
+              <div style={{ marginBottom: '0.5rem' }}>
+                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', marginBottom: '0.2rem' }}>Precio Contado</p>
+                <div style={{ fontSize: '3rem', fontWeight: '800', color: 'var(--color-accent)', display: 'flex', alignItems: 'center', gap: '0.5rem', letterSpacing: '-0.03em' }}>
+                  ${vehicle.precio.toLocaleString('es-CL')}
+                </div>
               </div>
             </div>
 
             {/* Bento Grid Specs */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-              <SpecCard icon={<Calendar size={20} />} label="Año" value={vehicle.ano} />
-              <SpecCard icon={<Gauge size={20} />} label="Kilometraje" value={`${vehicle.kilometraje.toLocaleString('es-CL')} km`} />
-              <SpecCard icon={<Settings size={20} />} label="Transmisión" value={vehicle.transmision} />
-              <SpecCard icon={<Fuel size={20} />} label="Combustible" value={vehicle.combustible} />
-              {vehicle.motor && <SpecCard icon={<Wrench size={20} />} label="Motor" value={vehicle.motor} />}
-              {vehicle.color && <SpecCard icon={<Palette size={20} />} label="Color" value={vehicle.color} />}
+              <SpecCard icon="solar:calendar-date-bold-duotone" label="Año" value={vehicle.ano} />
+              <SpecCard icon="solar:speedometer-bold-duotone" label="Kilometraje" value={`${vehicle.kilometraje.toLocaleString('es-CL')} km`} />
+              <SpecCard icon="solar:settings-bold-duotone" label="Transmisión" value={vehicle.transmision} />
+              <SpecCard icon="solar:gas-station-bold-duotone" label="Combustible" value={vehicle.combustible} />
+              {vehicle.motor && <SpecCard icon="solar:wrench-bold-duotone" label="Motor" value={vehicle.motor} />}
+              {vehicle.color && <SpecCard icon="solar:palette-bold-duotone" label="Color" value={vehicle.color} />}
             </div>
 
             {/* Description Area */}
@@ -177,7 +184,7 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecu
                     {person.telefono && (
                       <>
                         <a href={`tel:${person.telefono.replace(/\s+/g, '')}`} className="btn btn-primary" style={{ padding: '0.5rem', fontSize: '0.85rem', flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.3rem' }}>
-                          <Phone size={14} /> Llamar
+                          <Icon icon="solar:phone-calling-bold-duotone" width="16" /> Llamar
                         </a>
                         <a 
                           href={`https://wa.me/${person.telefono.replace(/[\s+]/g, '')}`} 
@@ -186,7 +193,7 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecu
                           className="btn btn-whatsapp" 
                           style={{ padding: '0.5rem', fontSize: '0.85rem', flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.3rem' }}
                         >
-                          <MessageCircle size={14} /> WhatsApp
+                          <Icon icon="logos:whatsapp-icon" width="16" /> WhatsApp
                         </a>
                       </>
                     )}
