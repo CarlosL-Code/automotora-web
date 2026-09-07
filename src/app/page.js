@@ -75,7 +75,7 @@ export default async function Home() {
             }}>
               Encuentra el auto<br/>
               <span style={{ 
-                background: 'linear-gradient(135deg, #10b981 0%, #047857 100%)', 
+                background: 'linear-gradient(135deg, #22a061 0%, #0F7143 100%)', 
                 WebkitBackgroundClip: 'text', 
                 WebkitTextFillColor: 'transparent', 
                 textShadow: 'none',
