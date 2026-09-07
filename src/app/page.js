@@ -48,40 +48,48 @@ export default async function Home() {
         }}></div>
 
         <div className="container hero-content" style={{ zIndex: 2, color: '#ffffff', position: 'relative', paddingBottom: '6rem' }}>
-          {/* Tagline */}
-          <div className="hero-animate hero-delay-1" style={{ 
-            display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
-            padding: '0.5rem 1.25rem', borderRadius: '99px', 
-            backgroundColor: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255,255,255,0.2)',
-            marginBottom: '2rem', fontSize: '0.85rem', fontWeight: '700', letterSpacing: '0.05em', textTransform: 'uppercase',
-            color: '#ffffff', textShadow: 'none'
-          }}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="20" height="14" style={{ borderRadius: '2px', display: 'block' }}>
-              <rect width="3" height="2" fill="#d52b1e"/>
-              <rect width="3" height="1" fill="#ffffff"/>
-              <rect width="1" height="1" fill="#0039a6"/>
-              <polygon points="0.5,0.25 0.58,0.45 0.8,0.45 0.63,0.6 0.7,0.8 0.5,0.7 0.3,0.8 0.37,0.6 0.2,0.45 0.42,0.45" fill="#ffffff"/>
-            </svg>
-            Concesionario en Temuco
-          </div>
-
-          <h1 className="hero-animate hero-delay-2" style={{ 
-            fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: '800', lineHeight: '1.05', 
-            marginBottom: '1.5rem', letterSpacing: '-0.03em', color: '#ffffff', maxWidth: '700px',
-            textShadow: '0 2px 20px rgba(0,0,0,0.5)'
-          }}>
-            Encuentra el auto<br/>
-            <span style={{ color: '#2ecc71', textShadow: '0 2px 30px rgba(46, 204, 113, 0.4)' }}>que mereces.</span>
-          </h1>
-
-          <p className="hero-animate hero-delay-3" style={{ 
-            fontSize: '1.15rem', color: 'rgba(255,255,255,0.85)', marginBottom: '3rem', 
-            maxWidth: '500px', lineHeight: '1.7', fontWeight: '400',
-            textShadow: '0 1px 10px rgba(0,0,0,0.5)'
-          }}>
-            Selección curada de vehículos con garantía, financiamiento a tu medida y la confianza de un equipo que te acompaña.
-          </p>
+            {/* Tagline */}
+            <div className="hero-animate hero-delay-1" style={{ 
+              display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
+              padding: '0.4rem 1.2rem', borderRadius: '100px', 
+              backgroundColor: 'rgba(255, 255, 255, 0.03)', backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              marginBottom: '2rem', fontSize: '0.75rem', fontWeight: '600', letterSpacing: '0.1em', textTransform: 'uppercase',
+              color: 'rgba(255, 255, 255, 0.9)', textShadow: 'none',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+            }}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" width="16" height="11" style={{ borderRadius: '2px', display: 'block' }}>
+                <rect width="3" height="2" fill="#d52b1e"/>
+                <rect width="3" height="1" fill="#ffffff"/>
+                <rect width="1" height="1" fill="#0039a6"/>
+                <polygon points="0.5,0.25 0.58,0.45 0.8,0.45 0.63,0.6 0.7,0.8 0.5,0.7 0.3,0.8 0.37,0.6 0.2,0.45 0.42,0.45" fill="#ffffff"/>
+              </svg>
+              Concesionario Premium
+            </div>
+  
+            <h1 className="hero-animate hero-delay-2" style={{ 
+              fontSize: 'clamp(3rem, 6vw, 5.5rem)', fontWeight: '800', lineHeight: '1', 
+              marginBottom: '1.5rem', letterSpacing: '-0.04em', color: '#ffffff', maxWidth: '800px',
+              textShadow: '0 4px 30px rgba(0,0,0,0.3)'
+            }}>
+              Encuentra el auto<br/>
+              <span style={{ 
+                background: 'linear-gradient(135deg, #10b981 0%, #047857 100%)', 
+                WebkitBackgroundClip: 'text', 
+                WebkitTextFillColor: 'transparent', 
+                textShadow: 'none',
+                display: 'inline-block'
+              }}>que mereces.</span>
+            </h1>
+  
+            <p className="hero-animate hero-delay-3" style={{ 
+              fontSize: '1.2rem', color: 'rgba(255, 255, 255, 0.75)', marginBottom: '3.5rem', 
+              maxWidth: '550px', lineHeight: '1.8', fontWeight: '400', letterSpacing: '-0.01em',
+              textShadow: '0 2px 10px rgba(0,0,0,0.5)'
+            }}>
+              Selección curada de vehículos con garantía, financiamiento a tu medida y la confianza de un equipo que te acompaña paso a paso.
+            </p>
 
           <div className="hero-animate hero-delay-4" style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap', alignItems: 'center' }}>
             <Link href="/vehiculos" className="hero-btn-primary">

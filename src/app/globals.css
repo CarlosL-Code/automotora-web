@@ -264,7 +264,7 @@ h3 { font-size: 1.875rem; }
   z-index: 9999;
   transition: all 0.25s ease-out;
   padding: 0.2rem 1.5rem; /* Más delgado */
-  border-radius: 16px; 
+  border-radius: 100px; 
   background: rgba(15, 15, 17, 0.75); /* Negro/Gris muy oscuro cristalino premium */
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -738,6 +738,200 @@ h3 { font-size: 1.875rem; }
     transform: translateY(0);
   }
 }
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1; /* Distribuye el espacio equitativamente y previene que se solapen */
+    height: 100%;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    padding-top: 5px;
+    cursor: pointer;
+  }
+
+  .mobile-nav-item.active {
+    color: var(--color-accent);
+  }
+
+  .mobile-nav-item:active .icon-wrapper {
+    transform: scale(0.85); /* Feedback táctil instantáneo al presionar */
+    opacity: 0.7;
+  }
+
+  .icon-wrapper {
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-nav-item.active .icon-wrapper {
+    transform: translateY(-2px) scale(1.1);
+  }
+
+  .nav-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  /* WhatsApp FAB (Guatita central) */
+  .mobile-nav-center-btn {
+    position: relative;
+    flex: 0 0 60px; /* Tamaño fijo, no se encoge ni se expande */
+    width: 60px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .whatsapp-fab {
+    position: absolute;
+    top: -25px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #25D366;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 10000;
+    /* Borde sutil para separarlo del fondo cuando hace scroll */
+    border: 4px solid var(--color-bg);
+  }
+  
+  [data-theme='dark'] .whatsapp-fab {
+    border: 4px solid #0f1115;
+  }
+
+  .whatsapp-fab:active {
+    transform: scale(0.9);
+  }
+
+  /* --- Off-Canvas Menu --- */
+  .offcanvas-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh; /* Usar dvh para evitar que la barra de navegación del celular lo tape */
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    animation: fadeInOverlay 0.3s ease forwards;
+  }
+  
+  .offcanvas-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: min(80vw, 320px); 
+    height: 100dvh; /* Usar dvh para ajustar perfectamente a la pantalla visible */
+    background: var(--color-bg-card);
+    display: flex;
+    flex-direction: column;
+    padding: 1.2rem; /* Reducir padding general ligeramente */
+    box-shadow: -5px 0 25px rgba(0,0,0,0.2);
+    animation: slideInMenu 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    overflow-y: auto; 
+  }
+
+  .offcanvas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem; /* Reducir margen inferior */
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .offcanvas-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Reducido para ahorrar espacio vertical */
+    flex-grow: 1;
+  }
+
+  .offcanvas-link {
+    font-size: clamp(1.1rem, 4vw, 1.25rem); 
+    font-weight: 600;
+    color: var(--color-text-primary);
+    transition: color 0.2s ease;
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem 0; 
+  }
+  .offcanvas-link:active {
+    color: var(--color-accent);
+  }
+  
+  .offcanvas-footer {
+    margin-top: auto;
+    padding-top: 1rem; /* Reducido para que el botón de dark mode suba */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInMenu {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+/* --- Hero Section Styles --- */
+.hero-section {
+  min-height: 100vh;
+}
+
+/* Animación Ken Burns - Zoom lento cinematográfico */
+.hero-image {
+  animation: heroKenBurns 20s ease-in-out infinite alternate;
+}
+
+@keyframes heroKenBurns {
+  0% {
+    transform: scaleX(-1) scale(1);
+  }
+  100% {
+    transform: scaleX(-1) scale(1.08);
+  }
+}
+
+.hero-content {
+  text-align: left;
+}
+
+/* Staggered fade-in animations - más notorias */
+.hero-animate {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: heroFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-delay-1 { animation-delay: 0.3s; }
+.hero-delay-2 { animation-delay: 0.6s; }
+.hero-delay-3 { animation-delay: 0.9s; }
+.hero-delay-4 { animation-delay: 1.2s; }
+
+@keyframes heroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
@@ -749,40 +943,24 @@ h3 { font-size: 1.875rem; }
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1.1rem 2.5rem;
+  padding: 1rem 2.5rem;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #ffffff;
-  background: linear-gradient(135deg, var(--color-accent) 0%, #0a5c36 100%);
-  border: none;
-  border-radius: 14px;
+  background: var(--color-accent);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 100px;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 8px 30px rgba(15, 113, 67, 0.4);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   text-decoration: none;
   letter-spacing: 0.02em;
 }
 
-.hero-btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.6s ease;
-}
-
-.hero-btn-primary:hover::before {
-  left: 100%;
-}
-
 .hero-btn-primary:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 40px rgba(15, 113, 67, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(15, 113, 67, 0.5);
+  background: #0d6139;
   color: #ffffff;
 }
 
@@ -790,26 +968,25 @@ h3 { font-size: 1.875rem; }
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1.1rem 2.5rem;
+  padding: 1rem 2.5rem;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s ease;
   text-decoration: none;
   letter-spacing: 0.02em;
 }
 
 .hero-btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
   color: #ffffff;
 }
 
@@ -827,6 +1004,18 @@ h3 { font-size: 1.875rem; }
     width: 100%;
     justify-content: center;
   }
+  .brands-marquee-container {
+    padding: 1.5rem 0;
+  }
+  .brand-pill {
+    font-size: 1rem;
+    padding: 0.6rem 1.8rem;
+  }
+  .brands-marquee-container::before,
+  .brands-marquee-container::after {
+    width: 60px;
+  }
+}
 
 /* --- BRAND MARQUEE --- */
 .brands-marquee-container {
