@@ -139,7 +139,7 @@ export default async function NosotrosPage() {
 
         {/* Team Section */}
         <section className={styles.teamSection}>
-          <div className="text-center slide-up" style={{ marginBottom: '4rem' }}>
+          <div className="slide-up" style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '1rem', color: 'var(--color-text-primary)' }}>
               Nuestro <span style={{ color: '#0F7143' }}>Equipo</span>
             </h2>
