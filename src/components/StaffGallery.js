@@ -105,38 +105,38 @@ export default function StaffGallery({ staff }) {
                     <Users size={64} opacity={0.3} />
                   </div>
                 )}
-                <div className="staff-overlay"></div>
                 
                 <div className="dept-badge">
                   {getIconForCategory(cat)}
                   {cat}
                 </div>
+              </div>
 
-                <div className="staff-info">
-                  <h3 className="staff-name">{person.nombre}</h3>
-                  <p className="staff-role">
-                    {person.cargo && person.cargo.includes(' | [') ? person.cargo.split(' | [')[0] : person.cargo}
-                  </p>
-                  
-                  <div className="staff-actions-reveal">
-                    {person.telefono && (
-                      <>
-                        <a href={`tel:${person.telefono.replace(/\s+/g, '')}`} className="staff-btn btn-call" title="Llamar">
-                          <Phone size={18} /> Llamar
-                        </a>
-                        <a 
-                          href={`https://wa.me/${person.telefono.replace(/[\s+]/g, '')}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="staff-btn btn-wa" 
-                          title="WhatsApp"
-                        >
-                          <MessageCircle size={18} /> WhatsApp
-                        </a>
-                      </>
-                    )}
-                  </div>
+              <div className="staff-info">
+                <h3 className="staff-name">{person.nombre}</h3>
+                <p className="staff-role">
+                  {person.cargo && person.cargo.includes(' | [') ? person.cargo.split(' | [')[0] : person.cargo}
+                </p>
+                
+                <div className="staff-actions-reveal">
+                  {person.telefono && (
+                    <>
+                      <a href={`tel:${person.telefono.replace(/\s+/g, '')}`} className="staff-btn btn-call" title="Llamar">
+                        <Phone size={18} /> Llamar
+                      </a>
+                      <a 
+                        href={`https://wa.me/${person.telefono.replace(/[\s+]/g, '')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="staff-btn btn-wa" 
+                        title="WhatsApp"
+                      >
+                        <MessageCircle size={18} /> WhatsApp
+                      </a>
+                    </>
+                  )}
                 </div>
+              </div>
               </div>
             </div>
             );
@@ -188,26 +188,33 @@ export default function StaffGallery({ staff }) {
 
         .staff-card {
           position: relative;
-          border-radius: 24px;
+          border-radius: 16px;
           overflow: hidden;
-          aspect-ratio: 4/5;
+          background: var(--color-bg-card);
           cursor: pointer;
           transform: translateY(0);
           transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+          box-shadow: 0 5px 20px rgba(0,0,0,0.05);
           border: 1px solid var(--color-border);
+          display: flex;
+          flex-direction: column;
         }
         
         .staff-card:hover {
           transform: translateY(-8px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+          box-shadow: 0 15px 35px rgba(0,0,0,0.12);
         }
 
         .staff-image-bg {
-          position: absolute;
-          inset: 0;
+          position: relative;
           width: 100%;
-          height: 100%;
+          aspect-ratio: 1/1;
+          overflow: hidden;
+          background: #f0f0f0;
+        }
+
+        [data-theme='dark'] .staff-image-bg {
+          background: #111;
         }
 
         .staff-img-element {
@@ -227,23 +234,11 @@ export default function StaffGallery({ staff }) {
           background: var(--color-bg-card);
         }
 
-        .staff-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.1) 60%, transparent 100%);
-          opacity: 0.8;
-          transition: opacity 0.4s ease;
-        }
-
-        .staff-card:hover .staff-overlay {
-          opacity: 1;
-        }
-
         .dept-badge {
           position: absolute;
-          top: 1.2rem;
-          right: 1.2rem;
-          background: rgba(0, 0, 0, 0.5);
+          top: 1rem;
+          right: 1rem;
+          background: rgba(0, 0, 0, 0.6);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           color: white;
@@ -261,58 +256,37 @@ export default function StaffGallery({ staff }) {
         }
 
         .staff-info {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          padding: 2.5rem 1.5rem 1.5rem 1.5rem;
-          z-index: 10;
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
-          justify-content: flex-end;
+          flex-grow: 1;
         }
 
         .staff-name {
-          color: white;
-          font-size: 1.5rem;
+          color: var(--color-text-primary);
+          font-size: 1.3rem;
           font-weight: 800;
           letter-spacing: -0.02em;
-          margin-bottom: 0.3rem;
-          text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-          transform: translateY(15px);
-          transition: transform 0.4s ease;
+          margin-bottom: 0.2rem;
         }
 
         .staff-role {
-          color: rgba(255, 255, 255, 0.75);
-          font-size: 0.85rem;
-          font-weight: 600;
+          color: #0F7143;
+          font-size: 0.8rem;
+          font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          margin-bottom: 1rem;
-          transform: translateY(15px);
-          transition: transform 0.4s ease;
+          margin-bottom: 1.5rem;
+        }
+
+        [data-theme='dark'] .staff-role {
+          color: #22a061;
         }
 
         .staff-actions-reveal {
           display: flex;
-          gap: 0.75rem;
-          opacity: 0;
-          transform: translateY(20px);
-          transition: all 0.4s ease;
-          pointer-events: none;
-        }
-
-        .staff-card:hover .staff-name,
-        .staff-card:hover .staff-role {
-          transform: translateY(0);
-        }
-
-        .staff-card:hover .staff-actions-reveal {
-          opacity: 1;
-          transform: translateY(0);
-          pointer-events: auto;
-          transition-delay: 0.1s;
+          gap: 0.5rem;
+          margin-top: auto;
         }
 
         .staff-btn {
@@ -320,9 +294,9 @@ export default function StaffGallery({ staff }) {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 0.5rem;
-          padding: 0.8rem;
-          border-radius: 12px;
+          gap: 0.4rem;
+          padding: 0.7rem;
+          border-radius: 10px;
           font-weight: 600;
           font-size: 0.85rem;
           text-decoration: none;
@@ -330,27 +304,27 @@ export default function StaffGallery({ staff }) {
         }
 
         .btn-call {
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-          color: white;
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          background: var(--color-bg);
+          color: var(--color-text-primary);
+          border: 1px solid var(--color-border);
         }
 
         .btn-call:hover {
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(0,0,0,0.05);
           transform: translateY(-2px);
         }
 
+        [data-theme='dark'] .btn-call:hover {
+          background: rgba(255,255,255,0.05);
+        }
+
         .btn-wa {
-          background: rgba(37, 211, 102, 0.2);
-          backdrop-filter: blur(10px);
-          color: #25D366;
-          border: 1px solid rgba(37, 211, 102, 0.4);
+          background: #25D366;
+          color: white;
         }
 
         .btn-wa:hover {
-          background: #25D366;
-          color: white;
+          background: #20b858;
           transform: translateY(-2px);
           box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
