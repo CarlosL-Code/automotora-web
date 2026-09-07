@@ -15,29 +15,44 @@ export default async function NosotrosPage() {
     <main className={styles.pageWrapper}>
       <div className="container">
         
-        {/* Clean Hero Section - Vidyard Style */}
+        {/* Premium Hero Section */}
         <section className={styles.heroSection}>
           <div className={`${styles.heroText} slide-up`}>
-            <h1 className="text-gradient">Más que una empresa, una familia.</h1>
+            <div className={styles.premiumTag}>
+              <span className={styles.premiumTagDot}></span>
+              Nuestra Historia
+            </div>
+            <h1>Más que una empresa,<br/> <span style={{ color: '#0F7143' }}>una familia.</span></h1>
             <p>
               Fundada en 2025, nacimos por el interés familiar en el rubro automotriz, con el firme propósito de entregar un servicio más cercano, transparente y confiable. 
-              <strong> Te acompañamos en cada paso</strong> para que encuentres el vehículo perfecto sin letra chica ni sorpresas.
+              <br/><br/>
+              <strong>Te acompañamos en cada paso</strong> para que encuentres el vehículo perfecto sin letra chica ni sorpresas. Tu tranquilidad es nuestro mayor éxito.
             </p>
           </div>
           
           <div className={`${styles.heroVisual} slide-up`} style={{ animationDelay: '0.2s' }}>
-            <div className={styles.dotsPattern + ' ' + styles.dots1}></div>
-            <div className={styles.dotsPattern + ' ' + styles.dots2}></div>
-            <div className={styles.abstractShape}></div>
-            
-            <div className={styles.blobWrapper}>
-              <Image 
-                src="/transparencia.jpg" 
-                alt="Familia recibiendo llaves de su nuevo auto" 
-                fill 
-                style={{ objectFit: 'cover' }}
-                priority
-              />
+            <div className={styles.imageGallery}>
+              <div className={styles.mainImage}>
+                <Image 
+                  src="/transparencia.jpg" 
+                  alt="Atención personalizada en concesionario" 
+                  fill 
+                  style={{ objectFit: 'cover' }}
+                  priority
+                />
+              </div>
+              <div className={styles.floatingImage}>
+                <Image 
+                  src="/hero-bg.jpg" 
+                  alt="Vehículo premium" 
+                  fill 
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+              <div className={styles.experienceBadge}>
+                <div className={styles.badgeNumber}>100%</div>
+                <div className={styles.badgeText}>Transparencia<br/>Garantizada</div>
+              </div>
             </div>
           </div>
         </section>
