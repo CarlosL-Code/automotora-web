@@ -137,7 +137,6 @@ export default function StaffGallery({ staff }) {
                   )}
                 </div>
               </div>
-              </div>
             </div>
             );
           })}
