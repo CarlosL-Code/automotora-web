@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
 
@@ -95,12 +95,10 @@ export default function ContactPage() {
             </div>
 
             {/* Mapa Card */}
-            <div className="premium-card" style={{ padding: '0.5rem', height: '300px', overflow: 'hidden' }}>
+            <div className="premium-card" style={{ padding: '0.5rem', flex: 1, minHeight: '300px', display: 'flex', flexDirection: 'column' }}>
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3161.4116499692415!2d-72.593798!3d-38.7369344!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9614d3c3337a4453%3A0xc6657c91ba2d6c6e!2sAv.%20Caupolic%C3%A1n%20579%2C%20Temuco%2C%20Araucan%C3%ADa!5e0!3m2!1ses-419!2scl!4v1700000000000!5m2!1ses-419!2scl" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0, borderRadius: '1rem', filter: 'contrast(1.1) saturate(1.1)' }} 
+                style={{ border: 0, borderRadius: '1rem', filter: 'contrast(1.1) saturate(1.1)', flex: 1, width: '100%' }} 
                 allowFullScreen="" 
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
@@ -110,7 +108,7 @@ export default function ContactPage() {
           </div>
 
           {/* Columna Derecha: Formulario Premium */}
-          <div className="premium-card form-card">
+          <div className="premium-card form-card" style={{ display: 'flex', flexDirection: 'column' }}>
             <h3 style={{ marginBottom: '0.5rem', fontSize: '1.8rem', fontWeight: '800' }}>Envíanos un mensaje</h3>
             <p style={{ color: 'var(--color-text-secondary)', marginBottom: '2.5rem', fontSize: '0.95rem' }}>Completa el formulario y te daremos prioridad en la atención.</p>
             
@@ -121,19 +119,17 @@ export default function ContactPage() {
               </div>
             )}
             
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', flex: 1 }}>
               <div className="form-row">
                 <div className="input-group">
                   <label>Nombre Completo</label>
                   <div className="input-wrapper">
-                    <Icon icon="solar:user-rounded-bold-duotone" width="20" className="input-icon" />
                     <input required type="text" name="nombre" value={formData.nombre} onChange={handleChange} placeholder="Tu nombre" />
                   </div>
                 </div>
                 <div className="input-group">
                   <label>Teléfono</label>
                   <div className="input-wrapper">
-                    <Icon icon="solar:phone-bold-duotone" width="20" className="input-icon" />
                     <input type="text" name="telefono" value={formData.telefono} onChange={handleChange} placeholder="+56 9 0000 0000" />
                   </div>
                 </div>
@@ -141,18 +137,16 @@ export default function ContactPage() {
               <div className="input-group">
                 <label>Email</label>
                 <div className="input-wrapper">
-                  <Icon icon="solar:letter-bold-duotone" width="20" className="input-icon" />
                   <input required type="email" name="email" value={formData.email} onChange={handleChange} placeholder="tu@email.com" />
                 </div>
               </div>
-              <div className="input-group">
+              <div className="input-group" style={{ flex: 1 }}>
                 <label>Mensaje</label>
-                <div className="input-wrapper" style={{ alignItems: 'flex-start' }}>
-                  <Icon icon="solar:pen-bold-duotone" width="20" className="input-icon" style={{ marginTop: '1rem' }} />
-                  <textarea required name="mensaje" value={formData.mensaje} onChange={handleChange} rows="5" placeholder="¿En qué te podemos ayudar?"></textarea>
+                <div className="input-wrapper" style={{ height: '100%' }}>
+                  <textarea required name="mensaje" value={formData.mensaje} onChange={handleChange} placeholder="¿En qué te podemos ayudar?" style={{ minHeight: '150px', height: '100%' }}></textarea>
                 </div>
               </div>
-              <button type="submit" disabled={loading} className="premium-btn" style={{ marginTop: '1rem' }}>
+              <button type="submit" disabled={loading} className="premium-btn" style={{ marginTop: 'auto' }}>
                 {loading ? <Icon icon="solar:spinner-bold-duotone" width="24" className="spin" /> : <Icon icon="solar:plain-bold-duotone" width="24" />}
                 {loading ? 'Enviando...' : 'Enviar Mensaje'}
               </button>
@@ -167,9 +161,13 @@ export default function ContactPage() {
           display: grid;
           grid-template-columns: 1fr 1.5fr;
           gap: 3rem;
-          align-items: start;
+          align-items: stretch;
         }
         
+        .contact-grid > div:first-child {
+          height: 100%;
+        }
+
         .premium-card {
           background: var(--color-bg-card);
           border: 1px solid var(--color-border);
@@ -247,22 +245,13 @@ export default function ContactPage() {
           align-items: center;
         }
 
-        .input-icon {
-          position: absolute;
-          left: 1.2rem;
-          color: var(--color-text-secondary);
-          opacity: 0.7;
-          pointer-events: none;
-          transition: color 0.3s ease;
-        }
-
         .input-wrapper input,
         .input-wrapper textarea {
           width: 100%;
           background: var(--color-bg);
           border: 1px solid var(--color-border);
           border-radius: 16px;
-          padding: 1rem 1.2rem 1rem 3.5rem;
+          padding: 1rem 1.2rem;
           font-family: inherit;
           font-size: 1rem;
           color: var(--color-text-primary);
@@ -271,7 +260,6 @@ export default function ContactPage() {
         }
 
         .input-wrapper textarea {
-          padding-top: 1.2rem;
           resize: vertical;
         }
 
@@ -281,14 +269,6 @@ export default function ContactPage() {
           border-color: #0F7143;
           box-shadow: 0 0 0 4px rgba(15, 113, 67, 0.1);
           background: var(--color-bg-card);
-        }
-
-        .input-wrapper input:focus + .input-icon,
-        .input-wrapper textarea:focus + .input-icon,
-        .input-wrapper input:focus ~ .input-icon,
-        .input-wrapper textarea:focus ~ .input-icon {
-          color: #0F7143;
-          opacity: 1;
         }
 
         .premium-btn {
