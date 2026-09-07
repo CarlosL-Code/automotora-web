@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useState, useMemo } from 'react';
-import { Phone, MessageCircle, Briefcase, Monitor, Wrench, Users, ShieldCheck } from 'lucide-react';
+import { Icon } from '@iconify/react';
 
 export default function StaffGallery({ staff }) {
   const [activeTab, setActiveTab] = useState('Todos');
@@ -12,23 +12,23 @@ export default function StaffGallery({ staff }) {
     const cargoFull = person.cargo || '';
     if (cargoFull.includes(' | [')) {
       const tag = cargoFull.split(' | [')[1].replace(']', '').trim();
-      if (tag === 'Administración') return 'Administración';
+      if (tag === 'Administración' || tag === 'Administracin') return 'Administración';
       if (tag === 'Ventas') return 'Ventas';
       if (tag === 'TI') return 'TI';
     }
     const cargo = cargoFull.toLowerCase();
-    if (/(informátic|sistemas|\bti\b|\bit\b|programador|desarrollador|software|soporte)/.test(cargo)) return 'TI';
+    if (/(informátic|informǭtic|sistemas|\bti\b|\bit\b|programador|desarrollador|software|soporte)/.test(cargo)) return 'TI';
     if (/(jefe|admin|gerent|director|encargado)/.test(cargo)) return 'Administración';
-    if (person.esEjecutivo || /(ejecutiv|venta|comercial|asesor|mecánic|taller|servicio|técnico|mantenimiento)/.test(cargo)) return 'Ventas';
+    if (person.esEjecutivo || /(ejecutiv|venta|comercial|asesor|mecǭnic|mecánic|taller|servicio|tǸcnico|técnico|mantenimiento)/.test(cargo)) return 'Ventas';
     return 'Otros';
   };
 
   const getIconForCategory = (cat) => {
     switch (cat) {
-      case 'TI': return <Monitor size={16} />;
-      case 'Administración': return <ShieldCheck size={16} />;
-      case 'Ventas': return <Wrench size={16} />;
-      default: return <Briefcase size={16} />;
+      case 'TI': return <Icon icon="solar:laptop-minimalistic-bold-duotone" width="18" />;
+      case 'Administración': return <Icon icon="solar:shield-keyhole-bold-duotone" width="18" />;
+      case 'Ventas': return <Icon icon="solar:tag-price-bold-duotone" width="18" />;
+      default: return <Icon icon="solar:users-group-two-rounded-bold-duotone" width="18" />;
     }
   };
 
@@ -102,7 +102,7 @@ export default function StaffGallery({ staff }) {
                   />
                 ) : (
                   <div className="staff-placeholder">
-                    <Users size={64} opacity={0.3} />
+                    <Icon icon="solar:user-circle-bold-duotone" width="64" opacity="0.3" />
                   </div>
                 )}
                 
@@ -122,7 +122,7 @@ export default function StaffGallery({ staff }) {
                   {person.telefono && (
                     <>
                       <a href={`tel:${person.telefono.replace(/\s+/g, '')}`} className="staff-btn btn-call" title="Llamar">
-                        <Phone size={18} /> Llamar
+                        <Icon icon="solar:phone-calling-bold-duotone" width="18" /> Llamar
                       </a>
                       <a 
                         href={`https://wa.me/${person.telefono.replace(/[\s+]/g, '')}`}
@@ -131,7 +131,7 @@ export default function StaffGallery({ staff }) {
                         className="staff-btn btn-wa" 
                         title="WhatsApp"
                       >
-                        <MessageCircle size={18} /> WhatsApp
+                        <Icon icon="logos:whatsapp-icon" width="18" /> WhatsApp
                       </a>
                     </>
                   )}
@@ -143,7 +143,7 @@ export default function StaffGallery({ staff }) {
         </div>
       ) : (
         <div style={{ textAlign: 'center', padding: '5rem', background: 'var(--color-bg-glass)', borderRadius: '1.5rem', border: '1px solid var(--color-border)' }}>
-          <Users size={64} style={{ color: 'var(--color-border)', margin: '0 auto 1rem', opacity: 0.5 }} />
+          <Icon icon="solar:users-group-rounded-bold-duotone" width="64" style={{ color: 'var(--color-border)', margin: '0 auto 1rem', opacity: 0.5 }} />
           <p style={{ color: 'var(--color-text-secondary)', fontSize: '1.1rem' }}>Aún no hay personal registrado en esta categoría.</p>
         </div>
       )}
