@@ -75,10 +75,8 @@ export default async function Home() {
             }}>
               Encuentra el auto<br/>
               <span style={{ 
-                background: 'linear-gradient(135deg, #22a061 0%, #0F7143 100%)', 
-                WebkitBackgroundClip: 'text', 
-                WebkitTextFillColor: 'transparent', 
-                textShadow: 'none',
+                color: '#ffffff',
+                textShadow: '0 4px 30px rgba(255,255,255,0.4)',
                 display: 'inline-block'
               }}>que mereces.</span>
             </h1>
