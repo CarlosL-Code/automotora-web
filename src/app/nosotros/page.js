@@ -137,12 +137,17 @@ export default async function NosotrosPage() {
           </p>
         </section>
 
-        {/* Staff Section */}
-        <section style={{ marginBottom: '4rem' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Nuestro <span className="text-gradient">Equipo</span></h2>
-            <p style={{ color: 'var(--color-text-secondary)', fontSize: '1.2rem' }}>Las personas detrás de HM&C Motors, listas para ayudarte.</p>
+        {/* Team Section */}
+        <section className={styles.teamSection}>
+          <div className="text-center slide-up" style={{ marginBottom: '4rem' }}>
+            <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', fontWeight: '800', letterSpacing: '-0.03em', marginBottom: '1rem', color: 'var(--color-text-primary)' }}>
+              Nuestro <span style={{ color: '#0F7143' }}>Equipo</span>
+            </h2>
+            <p className="subtitle" style={{ fontSize: '1.2rem', color: 'var(--color-text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
+              Los profesionales detrás de HM&C Motors, comprometidos con tu tranquilidad.
+            </p>
           </div>
+          
           <StaffGallery staff={staff} />
         </section>
 

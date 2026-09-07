@@ -69,17 +69,7 @@ export default function StaffGallery({ staff }) {
           <button
             key={cat}
             onClick={() => setActiveTab(cat)}
-            className={`btn ${activeTab === cat ? 'btn-primary' : 'btn-outline'} staff-tab`}
-            style={{
-              padding: '0.6rem 1.8rem',
-              borderRadius: '2rem',
-              fontSize: '0.95rem',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              fontWeight: '600'
-            }}
+            className={activeTab === cat ? 'staff-tab-active' : 'staff-tab'}
           >
             {getIconForCategory(cat)}
             {cat}
@@ -160,20 +150,57 @@ export default function StaffGallery({ staff }) {
       )}
 
       <style jsx>{`
+        .staff-tab {
+          padding: 0.6rem 1.8rem;
+          border-radius: 100px;
+          font-size: 0.95rem;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: var(--color-bg-card);
+          border: 1px solid var(--color-border);
+          color: var(--color-text-secondary);
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .staff-tab:hover {
+          background: rgba(15, 113, 67, 0.05);
+          color: var(--color-text-primary);
+        }
+
+        .staff-tab-active {
+          padding: 0.6rem 1.8rem;
+          border-radius: 100px;
+          font-size: 0.95rem;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: #0F7143;
+          border: 1px solid #0F7143;
+          color: #ffffff;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px rgba(15, 113, 67, 0.3);
+        }
+
         .staff-card {
           position: relative;
-          border-radius: 20px;
+          border-radius: 24px;
           overflow: hidden;
-          aspect-ratio: 3/4;
+          aspect-ratio: 4/5;
           cursor: pointer;
           transform: translateY(0);
           transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+          border: 1px solid var(--color-border);
         }
         
         .staff-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 20px rgba(var(--color-accent-rgb), 0.2);
+          transform: translateY(-8px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
 
         .staff-image-bg {
@@ -184,11 +211,11 @@ export default function StaffGallery({ staff }) {
         }
 
         .staff-img-element {
-          transition: transform 0.7s ease !important;
+          transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
         }
 
         .staff-card:hover .staff-img-element {
-          transform: scale(1.1) !important;
+          transform: scale(1.05) !important;
         }
 
         .staff-placeholder {
@@ -203,33 +230,34 @@ export default function StaffGallery({ staff }) {
         .staff-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0) 100%);
+          background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.1) 60%, transparent 100%);
+          opacity: 0.8;
           transition: opacity 0.4s ease;
+        }
+
+        .staff-card:hover .staff-overlay {
+          opacity: 1;
         }
 
         .dept-badge {
           position: absolute;
-          top: 1rem;
-          right: 1rem;
-          background: rgba(15, 113, 67, 0.9);
-          backdrop-filter: blur(8px);
+          top: 1.2rem;
+          right: 1.2rem;
+          background: rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           color: white;
-          padding: 0.5rem 1rem;
-          border-radius: 30px;
-          font-size: 0.75rem;
+          padding: 0.4rem 1rem;
+          border-radius: 100px;
+          font-size: 0.7rem;
           font-weight: 700;
           display: flex;
           align-items: center;
           gap: 0.4rem;
           text-transform: uppercase;
-          letter-spacing: 1px;
+          letter-spacing: 0.05em;
           z-index: 10;
-          transform: translateY(0);
-          transition: transform 0.4s ease;
-        }
-
-        .staff-card:hover .dept-badge {
-          transform: translateY(-5px);
+          border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .staff-info {
@@ -237,7 +265,7 @@ export default function StaffGallery({ staff }) {
           bottom: 0;
           left: 0;
           width: 100%;
-          padding: 2rem 1.5rem;
+          padding: 2.5rem 1.5rem 1.5rem 1.5rem;
           z-index: 10;
           display: flex;
           flex-direction: column;
@@ -246,22 +274,23 @@ export default function StaffGallery({ staff }) {
 
         .staff-name {
           color: white;
-          font-size: 1.6rem;
+          font-size: 1.5rem;
           font-weight: 800;
-          margin-bottom: 0.2rem;
+          letter-spacing: -0.02em;
+          margin-bottom: 0.3rem;
           text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-          transform: translateY(20px);
+          transform: translateY(15px);
           transition: transform 0.4s ease;
         }
 
         .staff-role {
-          color: var(--color-accent);
-          font-size: 0.95rem;
+          color: rgba(255, 255, 255, 0.75);
+          font-size: 0.85rem;
           font-weight: 600;
           text-transform: uppercase;
-          letter-spacing: 1px;
+          letter-spacing: 0.05em;
           margin-bottom: 1rem;
-          transform: translateY(20px);
+          transform: translateY(15px);
           transition: transform 0.4s ease;
         }
 
@@ -292,30 +321,38 @@ export default function StaffGallery({ staff }) {
           align-items: center;
           justify-content: center;
           gap: 0.5rem;
-          padding: 0.75rem;
+          padding: 0.8rem;
           border-radius: 12px;
-          font-weight: 700;
-          font-size: 0.9rem;
+          font-weight: 600;
+          font-size: 0.85rem;
           text-decoration: none;
-          transition: transform 0.2s ease, filter 0.2s ease;
-        }
-
-        .staff-btn:hover {
-          transform: scale(1.05);
-          filter: brightness(1.1);
+          transition: all 0.3s ease;
         }
 
         .btn-call {
-          background: rgba(255,255,255,0.15);
+          background: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(10px);
           color: white;
-          border: 1px solid rgba(255,255,255,0.2);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-call:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: translateY(-2px);
         }
 
         .btn-wa {
+          background: rgba(37, 211, 102, 0.2);
+          backdrop-filter: blur(10px);
+          color: #25D366;
+          border: 1px solid rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-wa:hover {
           background: #25D366;
           color: white;
-          box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
       `}</style>
     </div>
