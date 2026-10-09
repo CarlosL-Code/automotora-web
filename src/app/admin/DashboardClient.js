@@ -101,7 +101,7 @@ export default function DashboardClient({ stats, recentVehicles }) {
         </div>
       </div>
 
-      <style jsx>{\`
+      <style jsx>{`
         .crm-header h2 { margin: 0; font-size: 2rem; }
         .subtitle { color: var(--color-text-secondary); margin-top: 0.2rem; }
 
@@ -186,7 +186,7 @@ export default function DashboardClient({ stats, recentVehicles }) {
           .dashboard-grid { grid-template-columns: 1fr; }
           .recent-item { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
         }
-      \`}</style>
+      `}</style>
     </div>
   );
 }
