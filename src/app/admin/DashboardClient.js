@@ -59,7 +59,7 @@ export default function DashboardClient({ stats, recentVehicles }) {
               <div key={brand.marca} className="bar-row">
                 <div className="bar-label">{brand.marca} ({brand._count.id})</div>
                 <div className="bar-track">
-                  <div className="bar-fill" style={{ width: \`\${(brand._count.id / maxBrandCount) * 100}%\` }}></div>
+                  <div className="bar-fill" style={{ width: `${(brand._count.id / maxBrandCount) * 100}%` }}></div>
                 </div>
               </div>
             ))}
@@ -72,7 +72,7 @@ export default function DashboardClient({ stats, recentVehicles }) {
           <h3 className="card-title"><Icon icon="solar:pie-chart-2-bold-duotone" width="24" /> Distribución por Estado</h3>
           <div className="status-grid">
             {vehiclesByStatus.map(status => (
-              <div key={status.estado} className={\`status-box \${status.estado.toLowerCase()}\`}>
+              <div key={status.estado} className={`status-box ${status.estado.toLowerCase()}`}>
                 <h4>{status._count.id}</h4>
                 <p>{status.estado}</p>
               </div>
@@ -92,16 +92,14 @@ export default function DashboardClient({ stats, recentVehicles }) {
                   <strong>{v.marca} {v.modelo}</strong>
                   <span>{new Date(v.createdAt).toLocaleDateString('es-CL')}</span>
                 </div>
-                <div className="recent-price">\${v.precio.toLocaleString('es-CL')}</div>
-                <div className={\`recent-status \${v.estado.toLowerCase()}\`}>{v.estado}</div>
+                <div className="recent-price">${v.precio.toLocaleString('es-CL')}</div>
+                <div className={`recent-status ${v.estado.toLowerCase()}`}>{v.estado}</div>
               </div>
             ))}
             {recentVehicles.length === 0 && <p style={{ color: 'var(--color-text-secondary)' }}>No hay vehículos recientes.</p>}
           </div>
         </div>
       </div>
-
-      
     </div>
   );
 }
