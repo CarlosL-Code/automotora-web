@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { Plus, Trash2, Edit, Download, Upload } from 'lucide-react';
+import { Icon } from '@iconify/react';
 
 export default function AdminVehicles() {
   const [vehicles, setVehicles] = useState([]);
@@ -151,6 +152,20 @@ export default function AdminVehicles() {
     
     setEditingId(v.id);
     setIsAdding(true);
+  };
+
+  const handleStatusChange = async (id, newStatus) => {
+    try {
+      await fetch(`/api/vehicles/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ estado: newStatus })
+      });
+      fetchVehicles();
+    } catch (e) {
+      console.error(e);
+      alert('Error cambiando estado');
+    }
   };
 
   const handleDelete = async (id) => {
@@ -383,52 +398,220 @@ export default function AdminVehicles() {
       </div>
 
       <div className="card glass">
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th>Marca y Modelo</th>
-              <th>Año</th>
-              <th>Precio</th>
-              <th>Estado</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {vehicles.map(v => (
-              <tr key={v.id}>
-                <td><strong>{v.marca}</strong> {v.modelo}</td>
-                <td>{v.ano}</td>
-                <td>${v.precio.toLocaleString('es-CL')}</td>
-                <td>
-                  <span style={{ 
-                    padding: '0.25rem 0.75rem', 
-                    borderRadius: '999px', 
-                    fontSize: '0.875rem',
-                    backgroundColor: v.estado === 'DISPONIBLE' ? 'var(--color-accent-light)' : 'rgba(255,255,255,0.1)',
-                    color: v.estado === 'DISPONIBLE' ? 'var(--color-accent)' : 'inherit'
-                  }}>
-                    {v.estado}
-                  </span>
-                </td>
-                <td>
-                  <button onClick={() => handleEdit(v)} style={{ color: 'var(--color-primary)', cursor: 'pointer', marginRight: '1rem', background: 'none', border: 'none' }}>
-                    <Edit size={20} />
-                  </button>
-                  <button onClick={() => handleDelete(v.id)} style={{ color: 'var(--color-danger)', cursor: 'pointer', background: 'none', border: 'none' }}>
-                    <Trash2 size={20} />
-                  </button>
-                </td>
-              </tr>
-            ))}
-            {vehicles.length === 0 && (
-              <tr>
-                <td colSpan="5" style={{ textAlign: 'center', color: 'var(--color-text-secondary)', padding: '2rem' }}>
-                  No hay vehículos registrados.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+        <div className="vehicles-grid">
+        {vehicles.map(v => {
+          const createdAtDate = new Date(v.createdAt);
+          const now = new Date();
+          const diffTime = Math.abs(now - createdAtDate);
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          
+          let imgs = [];
+          if (v.imagenes) {
+            try { imgs = JSON.parse(v.imagenes); } catch(e) { imgs = [v.imagenes]; }
+          }
+          const coverImg = imgs.length > 0 ? imgs[0] : null;
+
+          return (
+            <div key={v.id} className="admin-vehicle-card">
+              <div className="card-img-container">
+                {coverImg ? <img src={coverImg} alt={v.modelo} /> : <div className="no-img"><Icon icon="solar:camera-broken-bold-duotone" width="32" /></div>}
+                <div className="card-badges">
+                  {v.destacado && <span className="badge-star"><Icon icon="solar:star-bold" width="14" /> Destacado</span>}
+                </div>
+              </div>
+              <div className="card-content">
+                <div className="card-header">
+                  <h3><strong>{v.marca}</strong> {v.modelo}</h3>
+                  <div className="card-price">${v.precio.toLocaleString('es-CL')}</div>
+                </div>
+                
+                <div className="card-meta">
+                  <span title="Fecha de carga"><Icon icon="solar:calendar-add-bold-duotone" width="16" /> {createdAtDate.toLocaleDateString('es-CL')}</span>
+                  <span title="Tiempo publicado" style={{ color: diffDays > 60 ? 'var(--color-danger)' : diffDays > 30 ? '#f59e0b' : 'inherit' }}><Icon icon="solar:clock-circle-bold-duotone" width="16" /> {diffDays} días</span>
+                </div>
+
+                <div className="card-status-actions">
+                  <select 
+                    value={v.estado} 
+                    onChange={(e) => handleStatusChange(v.id, e.target.value)}
+                    className={`status-select ${v.estado.toLowerCase()}`}
+                  >
+                    <option value="DISPONIBLE">DISPONIBLE</option>
+                    <option value="RESERVADO">RESERVADO</option>
+                    <option value="VENDIDO">VENDIDO</option>
+                  </select>
+                </div>
+
+                <div className="card-footer">
+                  <button onClick={() => handleEdit(v)} className="btn-icon edit" title="Editar"><Icon icon="solar:pen-bold-duotone" width="20" /> Editar</button>
+                  <button onClick={() => handleDelete(v.id)} className="btn-icon delete" title="Eliminar"><Icon icon="solar:trash-bin-trash-bold-duotone" width="20" /> Eliminar</button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+        {vehicles.length === 0 && (
+          <div style={{ textAlign: 'center', color: 'var(--color-text-secondary)', padding: '3rem', width: '100%', gridColumn: '1 / -1' }}>
+            <Icon icon="solar:box-bold-duotone" width="48" style={{ marginBottom: '1rem', opacity: 0.5 }} />
+            <p>No hay vehículos registrados en el inventario.</p>
+          </div>
+        )}
+      </div>
+
+      <style jsx>{`
+        .vehicles-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+          gap: 1.5rem;
+          margin-top: 1.5rem;
+        }
+        .admin-vehicle-card {
+          background: var(--color-bg-card);
+          border: 1px solid var(--color-border);
+          border-radius: 16px;
+          overflow: hidden;
+          transition: transform 0.2s, box-shadow 0.2s;
+          display: flex;
+          flex-direction: column;
+        }
+        .admin-vehicle-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        .card-img-container {
+          height: 180px;
+          position: relative;
+          background: var(--color-border);
+        }
+        .card-img-container img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        .no-img {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--color-text-secondary);
+        }
+        .card-badges {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          display: flex;
+          gap: 0.5rem;
+        }
+        .badge-star {
+          background: #f59e0b;
+          color: white;
+          padding: 0.25rem 0.5rem;
+          border-radius: 8px;
+          font-size: 0.75rem;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+          box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+        }
+        .card-content {
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.2rem;
+          flex: 1;
+        }
+        .card-header h3 {
+          font-size: 1.1rem;
+          margin: 0 0 0.5rem 0;
+          line-height: 1.2;
+        }
+        .card-price {
+          font-size: 1.25rem;
+          font-weight: 800;
+          color: var(--color-accent);
+        }
+        .card-meta {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.85rem;
+          color: var(--color-text-secondary);
+          background: var(--color-bg);
+          padding: 0.75rem;
+          border-radius: 8px;
+        }
+        .card-meta span {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-weight: 600;
+        }
+        .status-select {
+          width: 100%;
+          padding: 0.6rem;
+          border-radius: 8px;
+          font-weight: 700;
+          font-size: 0.85rem;
+          cursor: pointer;
+          border: 1px solid transparent;
+          outline: none;
+          appearance: none;
+          text-align: center;
+          transition: all 0.2s;
+        }
+        .status-select.disponible {
+          background: rgba(16, 185, 129, 0.1);
+          color: #10b981;
+          border-color: rgba(16, 185, 129, 0.2);
+        }
+        .status-select.reservado {
+          background: rgba(245, 158, 11, 0.1);
+          color: #f59e0b;
+          border-color: rgba(245, 158, 11, 0.2);
+        }
+        .status-select.vendido {
+          background: rgba(239, 68, 68, 0.1);
+          color: #ef4444;
+          border-color: rgba(239, 68, 68, 0.2);
+        }
+        .card-footer {
+          display: flex;
+          gap: 0.5rem;
+          margin-top: auto;
+          border-top: 1px solid var(--color-border);
+          padding-top: 1.2rem;
+        }
+        .btn-icon {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.4rem;
+          padding: 0.6rem;
+          border-radius: 8px;
+          border: 1px solid var(--color-border);
+          background: transparent;
+          font-weight: 600;
+          font-size: 0.85rem;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+        .btn-icon.edit {
+          color: var(--color-primary);
+        }
+        .btn-icon.edit:hover {
+          background: rgba(59, 130, 246, 0.05);
+          border-color: var(--color-primary);
+        }
+        .btn-icon.delete {
+          color: var(--color-danger);
+        }
+        .btn-icon.delete:hover {
+          background: rgba(239, 68, 68, 0.05);
+          border-color: var(--color-danger);
+        }
+      `}</style>
       </div>
     </div>
   );
