@@ -83,7 +83,7 @@
   gap: 1rem;
   margin-top: 2rem;
 }
-\n\n/* Extracted from src/app/admin/vehicles/page.js */\n
+/* Extracted from src/app/admin/vehicles/page.js */
         /* CRM Header & Filters */
         .crm-header {
           display: flex;
@@ -397,7 +397,7 @@
           background: rgba(239, 68, 68, 0.05);
           border-color: var(--color-danger);
         }
-      \n\n/* Extracted from src/app/admin/staff/page.js */\n
+/* Extracted from src/app/admin/staff/page.js */
         /* CRM Header & Filters */
         .crm-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
         .crm-header h2 { margin: 0; font-size: 2rem; }
@@ -483,7 +483,7 @@
         .btn-icon.edit:hover { background: rgba(59, 130, 246, 0.05); border-color: var(--color-primary); }
         .btn-icon.delete { color: var(--color-danger); }
         .btn-icon.delete:hover { background: rgba(239, 68, 68, 0.05); border-color: var(--color-danger); }
-      \n\n/* Extracted from src/app/admin/DashboardClient.js */\n
+/* Extracted from src/app/admin/DashboardClient.js */
         .crm-header h2 { margin: 0; font-size: 2rem; }
         .subtitle { color: var(--color-text-secondary); margin-top: 0.2rem; }
 
