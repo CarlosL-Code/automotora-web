@@ -473,7 +473,7 @@ export default function AdminStaffCRM() {
 
         /* Dropdown */
         .dropdown-group { position: relative; display: inline-block; }
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: var(--color-bg-card); min-width: 200px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 12px; border: 1px solid var(--color-border); z-index: 10; overflow: hidden; margin-top: 0.5rem; }
+        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: var(--color-bg-card); min-width: 200px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 12px; border: 1px solid var(--color-border); z-index: 10; overflow: hidden; margin-top: 0; }
         .dropdown-group:hover .dropdown-menu { display: block; }
         .dropdown-menu button, .dropdown-menu label { display: flex; align-items: center; gap: 0.5rem; width: 100%; padding: 1rem; border: none; background: transparent; color: var(--color-text-primary); text-align: left; cursor: pointer; font-size: 0.9rem; font-weight: 500; }
         .dropdown-menu button:hover, .dropdown-menu label:hover { background: var(--color-bg); color: var(--color-accent); }
