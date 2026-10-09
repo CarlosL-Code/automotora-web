@@ -432,7 +432,7 @@ export default function AdminVehiclesCRM() {
           <button className="btn btn-outline" onClick={handleExportReport}>
             <FileText size={20} /> Exportar Reporte
           </button>
-          <button className="btn btn-primary" onClick={resetForm}>
+          <button className="btn btn-primary" onClick={() => { resetForm(); setIsAdding(true); }}>
             <Plus size={20} /> Añadir Vehículo
           </button>
         </div>

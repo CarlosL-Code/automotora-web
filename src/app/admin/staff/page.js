@@ -350,7 +350,7 @@ export default function AdminStaffCRM() {
           <button className="btn btn-outline" onClick={handleExportReport}>
             <FileText size={20} /> Exportar Reporte
           </button>
-          <button className="btn btn-primary" onClick={() => setIsAdding(true)}>
+          <button className="btn btn-primary" onClick={() => { resetForm(); setIsAdding(true); }}>
             <Plus size={20} /> Añadir Miembro
           </button>
         </div>
