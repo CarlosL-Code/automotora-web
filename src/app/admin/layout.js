@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { Car, Users, LayoutDashboard, LogOut, Home } from 'lucide-react';
-import './admin.css';
+
 
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
