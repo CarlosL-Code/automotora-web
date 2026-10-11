@@ -6,6 +6,19 @@ import styles from './nosotros.module.css';
 
 export const revalidate = 0;
 
+export const metadata = {
+  title: "Sobre Nosotros | HM&C Motors Temuco",
+  description: "Conoce la historia y el equipo de HM&C Motors en Temuco. Más de una década ofreciendo confianza, transparencia y autos garantizados en La Araucanía.",
+  alternates: {
+    canonical: "/nosotros",
+  },
+  openGraph: {
+    title: "Sobre Nosotros | HM&C Motors Temuco",
+    description: "Conoce a la familia HM&C Motors. Tu automotora de confianza en Avenida Caupolicán 579, Temuco.",
+    url: "https://hmcautomotora.cl/nosotros",
+  },
+};
+
 export default async function NosotrosPage() {
   const staff = await prisma.staff.findMany({
     orderBy: { orden: 'asc' }

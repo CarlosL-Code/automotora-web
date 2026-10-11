@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import { CORPORATE_PHONE } from "@/lib/contactConfig";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -26,9 +27,6 @@ export const metadata = {
   authors: [{ name: "HMC Automotora Premium" }],
   creator: "HMC Automotora Premium",
   metadataBase: new URL("https://hmcautomotora.cl"),
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     title: "HMC Automotora Premium | Vehículos en Temuco, Chile",
     description: "Tu concesionario de confianza en Temuco. Vehículos usados y seminuevos con garantía, financiamiento flexible y atención personalizada.",
@@ -74,7 +72,7 @@ export default function RootLayout({ children }) {
     "image": "https://hmcautomotora.cl/logo.png",
     "@id": "https://hmcautomotora.cl",
     "url": "https://hmcautomotora.cl",
-    "telephone": "+56958251226",
+    "telephone": CORPORATE_PHONE.e164,
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Avenida Caupolicán 579",

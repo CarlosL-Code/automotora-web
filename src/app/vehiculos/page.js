@@ -4,6 +4,19 @@ import Link from 'next/link';
 
 export const revalidate = 0; // Disable static rendering
 
+export const metadata = {
+  title: "Catálogo de Vehículos Usados y Seminuevos | HM&C Motors Temuco",
+  description: "Explora nuestro inventario de autos usados y seminuevos garantizados en Temuco. Variedad de marcas, financiamiento a tu medida y asesoría experta.",
+  alternates: {
+    canonical: "/vehiculos",
+  },
+  openGraph: {
+    title: "Catálogo de Vehículos | HM&C Motors Temuco",
+    description: "Encuentra tu próximo auto entre nuestra selección de vehículos revisados y garantizados en Temuco.",
+    url: "https://hmcautomotora.cl/vehiculos",
+  },
+};
+
 export default async function VehiclesCatalog({ searchParams }) {
   const params = await searchParams;
   const marca = params.marca;

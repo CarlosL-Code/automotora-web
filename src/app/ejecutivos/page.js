@@ -4,6 +4,19 @@ import Image from 'next/image';
 
 export const revalidate = 0;
 
+export const metadata = {
+  title: "Ejecutivos Comerciales | HM&C Motors Temuco",
+  description: "Contacta directamente con nuestros asesores y ejecutivos comerciales en Temuco. Asistencia personalizada para comprar o financiar tu vehículo.",
+  alternates: {
+    canonical: "/ejecutivos",
+  },
+  openGraph: {
+    title: "Equipo de Ejecutivos | HM&C Motors Temuco",
+    description: "Atención comercial cercana y profesional para ayudarte a elegir tu próximo auto.",
+    url: "https://hmcautomotora.cl/ejecutivos",
+  },
+};
+
 export default async function EjecutivosPage() {
   const staff = await prisma.staff.findMany({
     where: { esEjecutivo: true },

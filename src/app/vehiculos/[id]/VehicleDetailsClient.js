@@ -5,6 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
 import { Icon } from '@iconify/react';
+import { WEB_SALES_CONFIG } from '@/lib/contactConfig';
 
 const SpecCard = ({ icon, label, value }) => (
   <div className="spec-card premium-card" style={{ 
@@ -138,11 +139,11 @@ export default function VehicleDetailsClient({ vehicle, images, mainImage, ejecu
                 Vehículo Vendido
               </div>
             ) : vehicle.estado === 'RESERVADO' ? (
-              <a href={`https://wa.me/56958251226?text=${encodeURIComponent(`Hola, quisiera consultar si el vehículo ${vehicle.marca} ${vehicle.modelo} ${vehicle.ano} (Precio: $${vehicle.precio.toLocaleString('es-CL')}) volverá a estar disponible.`)}`} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ width: '100%', padding: '1.25rem', fontSize: '1.1rem', fontWeight: '700', borderRadius: '16px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', backgroundColor: '#f59e0b', borderColor: '#f59e0b', boxShadow: '0 10px 25px rgba(245, 158, 11, 0.3)' }}>
+              <a href={WEB_SALES_CONFIG.getWhatsAppUrl(`Hola, quisiera consultar si el vehículo ${vehicle.marca} ${vehicle.modelo} ${vehicle.ano} (Precio: $${vehicle.precio.toLocaleString('es-CL')}) volverá a estar disponible.`)} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ width: '100%', padding: '1.25rem', fontSize: '1.1rem', fontWeight: '700', borderRadius: '16px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', backgroundColor: '#f59e0b', borderColor: '#f59e0b', boxShadow: '0 10px 25px rgba(245, 158, 11, 0.3)' }}>
                 <Icon icon="logos:whatsapp-icon" width="24" /> Consultar Disponibilidad
               </a>
             ) : (
-              <a href={`https://wa.me/56958251226?text=${encodeURIComponent(`Hola, me interesa cotizar el vehículo: ${vehicle.marca} ${vehicle.modelo} ${vehicle.ano}.\nPrecio publicado: $${vehicle.precio.toLocaleString('es-CL')}\n¿Sigue disponible?`)}`} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ width: '100%', padding: '1.25rem', fontSize: '1.1rem', fontWeight: '700', borderRadius: '16px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', boxShadow: '0 10px 25px rgba(15, 113, 67, 0.3)' }}>
+              <a href={WEB_SALES_CONFIG.getWhatsAppUrl(`Hola, me interesa cotizar el vehículo: ${vehicle.marca} ${vehicle.modelo} ${vehicle.ano}.\nPrecio publicado: $${vehicle.precio.toLocaleString('es-CL')}\n¿Sigue disponible?`)} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ width: '100%', padding: '1.25rem', fontSize: '1.1rem', fontWeight: '700', borderRadius: '16px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', boxShadow: '0 10px 25px rgba(15, 113, 67, 0.3)' }}>
                 <Icon icon="logos:whatsapp-icon" width="24" /> Cotizar por WhatsApp
               </a>
             )}

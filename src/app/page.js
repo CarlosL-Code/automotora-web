@@ -6,6 +6,12 @@ import { ArrowRight, ShieldCheck, Users, Wallet, Phone } from 'lucide-react';
 
 export const revalidate = 0; // Disable static rendering to avoid Vercel build failures with Hostinger DB
 
+export const metadata = {
+  alternates: {
+    canonical: '/',
+  },
+};
+
 export default async function Home() {
   const featuredVehicles = await prisma.vehicle.findMany({
     where: { estado: 'DISPONIBLE' }, // O donde destacado sea true

@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { WEB_SALES_CONFIG } from '@/lib/contactConfig';
 
 export default function FloatingWhatsApp() {
   const [mounted, setMounted] = useState(false);
@@ -13,7 +14,7 @@ export default function FloatingWhatsApp() {
 
   return (
     <a 
-      href="https://wa.me/56958251226" 
+      href={WEB_SALES_CONFIG.getWhatsAppUrl()}
       target="_blank" 
       rel="noopener noreferrer" 
       className="floating-wa-btn"
