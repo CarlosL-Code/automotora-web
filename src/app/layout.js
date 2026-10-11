@@ -62,6 +62,9 @@ export const metadata = {
     "geo.position": "-38.7369;-72.5938",
     "ICBM": "-38.7369, -72.5938",
   },
+  verification: {
+    google: "OUIlxDC6BIju0mkBGyibjO2K2canKCyYNHyKxBVkQGc",
+  },
 };
 
 export default function RootLayout({ children }) {
