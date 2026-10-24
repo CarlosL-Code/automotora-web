@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { prisma } from '@/lib/prisma';
 import VehicleCard from '@/components/VehicleCard';
-import { ArrowRight, ShieldCheck, Users, Wallet, Phone } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Users, Wallet, Phone, MapPin, CheckCircle2 } from 'lucide-react';
 
 export const revalidate = 0; // Disable static rendering to avoid Vercel build failures with Hostinger DB
 
@@ -29,21 +29,31 @@ export default async function Home() {
         justifyContent: 'flex-start',
         overflow: 'hidden'
       }}>
-        {/* Local Hero Image - Espejado + animación Ken Burns */}
+        {/* Fotografías Reales Optimizadas de Sucursal HM&C Motors (Desktop 1920x960 / Móvil 960x1200) */}
         <Image 
-          src="/hero-bg.jpg"
-          alt="Automotora HMC Premium - Concesionario"
+          src="/images/automotora/hero/hero-comercial-1920x960.webp"
+          alt="HM&C Motors Temuco - Exhibición de Vehículos y Financiamiento Autofin"
           fill
           priority
           sizes="100vw"
           unoptimized
-          className="hero-image"
-          style={{ objectFit: 'cover', objectPosition: 'center 60%', zIndex: 0, transform: 'scaleX(-1)' }}
+          className="hero-image hero-img-desktop"
+          style={{ objectFit: 'cover', objectPosition: 'center center', zIndex: 0 }}
         />
-        {/* Gradient Overlay - elegante degradado de abajo hacia arriba */}
+        <Image 
+          src="/images/automotora/hero/hero-movil-960x1200.webp"
+          alt="HM&C Motors Temuco - Sucursal Av. Caupolicán 579"
+          fill
+          priority
+          sizes="100vw"
+          unoptimized
+          className="hero-image hero-img-mobile"
+          style={{ objectFit: 'cover', objectPosition: 'center center', zIndex: 0 }}
+        />
+        {/* Gradient Overlay - contraste óptimo para lectura de texto sobre fotografía real */}
         <div style={{ 
           position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, 
-          background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.1) 70%, transparent 100%)', 
+          background: 'linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.52) 45%, rgba(0,0,0,0.18) 100%), linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.42) 45%, rgba(0,0,0,0.15) 100%)', 
           zIndex: 1 
         }}></div>
         {/* Subtle noise texture overlay for premium feel */}
@@ -214,6 +224,141 @@ export default async function Home() {
               <p style={{ color: 'var(--color-text-secondary)' }}>No hay vehículos disponibles en este momento.</p>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Showroom & Alianza Autofin Section */}
+      <section className="showroom-section" style={{ borderTop: '1px solid var(--color-border)' }}>
+        <div className="container">
+          <div className="showroom-header">
+            <div style={{ maxWidth: '680px' }}>
+              <div className="showroom-badge">
+                <MapPin size={15} /> Av. Caupolicán 579, Temuco
+              </div>
+              <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', marginBottom: '0.75rem' }}>
+                Conoce Nuestro <span className="text-gradient">Showroom en Temuco</span>
+              </h2>
+              <p style={{ color: 'var(--color-text-secondary)', fontSize: '1.1rem', lineHeight: '1.7' }}>
+                Visítanos en nuestra sucursal y descubre en persona una amplia exhibición de vehículos seleccionados, con evaluación de financiamiento inmediato a través de nuestra alianza con <strong>Autofin</strong>.
+              </p>
+            </div>
+            <Link href="/nosotros" className="btn btn-outline" style={{ borderRadius: '999px', padding: '0.85rem 1.75rem' }}>
+              Conocer Nuestra Historia <ArrowRight size={18} />
+            </Link>
+          </div>
+
+          <div className="showroom-bento">
+            {/* Tarjeta Principal 16:9 */}
+            <div className="showroom-card showroom-card-wide">
+              <Image
+                src="/images/automotora/tarjetas_16x9/04_exhibicion-frontal.webp"
+                alt="Exhibición frontal de vehículos en HM&C Motors Temuco"
+                fill
+                sizes="(max-width: 768px) 100vw, 60vw"
+                style={{ objectFit: 'cover' }}
+              />
+              <div className="showroom-card-overlay">
+                <span className="showroom-card-tag">Casa Matriz Temuco</span>
+                <h3 className="showroom-card-title">Exhibición Frontal Multimarca</h3>
+                <p className="showroom-card-desc">
+                  SUVs, Citycars, Sedanes y Camionetas revisados mecánicamente y listos para entrega inmediata.
+                </p>
+              </div>
+            </div>
+
+            {/* Tarjeta Destacada 4:3 */}
+            <div className="showroom-card showroom-card-tall">
+              <Image
+                src="/images/automotora/galeria_4x3/01_linea-suv-mazda.webp"
+                alt="Línea de SUVs y Crossovers en HM&C Motors"
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                style={{ objectFit: 'cover' }}
+              />
+              <div className="showroom-card-overlay">
+                <span className="showroom-card-tag">Stock Seleccionado</span>
+                <h3 className="showroom-card-title">Línea SUV & Crossover</h3>
+                <p className="showroom-card-desc">
+                  Unidades seminuevas con kilometraje verificado y documentación 100% al día.
+                </p>
+              </div>
+            </div>
+
+            {/* Tres Tarjetas Inferiores 4:3 */}
+            <div className="showroom-card showroom-card-third">
+              <Image
+                src="/images/automotora/galeria_4x3/05_sedan-changan.webp"
+                alt="Showroom interior techado HM&C Motors"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                style={{ objectFit: 'cover' }}
+              />
+              <div className="showroom-card-overlay">
+                <span className="showroom-card-tag">Atención Personalizada</span>
+                <h3 className="showroom-card-title">Showroom Techado</h3>
+                <p className="showroom-card-desc">
+                  Revisa e inspecciona tu próximo auto con total comodidad junto a nuestro equipo.
+                </p>
+              </div>
+            </div>
+
+            <div className="showroom-card showroom-card-third">
+              <Image
+                src="/images/automotora/galeria_4x3/07_suv-rojo.webp"
+                alt="Financiamiento automotriz Autofin en HM&C Motors"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                style={{ objectFit: 'cover' }}
+              />
+              <div className="showroom-card-overlay">
+                <span className="showroom-card-tag">Alianza Autofin</span>
+                <h3 className="showroom-card-title">Crédito a tu Medida</h3>
+                <p className="showroom-card-desc">
+                  Evaluación rápida con tu RUT, cuotas flexibles y aprobación en minutos.
+                </p>
+              </div>
+            </div>
+
+            <div className="showroom-card showroom-card-third">
+              <Image
+                src="/images/automotora/galeria_4x3/03_linea-vehiculos-negro.webp"
+                alt="Renovación semanal de stock en Av. Caupolicán 579"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                style={{ objectFit: 'cover' }}
+              />
+              <div className="showroom-card-overlay">
+                <span className="showroom-card-tag">Parte de Pago</span>
+                <h3 className="showroom-card-title">Renueva tu Vehículo</h3>
+                <p className="showroom-card-desc">
+                  Recibimos tu auto en parte de pago con tasación transparente y transferencia inmediata.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Banner Destacado Financiamiento Autofin */}
+          <div className="autofin-highlight">
+            <div style={{ maxWidth: '680px' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-accent)', fontWeight: '700', fontSize: '0.9rem', marginBottom: '0.5rem' }}>
+                <CheckCircle2 size={18} /> FINANCIAMIENTO AUTOMOTRIZ DIRECTO
+              </div>
+              <h3 style={{ fontSize: '1.65rem', marginBottom: '0.5rem' }}>
+                ¿Buscas financiar tu próximo vehículo con Autofin?
+              </h3>
+              <p style={{ color: 'var(--color-text-secondary)', margin: 0, fontSize: '1.02rem' }}>
+                Te asesoramos sin costo en toda la gestión de tu crédito automotriz, recibimos tu vehículo en parte de pago y realizamos la transferencia en un solo lugar.
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <Link href="/contacto" className="btn btn-primary" style={{ borderRadius: '999px', padding: '0.9rem 1.8rem' }}>
+                Solicitar Evaluación <ArrowRight size={18} />
+              </Link>
+              <Link href="/vehiculos" className="btn btn-outline" style={{ borderRadius: '999px', padding: '0.9rem 1.8rem' }}>
+                Ver Inventario
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

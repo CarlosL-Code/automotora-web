@@ -47,18 +47,20 @@ export default async function NosotrosPage() {
             <div className={styles.imageGallery}>
               <div className={styles.mainImage}>
                 <Image 
-                  src="/transparencia.jpg" 
-                  alt="Atención personalizada en concesionario" 
+                  src="/images/automotora/galeria_4x3/04_exhibicion-frontal.webp" 
+                  alt="Sucursal HM&C Motors en Avenida Caupolicán 579, Temuco" 
                   fill 
+                  sizes="(max-width: 768px) 100vw, 500px"
                   style={{ objectFit: 'cover' }}
                   priority
                 />
               </div>
               <div className={styles.floatingImage}>
                 <Image 
-                  src="/hero-bg.jpg" 
-                  alt="Vehículo premium" 
+                  src="/images/automotora/galeria_4x3/06_exhibicion-bajo-carpa.webp" 
+                  alt="Showroom y patio de exhibición HM&C Motors" 
                   fill 
+                  sizes="(max-width: 768px) 60vw, 320px"
                   style={{ objectFit: 'cover' }}
                 />
               </div>
@@ -101,9 +103,10 @@ export default async function NosotrosPage() {
             <div className={styles.pillarCard}>
               <div className={styles.pillarImageWrapper}>
                 <Image 
-                  src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80&w=600" 
-                  alt="Revisión mecánica rigurosa" 
+                  src="/images/automotora/galeria_4x3/02_vista-general-concesionaria.webp" 
+                  alt="Exhibición de vehículos inspeccionados en HM&C Motors" 
                   fill 
+                  sizes="(max-width: 768px) 100vw, 400px"
                 />
               </div>
               <div className={styles.pillarContent}>
@@ -122,9 +125,10 @@ export default async function NosotrosPage() {
             <div className={styles.pillarCard}>
               <div className={styles.pillarImageWrapper}>
                 <Image 
-                  src="/servicio-integral.jpg" 
-                  alt="Atención integral en concesionario" 
+                  src="/images/automotora/galeria_4x3/05_sedan-changan.webp" 
+                  alt="Atención integral y financiamiento Autofin en concesionario" 
                   fill 
+                  sizes="(max-width: 768px) 100vw, 400px"
                 />
               </div>
               <div className={styles.pillarContent}>
@@ -134,11 +138,44 @@ export default async function NosotrosPage() {
                 </div>
                 <h3 className={styles.pillarTitle}>Servicio Integral</h3>
                 <p className={styles.pillarText}>
-                  Te ofrecemos consignaciones, financiamiento y apoyo en transferencias. Todo gestionado en <strong>un solo lugar</strong>.
+                  Te ofrecemos consignaciones, financiamiento con Autofin y apoyo en transferencias. Todo gestionado en <strong>un solo lugar</strong>.
                 </p>
               </div>
             </div>
 
+          </div>
+        </section>
+
+        {/* Panoramic Real Dealership Showcase */}
+        <section className="slide-up" style={{ marginBottom: '6rem' }}>
+          <div style={{ position: 'relative', width: '100%', aspectRatio: '2 / 1', minHeight: '300px', borderRadius: '28px', overflow: 'hidden', border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-lg)' }}>
+            <Image
+              src="/images/automotora/hero/hero-fotografia-real-1920x960.webp"
+              alt="Vista panorámica real de HM&C Motors en Avenida Caupolicán 579, Temuco"
+              fill
+              sizes="100vw"
+              style={{ objectFit: 'cover' }}
+            />
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, transparent 100%)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-end',
+              padding: 'clamp(1.5rem, 4vw, 3.5rem)',
+              color: '#ffffff'
+            }}>
+              <span style={{ display: 'inline-block', width: 'fit-content', padding: '0.35rem 1rem', borderRadius: '999px', background: '#0F7143', fontSize: '0.78rem', fontWeight: '700', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+                Casa Matriz · Av. Caupolicán 579, Temuco
+              </span>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.5rem)', marginBottom: '0.5rem', color: '#ffffff' }}>
+                Un espacio pensado para tu confianza
+              </h2>
+              <p style={{ maxWidth: '720px', color: 'rgba(255,255,255,0.85)', margin: 0, fontSize: 'clamp(0.95rem, 2vw, 1.1rem)' }}>
+                Contamos con patio de exhibición y showroom techado en pleno corazón de Temuco para que revises, pruebes y financies tu próximo vehículo con total respaldo.
+              </p>
+            </div>
           </div>
         </section>
 
